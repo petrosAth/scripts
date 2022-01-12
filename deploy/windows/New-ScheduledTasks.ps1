@@ -3,8 +3,8 @@
 # Run autoHotkeys scripts at user log on
 $trigger = New-ScheduledTaskTrigger -AtLogon
 
-$actionAutoHotkey = New-ScheduledTaskAction -Execute "$env:USERPROFILE\.config\autohotkey\autoHotkeyScript.ahk"
-$actionAutoHotkeyElevated = New-ScheduledTaskAction -Execute "$env:USERPROFILE\.config\autohotkey\autoHotkeyScriptElevated.ahk"
+$actionAutoHotkey = New-ScheduledTaskAction -Execute "$env:USERPROFILE\dotfiles\autohotkey\autoHotkeyScript.ahk"
+$actionAutoHotkeyElevated = New-ScheduledTaskAction -Execute "$env:USERPROFILE\dotfiles\autohotkey\autoHotkeyScriptElevated.ahk"
 
 Register-ScheduledTask -Action $actionAutoHotkey         -Trigger $trigger -TaskName "autoHotkeyScript" `
     -Description "Start autoHotkeyScript at user log on"

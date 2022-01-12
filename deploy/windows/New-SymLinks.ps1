@@ -7,37 +7,37 @@ $SymLinksList = @(
 	# PowerShell profile
 	[pscustomobject]@{
 		origin = "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-		target = "$env:USERPROFILE\.config\powershell\Microsoft.PowerShell_profile.ps1"
+		target = "$env:USERPROFILE\dotfiles\powershell\Microsoft.PowerShell_profile.ps1"
 	}
 	# Windows Terminal settings
 	[pscustomobject]@{
 		origin = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-		target = "$env:USERPROFILE\.config\WindowsTerminal\settings.json"
+		target = "$env:USERPROFILE\dotfiles\WindowsTerminal\settings.json"
 	}
 	# App Installer (winget) settings
 	[pscustomobject]@{
 		origin = "$env:LOCALAPPDATA\Packages\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe\LocalState\settings.json"
-		target = "$env:USERPROFILE\.config\winget\settings.json"
+		target = "$env:USERPROFILE\dotfiles\winget\settings.json"
 	}
 	# Alacritty config
 	[pscustomobject]@{
 		origin = "$env:APPDATA\alacritty\alacritty.yml"
-		target = "$env:USERPROFILE\.config\alacritty\alacritty.yml"
+		target = "$env:USERPROFILE\dotfiles\alacritty\alacritty.yml"
 	}
 	# Git global config
 	[pscustomobject]@{
 		origin = "$env:USERPROFILE\.gitconfig"
-		target = "$env:USERPROFILE\.config\git\config"
+		target = "$env:USERPROFILE\dotfiles\git\config"
 	}
 	# FileZilla config
 	[pscustomobject]@{
 		origin = "$env:APPDATA\FileZilla"
-		target = "$env:USERPROFILE\.config\FileZilla"
+		target = "$env:USERPROFILE\dotfiles\FileZilla"
 	}
 	# Synergy config
 	[pscustomobject]@{
 		origin = "$env:USERPROFILE\synergy.sgc"
-		target = "$env:USERPROFILE\.config\synergy\synergy.sgc"
+		target = "$env:USERPROFILE\dotfiles\synergy\synergy.sgc"
 	}
 )
 
