@@ -47,6 +47,7 @@ $apps = @(
     @{name = "UnityTechnologies.UnityHub"      },
     @{name = "Notepad++.Notepad++"             },
     @{name = "Microsoft.PowerToys"             }, # Utilities #-----------------
+    @{name = "9NGHP3DX8HDX"; source = "msstore"}, # Files file manager
     @{name = "Logitech.GHUB"                   },
     @{name = "AppWork.JDownloader"             },
     @{name = "KeePassXCTeam.KeePassXC"         },

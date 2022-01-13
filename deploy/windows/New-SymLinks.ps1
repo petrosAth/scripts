@@ -27,7 +27,7 @@ $SymLinksList = @(
 	# Git global config
 	[pscustomobject]@{
 		origin = "$env:USERPROFILE\.gitconfig"
-		target = "$env:USERPROFILE\dotfiles\git\config"
+		target = "$env:USERPROFILE\dotfiles\git\.gitconfig"
 	}
 	# FileZilla config
 	[pscustomobject]@{
