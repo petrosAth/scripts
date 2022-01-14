@@ -18,6 +18,7 @@ o b zsh
 u b powershell-bin
 u g unityhub-beta
 o g filezilla
+o b ssh-client
 # Remote and Cloud --------------------
 o g bitwarden
 o g nextcloud-client
