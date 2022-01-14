@@ -138,7 +138,9 @@ install_packages() {
     done
 
     _process "→ Installing yay"
-    sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+    if ! pacman -Qi yay &>/dev/null 2>&1 ; then
+        git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+    fi
 
     _process "→ Installing packages from Arch user repository (AUR)"
     for index in ${!packages[*]}
