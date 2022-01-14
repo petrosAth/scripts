@@ -11,7 +11,6 @@
 #
 # Development -------------------------
 o b base-devel
-o b git
 o b github-cli
 o b nodejs
 o b npm
