@@ -4,6 +4,15 @@ GITHUB_USER="petrosAth"
 GITHUB_REPO="linux-config"
 DIR="${HOME}/dotfiles"
 
+_process() {
+    printf "$(tput setaf 6) %s...$(tput sgr0)\n" "$@"
+}
+
+_success() {
+    local message=$1
+    printf "%s✓ Success:%s\n" "$(tput setaf 2)" "$(tput sgr0) $message"
+}
+
 get_interface() {
     read -p "Select package list (GUI or CLI): " INTERFACE
 
@@ -23,22 +32,32 @@ get_interface() {
     fi
 }
 
-_process() {
-    printf "$(tput setaf 6) %s...$(tput sgr0)\n" "$@"
-}
+update_system() {
+    # Update keyring
+    _process "→ Updating keyring"
+    sudo pacman -Sy archlinux-keyring
 
-_success() {
-    local message=$1
-    printf "%s✓ Success:%s\n" "$(tput setaf 2)" "$(tput sgr0) $message"
+    # Update system
+    _process "→ Updating system"
+    sudo pacman -Syu
+
+    [[ $? ]] && _success "System updated"
 }
 
 clone_dotfiles() {
+    # Install git
+    _process "→ Installing git"
+    sudo pacman -S git
+
     # Clone repository with its submodules
-    _process "→ Cloning dotfiles"
+    _process "→ Cloning repository ${GITHUB_REPO}"
     git clone --recurse-submodules https://github.com/${GITHUB_USER}/${GITHUB_REPO}.git ${DIR}
 
+    # Change git branch to linux specific
     cd ${DIR}/git
-    git branch linux
+    git checkout linux
+
+    [[ $? ]] && _success "Repository ${GITHUB_REPO} cloned"
 }
 
 link_dotfiles() {
@@ -84,10 +103,6 @@ link_dotfiles() {
 }
 
 install_packages() {
-    # Update system
-    _process "→ Updating system"
-    sudo pacman -Syu
-
     # Set variables for list of files
     package_list="${DIR}/scripts/deploy/linux/packages.txt"
     # package_list="/home/petrosath/.config/scripts/deploy/linux/packages.txt"
@@ -159,9 +174,10 @@ install_packages() {
 
 install() {
     get_interface
+    update_system
     if [[ ${INTERFACE} == "c" ]] || [[ ${INTERFACE} == "g" ]] ; then
-        install_packages
         clone_dotfiles
+        install_packages
         link_dotfiles
     fi
 }
