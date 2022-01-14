@@ -1,9 +1,0 @@
-base-devel
-git
-github-cli
-nodejs
-npm
-fd
-ripgrep
-starship
-powershell-bin

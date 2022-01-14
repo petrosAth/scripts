@@ -1,0 +1,41 @@
+# Package list for installation -------
+#
+# Specify repository
+# o = Arch official repository
+# u = Arch user repository (u)
+#
+# Specify interface type
+# c = for cli
+# g = for gui
+# b = for both
+#
+# Development -------------------------
+o b base-devel
+o b git
+o b github-cli
+o b nodejs
+o b npm
+o b zsh
+u b powershell-bin
+u g unityhub-beta
+o g filezilla
+# Remote and Cloud --------------------
+o g bitwarden
+o g nextcloud-client
+# Utilities ---------------------------
+o b fd
+o b ripgrep
+o b starship
+o g solaar
+o g kdeconnect
+# Editing -----------------------------
+o g blender
+o g handbrake
+o g avidemux-qt
+o g audacity
+# Web & Chat --------------------------
+o g uget
+o g firefox
+o g thunderbird
+# Entertainment -----------------------
+o g vlc
