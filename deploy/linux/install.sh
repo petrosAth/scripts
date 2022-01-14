@@ -35,7 +35,7 @@ get_interface() {
 update_system() {
     # Update keyring
     _process "→ Updating keyring"
-    sudo pacman -Sy archlinux-keyring
+    sudo pacman -Sy --needed archlinux-keyring
 
     # Update system
     _process "→ Updating system"
@@ -47,7 +47,7 @@ update_system() {
 clone_dotfiles() {
     # Install git
     _process "→ Installing git"
-    sudo pacman -S git
+    sudo pacman -S --needed git
 
     # Clone repository with its submodules
     _process "→ Cloning repository ${GITHUB_REPO}"
@@ -138,7 +138,7 @@ install_packages() {
     done
 
     _process "→ Installing yay"
-    pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+    sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 
     _process "→ Installing packages from Arch user repository (AUR)"
     for index in ${!packages[*]}
