@@ -1,5 +1,5 @@
 gh/hosts.yml                                .config/gh/hosts.yml
 git/.gitconfig                              .gitconfig
-nvim/                                       .config/nvim/
+nvim                                        .config/nvim
 powershell/Microsoft.PowerShell_profile.ps1 .config/powershell/Microsoft.PowerShell_profile.ps1
 zsh/.zshrc                                  .zshrc
