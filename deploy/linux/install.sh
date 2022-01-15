@@ -53,11 +53,6 @@ clone_dotfiles() {
     _process "→ Cloning repository ${GITHUB_REPO}"
     git clone --recurse-submodules https://github.com/${GITHUB_USER}/${GITHUB_REPO}.git ${DIR}
 
-    # Change git branch to linux specific
-    cd ${DIR}/git
-    git checkout linux
-    cd ${HOME}
-
     [[ $? ]] && _success "Repository ${GITHUB_REPO} cloned"
 }
 
@@ -155,7 +150,7 @@ install_packages() {
         git clone https://aur.archlinux.org/yay-bin.git
         cd yay-bin
         makepkg -si
-        cd ${HOME}
+        cd ..
         rm -rf yay-bin
     fi
 

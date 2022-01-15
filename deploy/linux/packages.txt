@@ -12,6 +12,7 @@
 # Development -------------------------
 o b base-devel
 o b github-cli
+o b python-pip
 o b nodejs
 o b npm
 o b zsh
@@ -19,7 +20,10 @@ u b powershell-bin
 u g unityhub-beta
 o g filezilla
 ---------------------------------------
-# u b neovim-nightly-bin
+u b neovim-nightly-bin
+o b python-pynvim
+o b unzip
+u b code-minimap
 ---------------------------------------
 # Remote and Cloud --------------------
 o g bitwarden
