@@ -51,7 +51,7 @@ clone_dotfiles() {
 
     # Clone repository with its submodules
     _process "→ Cloning repository ${GITHUB_REPO}"
-    git clone --recursive https://github.com/${GITHUB_USER}/${GITHUB_REPO}.git ${DIR}
+    git clone --recurse-submodules https://github.com/${GITHUB_USER}/${GITHUB_REPO}.git ${DIR}
 
     # Change git branch to linux specific
     cd ${DIR}/git

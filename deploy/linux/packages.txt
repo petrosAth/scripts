@@ -25,6 +25,7 @@ o g nextcloud-client
 o b fd
 o b ripgrep
 o b starship
+o b wget
 o g solaar
 o g kdeconnect
 # Editing -----------------------------
