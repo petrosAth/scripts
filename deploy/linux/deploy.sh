@@ -88,7 +88,7 @@ link_dotfiles() {
 
                 # if the file doesn't exist, create it
                 if [ ! -e "${HOME}/${file[1]}" ] ; then
-                    install -Dv /dev/null "${HOME}/${file[1]}"
+                    install -D /dev/null "${HOME}/${file[1]}"
                 fi
 
                 # Create symbolic link
@@ -102,7 +102,9 @@ link_dotfiles() {
         # Reset IFS back
         IFS=$OIFS
 
-        source "${HOME}/.zshrc"
+        zsh
+        chsh -s /bin/zsh
+        # source "${HOME}/.zshrc"
 
         [[ $? ]] && _success "dotfiles have been cloned and linked"
     fi
