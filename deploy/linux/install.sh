@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# Srouces
+# Make Your dotfiles Portable With Git and a Simple Bash Script
+# Part 1: https://freddiecarthy.com/blog/make-your-dotfiles-portable-with-git-and-a-simple-bash-script
+# Part 2: https://freddiecarthy.com/blog/use-git-and-bash-to-automate-your-developer-tooling
+# github repo: https://github.com/gjunkie/dotfiles-starter-kit
+
 INTERFACE=""
 GITHUB_USER="petrosAth"
 GITHUB_REPO="linux-config"
@@ -102,8 +108,6 @@ link_dotfiles() {
         install -D /dev/null "${HOME}/.cache/zsh/history"
         # Change default shell to zsh
         chsh -s /bin/zsh
-        # Start zsh
-        zsh
 
         [[ $? ]] && _success "dotfiles have been cloned and linked"
     fi
