@@ -21,6 +21,8 @@ u g unityhub-beta
 o g filezilla
 ---------------------------------------
 u b neovim-nightly-bin
+o b fd
+o b ripgrep
 o b python-pynvim
 o b unzip
 u b code-minimap
@@ -29,8 +31,6 @@ u b code-minimap
 o g bitwarden
 o g nextcloud-client
 # Utilities ---------------------------
-o b fd
-o b ripgrep
 o b starship
 o b wget
 o g solaar
