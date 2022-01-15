@@ -146,7 +146,7 @@ install_packages() {
 
     _process "→ Installing yay"
     if ! pacman -Qi yay &>/dev/null 2>&1 ; then
-        pacman -S --needed git base-devel
+        sudo pacman -S --needed git base-devel
         git clone https://aur.archlinux.org/yay-bin.git
         cd yay-bin
         makepkg -si
@@ -180,10 +180,8 @@ install_packages() {
     IFS=$OIFS
 
     if pacman -Qi powershell &>/dev/null 2>&1 ; then
-        pwsh
-        Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
-        Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
-        exit
+        pwsh Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
+        pwsh Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
     fi
 
     _process "→ Installing oh-my-posh"
