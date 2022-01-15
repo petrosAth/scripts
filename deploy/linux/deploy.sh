@@ -180,7 +180,7 @@ install_packages() {
     [[ $? ]] && _success "All packages installed"
 }
 
-install() {
+deploy() {
     get_interface
     update_system
     if [[ ${INTERFACE} == "c" ]] || [[ ${INTERFACE} == "g" ]] ; then
@@ -190,4 +190,4 @@ install() {
     fi
 }
 
-install
+deploy
