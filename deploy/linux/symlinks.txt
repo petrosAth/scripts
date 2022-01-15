@@ -1,5 +1,5 @@
-gh/hosts.yml                                gh/hosts.yml
+gh/hosts.yml                                .config/gh/hosts.yml
 git/.gitconfig                              .gitconfig
-nvim/init.lua                               nvim/init.lua
-powershell/Microsoft.PowerShell_profile.ps1 powershell/Microsoft.PowerShell_profile.ps1
+nvim/init.lua                               .config/nvim/init.lua
+powershell/Microsoft.PowerShell_profile.ps1 .config/powershell/Microsoft.PowerShell_profile.ps1
 zsh/.zshrc                                  .zshrc

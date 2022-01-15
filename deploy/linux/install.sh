@@ -85,6 +85,12 @@ link_dotfiles() {
                 IFS=$' '
                 # create an array of line items
                 file=(${links[$index]})
+
+                # if the file doesn't exist, create it
+                if [ ! -e "${HOME}/${file[1]}" ] ; then
+                    install -Dv /dev/null "${HOME}/${file[1]}"
+                fi
+
                 # Create symbolic link
                 ln -fs "${DIR}/${file[0]}" "${HOME}/${file[1]}"
                 # echo 'ln -fs "${DIR}/${file[0]}" "${HOME}/${file[1]}"'
@@ -155,7 +161,7 @@ install_packages() {
             if [[ ${file[0]} == "u" ]]; then
                 if [[ ${file[1]} == ${INTERFACE} ]] || [[ ${file[1]} == "b" ]] ; then
                     _process "→ Installing ${file[2]}"
-                    sudo yay -S --needed ${file[2]}
+                    yay -S --needed ${file[2]}
                     # echo "sudo yay -S --needed ${file[2]}"
                 fi
             fi
