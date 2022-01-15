@@ -18,6 +18,9 @@ o b zsh
 u b powershell-bin
 u g unityhub-beta
 o g filezilla
+---------------------------------------
+# u b neovim-nightly-bin
+---------------------------------------
 # Remote and Cloud --------------------
 o g bitwarden
 o g nextcloud-client

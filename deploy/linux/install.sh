@@ -56,6 +56,7 @@ clone_dotfiles() {
     # Change git branch to linux specific
     cd ${DIR}/git
     git checkout linux
+    cd ${HOME}
 
     [[ $? ]] && _success "Repository ${GITHUB_REPO} cloned"
 }
@@ -102,9 +103,12 @@ link_dotfiles() {
         # Reset IFS back
         IFS=$OIFS
 
-        zsh
+        # Create zsh history file
+        install ${HOME}/.cache/zsh/history
+        # Change default shell to zsh
         chsh -s /bin/zsh
-        # source "${HOME}/.zshrc"
+        # Start zsh
+        zsh
 
         [[ $? ]] && _success "dotfiles have been cloned and linked"
     fi
@@ -147,7 +151,12 @@ install_packages() {
 
     _process "→ Installing yay"
     if ! pacman -Qi yay &>/dev/null 2>&1 ; then
-        git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
+        pacman -S --needed git base-devel
+        git clone https://aur.archlinux.org/yay-bin.git
+        cd yay-bin
+        makepkg -si
+        cd ${HOME}
+        rm -rf yay-bin
     fi
 
     _process "→ Installing packages from Arch user repository (AUR)"
@@ -174,6 +183,13 @@ install_packages() {
 
     # Reset IFS back
     IFS=$OIFS
+
+    if pacman -Qi powershell &>/dev/null 2>&1 ; then
+        pwsh
+        Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
+        Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
+        exit
+    fi
 
     _process "→ Installing oh-my-posh"
     sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh
