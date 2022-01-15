@@ -88,9 +88,9 @@ link_dotfiles() {
                 # create an array of line items
                 file=(${links[$index]})
 
-                # if the file doesn't exist, create it
-                if [ ! -e "${HOME}/${file[1]}" ] ; then
-                    install -D /dev/null "${HOME}/${file[1]}"
+                # if a parent directory doesn't exist, create it
+                if [ ! -e "${HOME}/${file[2]}" ] ; then
+                    mkdir "${HOME}/${file[2]}"
                 fi
 
                 # Create symbolic link
@@ -104,8 +104,6 @@ link_dotfiles() {
         # Reset IFS back
         IFS=$OIFS
 
-        # Create zsh history file
-        install -D /dev/null "${HOME}/.cache/zsh/history"
         # Change default shell to zsh
         chsh -s /bin/zsh
 
