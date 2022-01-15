@@ -99,7 +99,7 @@ link_dotfiles() {
         IFS=$OIFS
 
         # Create zsh history file
-        install ${HOME}/.cache/zsh/history
+        install -D /dev/null "${HOME}/.cache/zsh/history"
         # Change default shell to zsh
         chsh -s /bin/zsh
         # Start zsh
@@ -180,8 +180,8 @@ install_packages() {
     IFS=$OIFS
 
     if pacman -Qi powershell &>/dev/null 2>&1 ; then
-        pwsh Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
-        pwsh Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
+        pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
+        pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
     fi
 
     _process "→ Installing oh-my-posh"
