@@ -1,4 +1,4 @@
-gh/hosts.yml                                .config/gh/hosts.yml                                .config/gh
+gh/config.yml                               .config/gh/config.yml                               .config/gh
 git/.gitconfig                              .gitconfig
 nvim                                        .config/nvim
 powershell/Microsoft.PowerShell_profile.ps1 .config/powershell/Microsoft.PowerShell_profile.ps1 .config/powershell
