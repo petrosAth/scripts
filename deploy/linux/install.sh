@@ -87,22 +87,21 @@ link_dotfiles() {
         do
             for link in ${links[$index]}
             do
-				# skip lines starting with #
-				if [[ ! ${file[0]} == "#" ]] ; then
-					_process "→ Linking ${links[$index]}"
-					# set IFS back to space to split string on
-					IFS=$' '
-					# create an array of line items
-					file=(${links[$index]})
+		# set IFS back to space to split string on
+		IFS=$' '
+		# create an array of line items
+		file=(${links[$index]})
+		# skip lines starting with #
+		if [[ ! ${file[0]} == "#" ]] ; then
+			_process "→ Linking ${links[$index]}"
+			# if a parent directory doesn't exist, create it
+			if [[ ! -e "${HOME}/${file[2]}" ]] ; then
+				mkdir "${HOME}/${file[2]}"
+			fi
 
-					# if a parent directory doesn't exist, create it
-					if [[ ! -e "${HOME}/${file[2]}" ]] ; then
-						mkdir "${HOME}/${file[2]}"
-					fi
-
-					# Create symbolic link
-					ln -fs "${DIR}/${file[0]}" "${HOME}/${file[1]}"
-				fi
+			# Create symbolic link
+			ln -fs "${DIR}/${file[0]}" "${HOME}/${file[1]}"
+		fi
             done
             # set separater back to carriage return & new line break
             IFS=$'\r\n'
