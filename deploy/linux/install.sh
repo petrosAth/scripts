@@ -207,4 +207,4 @@ deploy() {
 
 deploy
 
-[[ $? ]] && zsh && _success "OS installed and configured"
+[[ $? ]] && _success "OS installed and configured" && zsh
