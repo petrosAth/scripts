@@ -12,25 +12,26 @@
 # Development -------------------------
 o b base-devel
 o b github-cli
-o b python-pip
+o b go
 o b nodejs
 o b npm
+o b python-pip
 o b zsh
 u b powershell-bin
 u g unityhub-beta
 o g filezilla
 ---------------------------------------
-u b neovim-nightly-bin
-o b fd
-o b ripgrep
-o b python-pynvim
 o b unzip
-u b code-minimap
+o b python-pynvim
+u b code-minimap-bin
+u b neovim-nightly-bin
 ---------------------------------------
 # Remote and Cloud --------------------
 o g bitwarden
 o g nextcloud-client
 # Utilities ---------------------------
+o b fd
+o b ripgrep
 o b starship
 o b wget
 o g solaar
