@@ -42,7 +42,7 @@ get_interface() {
 update_system() {
     # Update keyring
     _process "→ Updating keyring"
-    sudo pacman -Sy --needed archlinux-keyring
+    sudo pacman -Sy archlinux-keyring
 
     # Update system
     _process "→ Updating system"

@@ -27,6 +27,7 @@ u b code-minimap-bin
 u b neovim-nightly-bin
 ---------------------------------------
 # Remote and Cloud --------------------
+o b openssh
 o g bitwarden
 o g nextcloud-client
 # Utilities ---------------------------
