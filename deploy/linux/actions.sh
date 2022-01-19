@@ -108,6 +108,7 @@ declare -A update_os=(
 # Package managers -------------------------------------------------------------
 declare -A install_package_manager=(
     [interface]="both"
+    [message_process]="* Installing yay "
     [arch]="4"
     [arch1]="sudo pacman -Suy --needed git base-devel"
     [arch2]="git clone https://aur.archlinux.org/yay-bin.git"
@@ -119,11 +120,13 @@ declare -A install_package_manager=(
 # Development ------------------------------------------------------------------
 declare -A install_base_devel=(
     [interface]="both"
+    [message_process]="* Installing base-devel "
     [arch]="sudo pacman -Syu --needed base-devel"
     [manjaro]="sudo pacman -Syu --needed base-devel"
 )
 declare -A install_git=(
     [interface]="both"
+    [message_process]="* Installing Git "
     [arch]="sudo pacman -Syu --needed git"
     [manjaro]="sudo pacman -Syu --needed git"
     # Create symlinks
@@ -131,6 +134,7 @@ declare -A install_git=(
 )
 declare -A install_github_cli=(
     [interface]="both"
+    [message_process]="* Installing GitHub CLI "
     [arch]="sudo pacman -Syu --needed github-cli"
     [manjaro]="sudo pacman -Syu --needed github-cli"
     # Create symlinks
@@ -140,26 +144,31 @@ declare -A install_github_cli=(
 )
 declare -A install_go=(                     # Neovim or Neovim plugin dependancy
     [interface]="both"
+    [message_process]="* Installing GO "
     [arch]="sudo pacman -Syu --needed go"
     [manjaro]="sudo pacman -Syu --needed go"
 )
 declare -A install_nodejs=(                 # Neovim or Neovim plugin dependancy
     [interface]="both"
+    [message_process]="* Installing Node.js "
     [arch]="sudo pacman -Syu --needed nodejs"
     [manjaro]="sudo pacman -Syu --needed nodejs"
 )
 declare -A install_npm=(                    # Neovim or Neovim plugin dependancy
     [interface]="both"
+    [message_process]="* Installing npm "
     [arch]="sudo pacman -Syu --needed npm"
     [manjaro]="sudo pacman -Syu --needed npm"
 )
 declare -A install_python_pip=(
     [interface]="both"
+    [message_process]="* Installing pip "
     [arch]="sudo pacman -Syu --needed python-pip"
     [manjaro]="sudo pacman -Syu --needed python-pip"
 )
 declare -A install_zsh=(
     [interface]="both"
+    [message_process]="* Installing Z shell "
     [arch]="sudo pacman -Syu --needed zsh"
     [manjaro]="sudo pacman -Syu --needed zsh"
     # Create symlinks
@@ -167,6 +176,7 @@ declare -A install_zsh=(
 )
 declare -A install_powershell=(
     [interface]="both"
+    [message_process]="* Installing PowerShell "
     [arch]="yay -Syu --needed powershell-bin"
     [manjaro]="yay -Syu --needed powershell-bin"
     [post_install_command]="4"
@@ -179,16 +189,19 @@ declare -A install_powershell=(
 )
 declare -A install_unityhub_beta=(
     [interface]="gui"
+    [message_process]="* Installing Unity Hub beta "
     [arch]="yay -Syu --needed unityhub-beta"
     [manjaro]="yay -Syu --needed unityhub-beta"
 )
 declare -A install_filezilla=(
     [interface]="gui"
+    [message_process]="* Installing FileZilla "
     [arch]="sudo pacman -Syu --needed filezilla"
     [manjaro]="sudo pacman -Syu --needed filezilla"
 )
 declare -A install_neovim_nightly_bin=(     # Neovim or Neovim plugin dependancy
     [interface]="both"
+    [message_process]="* Installing Neovim nightly "
     [arch]="yay -Syu --needed neovim-nightly-bin"
     [manjaro]="yay -Syu --needed neovim-nightly-bin"
     # Create symlinks
@@ -198,53 +211,63 @@ declare -A install_neovim_nightly_bin=(     # Neovim or Neovim plugin dependancy
 )
 declare -A install_python_pynvim=(          # Neovim or Neovim plugin dependancy
     [interface]="both"
+    [message_process]="* Installing python-pynvim "
     [arch]="sudo pacman -Syu --needed python-pynvim"
     [manjaro]="sudo pacman -Syu --needed python-pynvim"
 )
 declare -A install_code_minimap_bin=(       # Neovim or Neovim plugin dependancy
     [interface]="both"
+    [message_process]="* Installing code-minimap "
     [arch]="yay -Syu --needed code-minimap-bin"
     [manjaro]="yay -Syu --needed code-minimap-bin"
 )
 # Remote and Cloud -------------------------------------------------------------
 declare -A install_openssh=(
     [interface]="both"
+    [message_process]="* Installing OpenSSH "
     [arch]="sudo pacman -Syu --needed openssh"
     [manjaro]="sudo pacman -Syu --needed openssh"
 )
 declare -A install_bitwarden=(
     [interface]="gui"
+    [message_process]="* Installing Bitwarden "
     [arch]="sudo pacman -Syu --needed bitwarden"
     [manjaro]="sudo pacman -Syu --needed bitwarden"
 )
 declare -A install_nextcloud_client=(
     [interface]="gui"
+    [message_process]="* Installing Nextcloud client "
     [arch]="sudo pacman -Syu --needed nextcloud-client"
     [manjaro]="sudo pacman -Syu --needed nextcloud-client"
 )
 # Utilities --------------------------------------------------------------------
 declare -A install_unzip=(                  # Neovim or Neovim plugin dependancy
     [interface]="both"
+    [message_process]="* Installing unzip "
     [arch]="sudo pacman -Syu --needed unzip"
     [manjaro]="sudo pacman -Syu --needed unzip"
 )
 declare -A install_fd=(                     # Neovim or Neovim plugin dependancy
     [interface]="both"
+    [message_process]="* Installing fd "
     [arch]="sudo pacman -Syu --needed fd"
     [manjaro]="sudo pacman -Syu --needed fd"
 )
 declare -A install_ripgrep=(                # Neovim or Neovim plugin dependancy
     [interface]="both"
+    [message_process]="* Installing ripGREP "
     [arch]="sudo pacman -Syu --needed ripgrep"
     [manjaro]="sudo pacman -Syu --needed ripgrep"
 )
 declare -A install_starship=(
     [interface]="both"
+    [message_process]="* Installing Starship "
     [arch]="sudo pacman -Syu --needed starship"
     [manjaro]="sudo pacman -Syu --needed starship"
 )
 declare -A install_oh_my_posh=(
     [interface]="both"
+    [message_process]="* Installing Oh My Posh "
     [arch]="2"
     [arch1]="sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh"
     [arch2]="sudo chmod +x /usr/local/bin/oh-my-posh"
@@ -254,59 +277,70 @@ declare -A install_oh_my_posh=(
 )
 declare -A install_wget=(
     [interface]="both"
+    [message_process]="* Installing wget "
     [arch]="sudo pacman -Syu --needed wget"
     [manjaro]="sudo pacman -Syu --needed wget"
 )
 declare -A install_solaar=(
     [interface]="gui"
+    [message_process]="* Installing Solaar "
     [arch]="sudo pacman -Syu --needed solaar"
     [manjaro]="sudo pacman -Syu --needed solaar"
 )
 declare -A install_kdeconnect=(
     [interface]="gui"
+    [message_process]="* Installing KDE Connect "
     [arch]="sudo pacman -Syu --needed kdeconnect"
     [manjaro]="sudo pacman -Syu --needed kdeconnect"
 )
 # Editing ----------------------------------------------------------------------
 declare -A install_blender=(
     [interface]="gui"
+    [message_process]="* Installing Blender "
     [arch]="sudo pacman -Syu --needed blender"
     [manjaro]="sudo pacman -Syu --needed blender"
 )
 declare -A install_handbrake=(
     [interface]="gui"
+    [message_process]="* Installing Handbrake "
     [arch]="sudo pacman -Syu --needed handbrake"
     [manjaro]="sudo pacman -Syu --needed handbrake"
 )
 declare -A install_avidemux_qt=(
     [interface]="gui"
+    [message_process]="* Installing Avidemux "
     [arch]="sudo pacman -Syu --needed avidemux-qt"
     [manjaro]="sudo pacman -Syu --needed avidemux-qt"
 )
 declare -A install_audacity=(
     [interface]="gui"
+    [message_process]="* Installing Audacity "
     [arch]="sudo pacman -Syu --needed audacity"
     [manjaro]="sudo pacman -Syu --needed audacity"
 )
 # Web & Chat -------------------------------------------------------------------
 declare -A install_uget=(
     [interface]="gui"
+    [message_process]="* Installing uget "
     [arch]="sudo pacman -Syu --needed uget"
     [manjaro]="sudo pacman -Syu --needed uget"
 )
 declare -A install_firefox=(
     [interface]="gui"
+    [message_process]="* Installing Firefox "
     [arch]="sudo pacman -Syu --needed firefox"
     [manjaro]="sudo pacman -Syu --needed firefox"
 )
 declare -A install_thunderbird=(
     [interface]="gui"
+    [message_process]="* Installing Thunderbird "
     [arch]="sudo pacman -Syu --needed thunderbird"
     [manjaro]="sudo pacman -Syu --needed thunderbird"
 )
 # Entertainment ----------------------------------------------------------------
 declare -A install_vlc=(
     [interface]="gui"
+    [message_process]="* Installing VLC "
     [arch]="sudo pacman -Syu --needed vlc"
     [manjaro]="sudo pacman -Syu --needed vlc"
 )
