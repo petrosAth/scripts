@@ -1,14 +1,20 @@
-#!/usr/bin/env bash
-# Srouces
+#!/bin/bash
+
+# Sources
 # Make Your dotfiles Portable With Git and a Simple Bash Script
 # Part 1: https://freddiecarthy.com/blog/make-your-dotfiles-portable-with-git-and-a-simple-bash-script
 # Part 2: https://freddiecarthy.com/blog/use-git-and-bash-to-automate-your-developer-tooling
 # github repo: https://github.com/gjunkie/dotfiles-starter-kit
 
-INTERFACE=""
 GITHUB_USER="petrosAth"
 GITHUB_REPO="linux-config"
 DIR="${HOME}/dotfiles"
+
+VALID_INTERFACE=("CLI" "GUI" "both")
+VALID_DISTRO=("Arch" "Manjaro")
+
+INTERFACE=""
+DISTRO=""
 
 _process() {
     printf "$(tput setaf 6) %s...$(tput sgr0)\n" "$@"
@@ -19,192 +25,147 @@ _success() {
     printf "%s✓ Success:%s\n" "$(tput setaf 2)" "$(tput sgr0) $message"
 }
 
-get_interface() {
-	# Ask for interface type
-    read -p "Select package list (GUI or CLI): " INTERFACE
+get_user_input() {
+    local question=$1
+    local -n selection=$2
+    local -n valid_array=$3
+
+    echo ${question}
+    # List the available options
+    printf '* %s\n' "${valid_array[@]^}"; echo
+
+    # Keep asking for user input until it is in a valid array (VALID_INTERFACE, VALID_DISTRO)
+    while [[ ! " ${valid_array[*],,} " =~ " ${selection,,} " ]] ; do
+        read -p "Pick one from the list: " selection
+    done
 
     # change to lower case
-    INTERFACE=${INTERFACE,,}
-
-    # If valid selection, change to single character, else exit
-    if [[ ${INTERFACE} == "gui" ]] ; then
-        INTERFACE="g"
-        _process "→ Installing packages for Graphical User Interface"
-    elif [[ ${INTERFACE} == "cli" ]] ; then
-        INTERFACE="c"
-        _process "→ Installing packages for Command Line Interface"
-    else
-        echo "Not a valid selection"
-        command || exit 1
-    fi
+    selection=${selection,,}
 }
 
-update_system() {
-    # Update keyring
-    _process "→ Updating keyring"
-    sudo pacman -Sy archlinux-keyring
+get_distro() {
+    # Ask for distribution
+    local question="Which distribution are you installing?"
+    get_user_input "$question" DISTRO VALID_DISTRO
 
-    # Update system
-    _process "→ Updating system"
-    sudo pacman -Syu
+    # Capitalize the first letter only and print install message
+    _process "* Installing packages for ${DISTRO^}"
+}
 
-    [[ $? ]] && _success "System updated"
+get_interface() {
+    # Ask for distribution
+    local question="What type of interface are you using?"
+    get_user_input "$question" INTERFACE VALID_INTERFACE
+
+    # If the choice is "both" leave it lower case
+    if [[ "${INTERFACE}" == "both" ]] ; then
+        _process "* Installing packages for ${INTERFACE} CLI and GUI"
+    # Else if it is "cli" or "gui" capitalize all
+    else
+        _process "* Installing packages for ${INTERFACE^^}"
+    fi
 }
 
 clone_dotfiles() {
     # Install git
-    _process "→ Installing git"
+    _process "* Installing git"
     sudo pacman -S --needed git
 
     # Clone repository with its submodules
-    _process "→ Cloning repository ${GITHUB_REPO}"
+    _process "* Cloning repository ${GITHUB_REPO}"
     git clone --recurse-submodules https://github.com/${GITHUB_USER}/${GITHUB_REPO}.git ${DIR}
 	# Checkout all submodules on master branch to get rid of detached head state
 	cd ${DIR} && git submodule foreach 'git checkout master'
 	# Checkout git submodule on linux specific branch
 	cd ${DIR}/git && git checkout linux && cd ${HOME}
+	cd ${DIR}/scripts && git checkout source-array && cd ${HOME}
 
     [[ $? ]] && _success "dotfiles have been cloned"
 }
 
-link_dotfiles() {
-    # symlink files to the HOME directory.
-    if [[ -f "${DIR}/scripts/deploy/linux/symlinks.txt" ]]; then
-        _process "→ Symlinking dotfiles"
-
-        # Set variable for list of files
-        files="${DIR}/scripts/deploy/linux/symlinks.txt"
-
-        # Store IFS separator within a temp variable
-        OIFS=$IFS
-        # Set the separator to a carriage return & a new line break
-        # read in passed-in file and store as an array
-        IFS=$'\r\n'
-        links=($(cat "${files}"))
-
-        # Loop through array of files
-        for index in ${!links[*]}
-        do
-            for link in ${links[$index]}
-            do
-                # set IFS back to space to split string on
-                IFS=$' '
-                # create an array of line items
-                file=(${links[$index]})
-                # skip lines starting with #
-                if [[ ! ${file[0]} == "#" ]] ; then
-                    _process "→ Linking ${links[$index]}"
-                    # if a parent directory doesn't exist, create it
-                    if [[ ! -e "${HOME}/${file[2]}" ]] ; then
-                        mkdir "${HOME}/${file[2]}"
-                    fi
-
-                    # Create symbolic link
-                    ln -fs "${DIR}/${file[0]}" "${HOME}/${file[1]}"
-                fi
-            done
-            # set separater back to carriage return & new line break
-            IFS=$'\r\n'
-        done
-
-        # Reset IFS back
-        IFS=$OIFS
-
-        # Change default shell to zsh
-        chsh -s /bin/zsh
-
-        [[ $? ]] && _success "dotfiles have been linked"
-    fi
+execute() {
+    local action=$1
+    # Use shift to remove first argument from the array
+    shift
+    local commands=("$@")
+    for command in ${commands[@]} ; do
+        local execute=${action}[${command}]
+        if [[ ${!execute} ]] ; then
+            local re='^[0-9]+$'
+            if [[ ${!execute} =~ $re ]] ; then
+                for (( i=1; i <= ${!execute}; ++i ))
+                do
+                    command_number=${action}[${command}${i}]
+                    ${!command_number}
+                done
+            else
+                ${!execute}
+            fi
+        fi
+    done
 }
 
-install_packages() {
-    # Set variables for list of files
-    package_list="${DIR}/scripts/deploy/linux/packages.txt"
+install_sequence() {
+    source "${DIR}/scripts/deploy/linux/actions.sh"
 
-    # Store IFS separator within a temp variable
-    OIFS=$IFS
-    # Set the separator to a carriage return & a new line break
-    IFS=$'\r\n'
-    # read in passed-in file and store as an array
-    packages=($(cat "${package_list}"))
-
-    _process "→ Installing packages from Arch official repository"
-    for index in ${!packages[*]}
-    do
-        for package in ${packages[$index]}
-        do
-            # set IFS back to space to split string on
-            IFS=$' '
-            # create an array of line items
-            file=(${packages[$index]})
-            # Install package
-            if [[ ${file[0]} == "o" ]]; then
-                if [[ ${file[1]} == ${INTERFACE} ]] || [[ ${file[1]} == "b" ]] ; then
-                    _process "→ Installing ${file[2]}"
-                    sudo pacman -S --needed ${file[2]}
+    local commands=("pre" "${DISTRO}" "post")
+    for action in ${actions_list[@]} ; do
+        local action_interface=${action}[interface]
+        local action_distro=${action}[${DISTRO}]
+        local action_process=${action}[message_process]
+        local action_success=${action}[message_success]
+        # If the action has an process message print it
+        if [[ ${!action_process} ]] ; then
+            _process "${!action_process}"
+        fi
+        # Go through action's commands
+        if [[ ${!action_distro} ]] ; then
+            if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
+                execute $action "${commands[@]}"
+                # If the action completed successfully and has a success message, print it
+                if [[ ${!action_success} ]] && [[ $? ]] ; then
+                    _success "${!action_success}"
                 fi
             fi
-        done
-        # set separater back to carriage return & new line break
-        IFS=$'\r\n'
+        fi
     done
 
-    _process "→ Installing yay"
-    if ! pacman -Qi yay &>/dev/null 2>&1 ; then
-        sudo pacman -S --needed git base-devel
-        git clone https://aur.archlinux.org/yay-bin.git
-        cd yay-bin && makepkg -si
-        cd .. && rm -rf yay-bin
-    fi
-
-    _process "→ Installing packages from Arch user repository (AUR)"
-    for index in ${!packages[*]}
-    do
-        for package in ${packages[$index]}
-        do
-            # set IFS back to space to split string on
-            IFS=$' '
-            # create an array of line items
-            file=(${packages[$index]})
-            # Install package
-            if [[ ${file[0]} == "u" ]]; then
-                if [[ ${file[1]} == ${INTERFACE} ]] || [[ ${file[1]} == "b" ]] ; then
-                    _process "→ Installing ${file[2]}"
-                    yay -S --needed ${file[2]}
-                fi
-            fi
-        done
-        # set separater back to carriage return & new line break
-        IFS=$'\r\n'
-    done
-
-    # Reset IFS back
-    IFS=$OIFS
-
-	# Install powershell modules only if powershell is installed already
-    if pacman -Qi powershell &>/dev/null 2>&1 ; then
-        pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
-        pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force
-    fi
-
-	# Install oh-my-posh
-    _process "→ Installing oh-my-posh"
-    sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh
-    sudo chmod +x /usr/local/bin/oh-my-posh
-
-    [[ $? ]] && _success "All packages installed"
+    [[ $? ]] && _success "All packages have been installed"
 }
+
+create_symlinks() {
+    _process "* Creating symlinks "
+    local commands=("dir" "link")
+    for action in ${actions_list[@]} ; do
+        action_interface=${action}[interface]
+        action_distro=${action}[${DISTRO}]
+        action_link=(${action}[link])
+        action_link_array=(${!action_link})
+        if [[ ${!action_distro} ]] ; then
+            if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
+                _process "* Linking ${action_link_array[3]} → ${action_link_array[4]} "
+                execute $action "${commands[@]}"
+            fi
+        fi
+    done
+
+    [[ $? ]] && _success "dotfiles have been linked"
+}
+
 
 deploy() {
+    get_distro
     get_interface
-    update_system
-    if [[ ${INTERFACE} == "c" ]] || [[ ${INTERFACE} == "g" ]] ; then
-        clone_dotfiles
-        install_packages
-        link_dotfiles
-    fi
+    clone_dotfiles
+    install_sequence
+    create_symlinks
 }
 
 deploy
 
-[[ $? ]] && _success "OS installed and configured" && zsh
+[[ $? ]] && _success "OS installed and configured"
+
+# Change default shell to zsh
+chsh -s /bin/zsh
+# Start zsh
+zsh

@@ -1,0 +1,312 @@
+#!/bin/bash
+# Packages for auto installagion
+
+# Help -------------------------------------------------------------------------
+# Package addition -------------------------------------------------------------
+# The packages that will be auto-installed by the script are administered here
+# They must be declared and placed in the package_list using the exact same name
+
+# package_list=(
+#     "install_base_devel"
+# )
+
+# declare -A install_base_devel=(
+#     [interface]="both"
+#     [arch]="pacman -Syu --needed base_devel"
+# )
+
+# Configuration ----------------------------------------------------------------
+# The interface type that the package will be installed is stated using the
+# following key and has three options:
+#     [interface]="cli"
+#     [interface]="gui"
+#     [interface]="both"
+
+# The distributions that the package will be installed along with the
+# installation commands for those distributions are stated using the following
+# key:
+#     [manjaro]="pacman -Syu blender"
+#     [debian]="apt-get install blender"
+
+# In case there are more than one commands that have to be issued for the
+# installation of the package, we can enter them using the following method:
+#     [arch]="4"
+#     [arch1]="sudo pacman -S --needed git base_devel"
+#     [arch2]="git clone https://aur.archlinux.org/yay-bin.git"
+#     [arch3]="cd yay-bin && makepkg -si"
+#     [arch4]="cd .. && rm -rf yay-bin"
+
+# If there are any commands that have to be executed before the installation
+# they can be added using the key [pre]:
+#     [pre]="2"
+#     [pre1]="mkdir ${HOME}/.config/gh"
+#     [pre2]="ln -fs ${HOME}/dotfiles/gh/config.yml ${HOME}/.config/gh/config.yml"
+
+# If there are any commands that have to be executed after the installation
+# they can be added using the key [post]:
+#     [post]="2"
+#     [post1]="mkdir ${HOME}/.config/gh"
+#     [post2]="ln -fs ${HOME}/dotfiles/gh/config.yml ${HOME}/.config/gh/config.yml"
+# ------------------------------------------------------------------------------
+
+# List of packages for installation
+actions_list=(
+# System Update
+    "update_os"
+# Package Managers
+    "install_package_manager"
+# Development
+    "install_base_devel"
+    "install_git"
+    "install_github_cli"
+    "install_go"
+    "install_nodejs"
+    "install_npm"
+    "install_python_pip"
+    "install_zsh"
+    "install_powershell_bin"
+    "install_unityhub_beta"
+    "install_filezilla"
+    "install_neovim_nightly_bin" # Neovim or Neovim plugin dependancy
+    "install_python_pynvim"      # Neovim or Neovim plugin dependancy
+    "install_code_minimap_bin"   # Neovim or Neovim plugin dependancy
+# Remote and Cloud
+    "install_openssh"
+    "install_bitwarden"
+    "install_nextcloud_client"
+# Utilities
+    "install_unzip"              # Neovim or Neovim plugin dependancy
+    "install_fd"                 # Neovim or Neovim plugin dependancy
+    "install_ripgrep"            # Neovim or Neovim plugin dependancy
+    "install_starship"
+    "install_oh_my_posh"
+    "install_wget"
+    "install_solaar"
+    "install_kdeconnect"
+# Editing
+    "install_blender"
+    "install_handbrake"
+    "install_avidemux_qt"
+    "install_audacity"
+# Web & Chat
+    "install_uget"
+    "install_firefox"
+    "install_thunderbird"
+# Entertainment
+    "install_vlc"
+)
+
+# System Update ----------------------------------------------------------------
+declare -A update_os=(
+    [interface]="both"
+    [message_process]="* Updating system "
+    [message_success]="System updated "
+    [arch]="sudo pacman -Syu"
+    [manjaro]="sudo pacman -Syu"
+)
+
+# Package managers -------------------------------------------------------------
+declare -A install_package_manager=(
+    [interface]="both"
+    [arch]="4"
+    [arch1]="sudo pacman -Suy --needed git base-devel"
+    [arch2]="git clone https://aur.archlinux.org/yay-bin.git"
+    [arch3]="cd yay-bin && makepkg -si"
+    [arch4]="cd .. && rm -rf yay-bin"
+    [manjaro]="sudo pacman -Syu yay"
+)
+
+# Development ------------------------------------------------------------------
+declare -A install_base_devel=(
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed base-devel"
+    [manjaro]="sudo pacman -Syu --needed base-devel"
+)
+declare -A install_git=(
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed git"
+    [manjaro]="sudo pacman -Syu --needed git"
+    # Create symlinks
+    [post_install_command]="ln -fs ${HOME}/dotfiles/git/.gitconfig ${HOME}/.gitconfig"
+)
+declare -A install_github_cli=(
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed github-cli"
+    [manjaro]="sudo pacman -Syu --needed github-cli"
+    # Create symlinks
+    [post_install_command]="2"
+    [post_install_command1]="mkdir ${HOME}/.config/gh"
+    [post_install_command2]="ln -fs ${HOME}/dotfiles/gh/config.yml ${HOME}/.config/gh/config.yml"
+)
+declare -A install_go=(                     # Neovim or Neovim plugin dependancy
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed go"
+    [manjaro]="sudo pacman -Syu --needed go"
+)
+declare -A install_nodejs=(                 # Neovim or Neovim plugin dependancy
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed nodejs"
+    [manjaro]="sudo pacman -Syu --needed nodejs"
+)
+declare -A install_npm=(                    # Neovim or Neovim plugin dependancy
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed npm"
+    [manjaro]="sudo pacman -Syu --needed npm"
+)
+declare -A install_python_pip=(
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed python-pip"
+    [manjaro]="sudo pacman -Syu --needed python-pip"
+)
+declare -A install_zsh=(
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed zsh"
+    [manjaro]="sudo pacman -Syu --needed zsh"
+    # Create symlinks
+    [post_install_command]="ln -fs ${HOME}/dotfiles/zsh/.zshrc ${HOME}/.zshrc"
+)
+declare -A install_powershell=(
+    [interface]="both"
+    [arch]="yay -Syu --needed powershell-bin"
+    [manjaro]="yay -Syu --needed powershell-bin"
+    [post_install_command]="4"
+    # Create symlinks
+    [post_install_command1]="mkdir ${HOME}/.config/powershell"
+    [post_install_command2]="ln -fs ${HOME}/dotfiles/powershell/Microsoft.PowerShell_profile.ps1 ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1"
+    # Install modules
+    [post_install_command3]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
+    [post_install_command4]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
+)
+declare -A install_unityhub_beta=(
+    [interface]="gui"
+    [arch]="yay -Syu --needed unityhub-beta"
+    [manjaro]="yay -Syu --needed unityhub-beta"
+)
+declare -A install_filezilla=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed filezilla"
+    [manjaro]="sudo pacman -Syu --needed filezilla"
+)
+declare -A install_neovim_nightly_bin=(     # Neovim or Neovim plugin dependancy
+    [interface]="both"
+    [arch]="yay -Syu --needed neovim-nightly-bin"
+    [manjaro]="yay -Syu --needed neovim-nightly-bin"
+    # Create symlinks
+    [post_install_command]="2"
+    [post_install_command1]="mkdir ${HOME}/.config/gh"
+    [post_install_command2]="ln -fs ${HOME}/dotfiles/nvim ${HOME}/.config/nvim"
+)
+declare -A install_python_pynvim=(          # Neovim or Neovim plugin dependancy
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed python-pynvim"
+    [manjaro]="sudo pacman -Syu --needed python-pynvim"
+)
+declare -A install_code_minimap_bin=(       # Neovim or Neovim plugin dependancy
+    [interface]="both"
+    [arch]="yay -Syu --needed code-minimap-bin"
+    [manjaro]="yay -Syu --needed code-minimap-bin"
+)
+# Remote and Cloud -------------------------------------------------------------
+declare -A install_openssh=(
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed openssh"
+    [manjaro]="sudo pacman -Syu --needed openssh"
+)
+declare -A install_bitwarden=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed bitwarden"
+    [manjaro]="sudo pacman -Syu --needed bitwarden"
+)
+declare -A install_nextcloud_client=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed nextcloud-client"
+    [manjaro]="sudo pacman -Syu --needed nextcloud-client"
+)
+# Utilities --------------------------------------------------------------------
+declare -A install_unzip=(                  # Neovim or Neovim plugin dependancy
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed unzip"
+    [manjaro]="sudo pacman -Syu --needed unzip"
+)
+declare -A install_fd=(                     # Neovim or Neovim plugin dependancy
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed fd"
+    [manjaro]="sudo pacman -Syu --needed fd"
+)
+declare -A install_ripgrep=(                # Neovim or Neovim plugin dependancy
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed ripgrep"
+    [manjaro]="sudo pacman -Syu --needed ripgrep"
+)
+declare -A install_starship=(
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed starship"
+    [manjaro]="sudo pacman -Syu --needed starship"
+)
+declare -A install_oh_my_posh=(
+    [interface]="both"
+    [arch]="2"
+    [arch1]="sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh"
+    [arch2]="sudo chmod +x /usr/local/bin/oh-my-posh"
+    [manjaro]="2"
+    [manjaro1]="sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh"
+    [manjaro2]="sudo chmod +x /usr/local/bin/oh-my-posh"
+)
+declare -A install_wget=(
+    [interface]="both"
+    [arch]="sudo pacman -Syu --needed wget"
+    [manjaro]="sudo pacman -Syu --needed wget"
+)
+declare -A install_solaar=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed solaar"
+    [manjaro]="sudo pacman -Syu --needed solaar"
+)
+declare -A install_kdeconnect=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed kdeconnect"
+    [manjaro]="sudo pacman -Syu --needed kdeconnect"
+)
+# Editing ----------------------------------------------------------------------
+declare -A install_blender=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed blender"
+    [manjaro]="sudo pacman -Syu --needed blender"
+)
+declare -A install_handbrake=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed handbrake"
+    [manjaro]="sudo pacman -Syu --needed handbrake"
+)
+declare -A install_avidemux_qt=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed avidemux-qt"
+    [manjaro]="sudo pacman -Syu --needed avidemux-qt"
+)
+declare -A install_audacity=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed audacity"
+    [manjaro]="sudo pacman -Syu --needed audacity"
+)
+# Web & Chat -------------------------------------------------------------------
+declare -A install_uget=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed uget"
+    [manjaro]="sudo pacman -Syu --needed uget"
+)
+declare -A install_firefox=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed firefox"
+    [manjaro]="sudo pacman -Syu --needed firefox"
+)
+declare -A install_thunderbird=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed thunderbird"
+    [manjaro]="sudo pacman -Syu --needed thunderbird"
+)
+# Entertainment ----------------------------------------------------------------
+declare -A install_vlc=(
+    [interface]="gui"
+    [arch]="sudo pacman -Syu --needed vlc"
+    [manjaro]="sudo pacman -Syu --needed vlc"
+)
