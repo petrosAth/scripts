@@ -10,15 +10,17 @@
 # Part 2: https://freddiecarthy.com/blog/use-git-and-bash-to-automate-your-developer-tooling
 # github repo: https://github.com/gjunkie/dotfiles-starter-kit
 
-# Depoly script call command
+# Deploy script call command
 # `bash -c "$(curl -#fL raw.githubusercontent.com/petrosAth/scripts/master/deploy/linux/install.sh)"`
 
 # user of the github repo to be cloned
 GITHUB_USER="petrosAth"
 # name of the github repo to be cloned
 GITHUB_REPO="linux-config"
-# folder name where the repo will be cloned
+# folder name where the dotfiles repo will be cloned
 DIR="${HOME}/dotfiles"
+# home of the script's files
+SCRIPT_DIR="${DIR}/scripts/deploy/linux"
 
 VALID_INTERFACE=("CLI" "GUI" "both")
 VALID_DISTRO=("Arch" "Manjaro")
@@ -100,7 +102,6 @@ clone_dotfiles() {
 	cd ${DIR} && git submodule foreach 'git checkout master'
 	# Checkout git submodule on linux specific branch
 	cd ${DIR}/git && git checkout linux && cd ${HOME}
-	cd ${DIR}/scripts && git checkout source-array && cd ${HOME}
 
     [[ $? ]] && _success "dotfiles have been cloned"
 }
@@ -174,8 +175,10 @@ create_symlinks() {
             # Check if the interface key has the value selected
             if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
                 # Print the directory to be created
-                [[ ${!action_dir} ]] && _process "* Creating directory ${action_dir_array[1]} "
-                # Print the link to be done
+                if [[ ! -d "${action_dir_array[2]}" ]] && [[ ${!action_dir} ]] ; then
+                    _process "* Creating directory ${action_dir_array[2]} "
+                fi
+                # Print the link to be made
                 [[ ${!action_link} ]] && _process "* Linking ${action_link_array[2]} → ${action_link_array[3]} "
                 # Send the action's mkdir and ln commands for execution
                 execute $action "${commands[@]}"
@@ -197,7 +200,7 @@ deploy() {
         clone_dotfiles
 
         # Source actions list
-        source "${DIR}/scripts/deploy/linux/actions.sh"
+        source "${SCRIPT_DIR}/actions.sh"
 
         actions_sequence
         create_symlinks
