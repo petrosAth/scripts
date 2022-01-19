@@ -79,8 +79,8 @@ actions_list=(
     "install_fd"                 # Neovim or Neovim plugin dependancy
     "install_ripgrep"            # Neovim or Neovim plugin dependancy
     "install_starship"
-    "install_oh_my_posh"
     "install_wget"
+    "install_oh_my_posh"
     "install_solaar"
     "install_kdeconnect"
 # Editing
@@ -250,6 +250,12 @@ declare -A install_starship=(
     [arch]="sudo pacman -Syu --needed starship"
     [manjaro]="sudo pacman -Syu --needed starship"
 )
+declare -A install_wget=(
+    [interface]="both"
+    [message_process]="* Installing wget "
+    [arch]="sudo pacman -Syu --needed wget"
+    [manjaro]="sudo pacman -Syu --needed wget"
+)
 declare -A install_oh_my_posh=(
     [interface]="both"
     [message_process]="* Installing Oh My Posh "
@@ -259,12 +265,6 @@ declare -A install_oh_my_posh=(
     [manjaro]="2"
     [manjaro1]="sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh"
     [manjaro2]="sudo chmod +x /usr/local/bin/oh-my-posh"
-)
-declare -A install_wget=(
-    [interface]="both"
-    [message_process]="* Installing wget "
-    [arch]="sudo pacman -Syu --needed wget"
-    [manjaro]="sudo pacman -Syu --needed wget"
 )
 declare -A install_solaar=(
     [interface]="gui"

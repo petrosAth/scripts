@@ -154,7 +154,9 @@ create_symlinks() {
         action_link=(${action}[link])
         action_link_array=(${!action_link})
         if [[ ${!action_distro} ]] ; then
+            echo "pass 1"
             if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
+                echo "pass 2"
                 [[ ${!action_dir} ]] && _process "* Creating directory ${action_dir_array[1]} "
                 [[ ${!action_link} ]] && _process "* Linking ${action_link_array[2]} → ${action_link_array[3]} "
                 execute $action "${commands[@]}"
