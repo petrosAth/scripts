@@ -130,7 +130,7 @@ declare -A install_git=(
     [arch]="sudo pacman -Syu --needed git"
     [manjaro]="sudo pacman -Syu --needed git"
     # Create symlinks
-    [post_install_command]="ln -fs ${HOME}/dotfiles/git/.gitconfig ${HOME}/.gitconfig"
+    [post_install_command]="ln -fs '${HOME}/dotfiles/git/.gitconfig' '${HOME}/.gitconfig'"
 )
 declare -A install_github_cli=(
     [interface]="both"
@@ -140,7 +140,7 @@ declare -A install_github_cli=(
     # Create symlinks
     [post_install_command]="2"
     [post_install_command1]="mkdir ${HOME}/.config/gh"
-    [post_install_command2]="ln -fs ${HOME}/dotfiles/gh/config.yml ${HOME}/.config/gh/config.yml"
+    [post_install_command2]="ln -fs '${HOME}/dotfiles/gh/config.yml' '${HOME}/.config/gh/config.yml'"
 )
 declare -A install_go=(                     # Neovim or Neovim plugin dependancy
     [interface]="both"
@@ -172,7 +172,7 @@ declare -A install_zsh=(
     [arch]="sudo pacman -Syu --needed zsh"
     [manjaro]="sudo pacman -Syu --needed zsh"
     # Create symlinks
-    [post_install_command]="ln -fs ${HOME}/dotfiles/zsh/.zshrc ${HOME}/.zshrc"
+    [post_install_command]="ln -fs '${HOME}/dotfiles/zsh/.zshrc' '${HOME}/.zshrc'"
 )
 declare -A install_powershell=(
     [interface]="both"
@@ -182,7 +182,7 @@ declare -A install_powershell=(
     [post_install_command]="4"
     # Create symlinks
     [post_install_command1]="mkdir ${HOME}/.config/powershell"
-    [post_install_command2]="ln -fs ${HOME}/dotfiles/powershell/Microsoft.PowerShell_profile.ps1 ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1"
+    [post_install_command2]="ln -fs '${HOME}/dotfiles/powershell/Microsoft.PowerShell_profile.ps1' '${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1'"
     # Install modules
     [post_install_command3]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
     [post_install_command4]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
@@ -207,7 +207,7 @@ declare -A install_neovim_nightly_bin=(     # Neovim or Neovim plugin dependancy
     # Create symlinks
     [post_install_command]="2"
     [post_install_command1]="mkdir ${HOME}/.config/gh"
-    [post_install_command2]="ln -fs ${HOME}/dotfiles/nvim ${HOME}/.config/nvim"
+    [post_install_command2]="ln -fs '${HOME}/dotfiles/nvim' '${HOME}/.config/nvim'"
 )
 declare -A install_python_pynvim=(          # Neovim or Neovim plugin dependancy
     [interface]="both"
