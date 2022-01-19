@@ -1,13 +1,23 @@
 #!/bin/bash
 
-# Sources
+# GitHub user: petrosAth
+# Name: Petros Athanasoulis
+# Email: develop@athanasoulis.me
+
+# Citation
 # Make Your dotfiles Portable With Git and a Simple Bash Script
 # Part 1: https://freddiecarthy.com/blog/make-your-dotfiles-portable-with-git-and-a-simple-bash-script
 # Part 2: https://freddiecarthy.com/blog/use-git-and-bash-to-automate-your-developer-tooling
 # github repo: https://github.com/gjunkie/dotfiles-starter-kit
 
+# Depoly script call command
+# `bash -c "$(curl -#fL raw.githubusercontent.com/petrosAth/scripts/master/deploy/linux/install.sh)"`
+
+# user of the github repo to be cloned
 GITHUB_USER="petrosAth"
+# name of the github repo to be cloned
 GITHUB_REPO="linux-config"
+# folder name where the repo will be cloned
 DIR="${HOME}/dotfiles"
 
 VALID_INTERFACE=("CLI" "GUI" "both")
@@ -102,14 +112,18 @@ execute() {
     local commands=("$@")
     for command in ${commands[@]} ; do
         local execute=${action}[${command}]
+        # If a key exists continue
         if [[ ${!execute} ]] ; then
+            # regex for findint number characters
             local re='^[0-9]+$'
+            # If the key ends with a number start an execution loop
             if [[ ${!execute} =~ $re ]] ; then
                 for (( i=1; i <= ${!execute}; ++i ))
                 do
                     command_number=${action}[${command}${i}]
                     ${!command_number}
                 done
+            # Else execute the key's commands
             else
                 ${!execute}
             fi
@@ -117,20 +131,23 @@ execute() {
     done
 }
 
-install_sequence() {
+actions_sequence() {
+    # Array of keys of which their commands will be executed
     local commands=("pre" "${DISTRO}" "post")
     for action in ${actions_list[@]} ; do
         local action_interface=${action}[interface]
         local action_distro=${action}[${DISTRO}]
         local action_process=${action}[message_process]
         local action_success=${action}[message_success]
-        # Go through action's commands
+        # If the action has a key with the current distro's name continue
         if [[ ${!action_distro} ]] ; then
+            # Check if the interface key has the value selected
             if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
                 # If the action has an process message print it
                 [[ ${!action_process} ]] && _process "${!action_process}"
+                # Send the action's commands for execution
                 execute $action "${commands[@]}"
-                # If the action completed successfully and has a success message, print it
+                # If the action's commands completed successfully and has a success message, print it
                 if [[ ${!action_success} ]] && [[ $? ]] ; then
                     _success "${!action_success}"
                 fi
@@ -143,6 +160,7 @@ install_sequence() {
 
 create_symlinks() {
     _process "* Creating symlinks "
+    # Array of keys of which their commands will be executed
     local commands=("dir" "link")
     for action in ${actions_list[@]} ; do
         local action_interface=${action}[interface]
@@ -151,10 +169,15 @@ create_symlinks() {
         local action_dir_array=(${!action_dir})
         local action_link=(${action}[link])
         local action_link_array=(${!action_link})
+        # If the action has a key with the current distro's name continue
         if [[ ${!action_distro} ]] ; then
+            # Check if the interface key has the value selected
             if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
+                # Print the directory to be created
                 [[ ${!action_dir} ]] && _process "* Creating directory ${action_dir_array[1]} "
+                # Print the link to be done
                 [[ ${!action_link} ]] && _process "* Linking ${action_link_array[2]} → ${action_link_array[3]} "
+                # Send the action's mkdir and ln commands for execution
                 execute $action "${commands[@]}"
             fi
         fi
@@ -164,7 +187,9 @@ create_symlinks() {
 }
 
 deploy() {
+    # Ask for distribution to be installed
     get_distro
+    # Ask for interface to be used
     get_interface
     # Test again if a valid selection has been made by the user
     if [[ " ${valid_array[*],,} " =~ " ${selection,,} " ]] ; then
@@ -174,11 +199,12 @@ deploy() {
         # Source actions list
         source "${DIR}/scripts/deploy/linux/actions.sh"
 
-        install_sequence
+        actions_sequence
         create_symlinks
     fi
 }
 
+# Call all the functions!!!
 deploy
 
 [[ $? ]] && _success "OS installed and configured"

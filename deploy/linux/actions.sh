@@ -1,57 +1,6 @@
 #!/bin/bash
-# Packages for auto installagion
 
-# Help -------------------------------------------------------------------------
-# Package addition -------------------------------------------------------------
-# The packages that will be auto-installed by the script are administered here
-# They must be declared and placed in the package_list using the exact same name
-
-# package_list=(
-#     "install_base_devel"
-# )
-
-# declare -A install_base_devel=(
-#     [interface]="both"
-#     [arch]="pacman -Syu --needed base_devel"
-# )
-
-# Configuration ----------------------------------------------------------------
-# The interface type that the package will be installed is stated using the
-# following key and has three options:
-#     [interface]="cli"
-#     [interface]="gui"
-#     [interface]="both"
-
-# The distributions that the package will be installed along with the
-# installation commands for those distributions are stated using the following
-# key:
-#     [manjaro]="pacman -Syu blender"
-#     [debian]="apt-get install blender"
-
-# In case there are more than one commands that have to be issued for the
-# installation of the package, we can enter them using the following method:
-#     [arch]="4"
-#     [arch1]="sudo pacman -S --needed git base_devel"
-#     [arch2]="git clone https://aur.archlinux.org/yay-bin.git"
-#     [arch3]="cd yay-bin
-#     [arch4]="makepkg -si"
-#     [arch5]="cd ..
-#     [arch6]="rm -rf yay-bin"
-
-# If there are any commands that have to be executed before the installation
-# they can be added using the key [pre]:
-#     [pre]="2"
-#     [pre1]="mkdir ${HOME}/.config/gh"
-#     [pre2]="ln -fs ${HOME}/dotfiles/gh/config.yml ${HOME}/.config/gh/config.yml"
-
-# If there are any commands that have to be executed after the installation
-# they can be added using the key [post]:
-#     [post]="2"
-#     [post1]="mkdir ${HOME}/.config/gh"
-#     [post2]="ln -fs ${HOME}/dotfiles/gh/config.yml ${HOME}/.config/gh/config.yml"
-# ------------------------------------------------------------------------------
-
-# List of packages for installation
+# Array of actions to be taken by the auto installation script
 actions_list=(
 # Package Managers
     "install_package_manager"
@@ -112,7 +61,7 @@ declare -A install_package_manager=(
 # Development ------------------------------------------------------------------
 declare -A install_base_devel=(
     [interface]="both"
-    [message_process]="* Installing base-devel "
+    [message_process]="* Installing Package group base-devel "
     [arch]="sudo pacman -Syu --needed base-devel"
     [manjaro]="sudo pacman -Syu --needed base-devel"
 )
@@ -133,7 +82,7 @@ declare -A install_github_cli=(
 )
 declare -A install_go=(
     [interface]="both"
-    [message_process]="* Installing GO "
+    [message_process]="* Installing GO language "
     [arch]="sudo pacman -Syu --needed go"
     [manjaro]="sudo pacman -Syu --needed go"
 )
@@ -145,13 +94,13 @@ declare -A install_nodejs=(
 )
 declare -A install_npm=(
     [interface]="both"
-    [message_process]="* Installing npm "
+    [message_process]="* Installing Node.js package manager (npm) "
     [arch]="sudo pacman -Syu --needed npm"
     [manjaro]="sudo pacman -Syu --needed npm"
 )
 declare -A install_python_pip=(
     [interface]="both"
-    [message_process]="* Installing pip "
+    [message_process]="* Installing pip package manager "
     [arch]="sudo pacman -Syu --needed python-pip"
     [manjaro]="sudo pacman -Syu --needed python-pip"
 )
@@ -196,7 +145,7 @@ declare -A install_neovim_nightly_bin=(
 )
 declare -A install_python_pynvim=(
     [interface]="both"
-    [message_process]="* Installing python-pynvim "
+    [message_process]="* Installing Pynvim "
     [arch]="sudo pacman -Syu --needed python-pynvim"
     [manjaro]="sudo pacman -Syu --needed python-pynvim"
 )
