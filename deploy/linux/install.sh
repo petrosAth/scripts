@@ -118,8 +118,6 @@ execute() {
 }
 
 install_sequence() {
-    source "${DIR}/scripts/deploy/linux/actions.sh"
-
     local commands=("pre" "${DISTRO}" "post")
     for action in ${actions_list[@]} ; do
         local action_interface=${action}[interface]
@@ -147,16 +145,14 @@ create_symlinks() {
     _process "* Creating symlinks "
     local commands=("dir" "link")
     for action in ${actions_list[@]} ; do
-        action_interface=${action}[interface]
-        action_distro=${action}[${DISTRO}]
-        action_dir=(${action}[dir])
-        action_dir_array=(${!action_dir})
-        action_link=(${action}[link])
-        action_link_array=(${!action_link})
+        local action_interface=${action}[interface]
+        local action_distro=${action}[${DISTRO}]
+        local action_dir=(${action}[dir])
+        local action_dir_array=(${!action_dir})
+        local action_link=(${action}[link])
+        local action_link_array=(${!action_link})
         if [[ ${!action_distro} ]] ; then
-            echo "pass 1"
             if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
-                echo "pass 2"
                 [[ ${!action_dir} ]] && _process "* Creating directory ${action_dir_array[1]} "
                 [[ ${!action_link} ]] && _process "* Linking ${action_link_array[2]} → ${action_link_array[3]} "
                 execute $action "${commands[@]}"
@@ -174,6 +170,10 @@ deploy() {
     if [[ " ${valid_array[*],,} " =~ " ${selection,,} " ]] ; then
         update_system
         clone_dotfiles
+
+        # Source actions list
+        source "${DIR}/scripts/deploy/linux/actions.sh"
+
         install_sequence
         create_symlinks
     fi

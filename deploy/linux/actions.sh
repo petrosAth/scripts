@@ -128,7 +128,7 @@ declare -A install_github_cli=(
     [message_process]="* Installing GitHub CLI "
     [arch]="sudo pacman -Syu --needed github-cli"
     [manjaro]="sudo pacman -Syu --needed github-cli"
-    [dir]="mkdir ${HOME}/.config/gh"
+    # [dir]="mkdir ${HOME}/.config/gh"
     [link]="ln -fs ${DIR}/gh/config.yml ${HOME}/.config/gh/config.yml"
 )
 declare -A install_go=(
@@ -168,7 +168,7 @@ declare -A install_powershell=(
     [message_process]="* Installing PowerShell "
     [arch]="yay -Syu --needed powershell-bin"
     [manjaro]="yay -Syu --needed powershell-bin"
-    [dir]="mkdir ${HOME}/.config/powershell"
+    # [dir]="mkdir ${HOME}/.config/powershell"
     [link]="ln -fs ${DIR}/powershell/Microsoft.PowerShell_profile.ps1 ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1"
     [post_install_command]="2"
     [post_install_command1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
@@ -191,7 +191,7 @@ declare -A install_neovim_nightly_bin=(
     [message_process]="* Installing Neovim nightly "
     [arch]="yay -Syu --needed neovim-nightly-bin"
     [manjaro]="yay -Syu --needed neovim-nightly-bin"
-    [dir]="mkdir ${HOME}/.config/gh"
+    # [dir]="mkdir ${HOME}/.config/gh"
     [link]="ln -fs ${DIR}/nvim ${HOME}/.config/nvim"
 )
 declare -A install_python_pynvim=(
