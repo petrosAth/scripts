@@ -33,8 +33,10 @@
 #     [arch]="4"
 #     [arch1]="sudo pacman -S --needed git base_devel"
 #     [arch2]="git clone https://aur.archlinux.org/yay-bin.git"
-#     [arch3]="cd yay-bin && makepkg -si"
-#     [arch4]="cd .. && rm -rf yay-bin"
+#     [arch3]="cd yay-bin
+#     [arch4]="makepkg -si"
+#     [arch5]="cd ..
+#     [arch6]="rm -rf yay-bin"
 
 # If there are any commands that have to be executed before the installation
 # they can be added using the key [pre]:
@@ -51,8 +53,6 @@
 
 # List of packages for installation
 actions_list=(
-# System Update
-    "update_os"
 # Package Managers
     "install_package_manager"
 # Development
@@ -96,27 +96,19 @@ actions_list=(
     "install_vlc"
 )
 
-# System Update ----------------------------------------------------------------
-declare -A update_os=(
-    [interface]="both"
-    [message_process]="* Updating system "
-    [message_success]="System updated "
-    [arch]="sudo pacman -Syu"
-    [manjaro]="sudo pacman -Syu"
-)
-
 # Package managers -------------------------------------------------------------
 declare -A install_package_manager=(
     [interface]="both"
     [message_process]="* Installing yay "
-    [arch]="4"
+    [arch]="6"
     [arch1]="sudo pacman -Suy --needed git base-devel"
     [arch2]="git clone https://aur.archlinux.org/yay-bin.git"
-    [arch3]="cd yay-bin && makepkg -si"
-    [arch4]="cd .. && rm -rf yay-bin"
+    [arch3]="cd yay-bin"
+    [arch4]="makepkg -si"
+    [arch5]="cd .."
+    [arch6]="rm -rf yay-bin"
     [manjaro]="sudo pacman -Syu yay"
 )
-
 # Development ------------------------------------------------------------------
 declare -A install_base_devel=(
     [interface]="both"
@@ -129,32 +121,29 @@ declare -A install_git=(
     [message_process]="* Installing Git "
     [arch]="sudo pacman -Syu --needed git"
     [manjaro]="sudo pacman -Syu --needed git"
-    # Create symlinks
-    [post_install_command]="ln -fs '${HOME}/dotfiles/git/.gitconfig' '${HOME}/.gitconfig'"
+    [link]="ln -fs ${DIR}/git/.gitconfig ${HOME}/.gitconfig"
 )
 declare -A install_github_cli=(
     [interface]="both"
     [message_process]="* Installing GitHub CLI "
     [arch]="sudo pacman -Syu --needed github-cli"
     [manjaro]="sudo pacman -Syu --needed github-cli"
-    # Create symlinks
-    [post_install_command]="2"
-    [post_install_command1]="mkdir ${HOME}/.config/gh"
-    [post_install_command2]="ln -fs '${HOME}/dotfiles/gh/config.yml' '${HOME}/.config/gh/config.yml'"
+    [dir]="mkdir ${HOME}/.config/gh"
+    [link]="ln -fs ${DIR}/gh/config.yml ${HOME}/.config/gh/config.yml"
 )
-declare -A install_go=(                     # Neovim or Neovim plugin dependancy
+declare -A install_go=(
     [interface]="both"
     [message_process]="* Installing GO "
     [arch]="sudo pacman -Syu --needed go"
     [manjaro]="sudo pacman -Syu --needed go"
 )
-declare -A install_nodejs=(                 # Neovim or Neovim plugin dependancy
+declare -A install_nodejs=(
     [interface]="both"
     [message_process]="* Installing Node.js "
     [arch]="sudo pacman -Syu --needed nodejs"
     [manjaro]="sudo pacman -Syu --needed nodejs"
 )
-declare -A install_npm=(                    # Neovim or Neovim plugin dependancy
+declare -A install_npm=(
     [interface]="both"
     [message_process]="* Installing npm "
     [arch]="sudo pacman -Syu --needed npm"
@@ -171,21 +160,19 @@ declare -A install_zsh=(
     [message_process]="* Installing Z shell "
     [arch]="sudo pacman -Syu --needed zsh"
     [manjaro]="sudo pacman -Syu --needed zsh"
-    # Create symlinks
-    [post_install_command]="ln -fs '${HOME}/dotfiles/zsh/.zshrc' '${HOME}/.zshrc'"
+    [link]="ln -fs ${DIR}/zsh/.zshrc ${HOME}/.zshrc"
+    [post_install_command]="chsh -s /bin/zsh" # Change default shell to zsh
 )
 declare -A install_powershell=(
     [interface]="both"
     [message_process]="* Installing PowerShell "
     [arch]="yay -Syu --needed powershell-bin"
     [manjaro]="yay -Syu --needed powershell-bin"
-    [post_install_command]="4"
-    # Create symlinks
-    [post_install_command1]="mkdir ${HOME}/.config/powershell"
-    [post_install_command2]="ln -fs '${HOME}/dotfiles/powershell/Microsoft.PowerShell_profile.ps1' '${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1'"
-    # Install modules
-    [post_install_command3]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
-    [post_install_command4]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
+    [dir]="mkdir ${HOME}/.config/powershell"
+    [link]="ln -fs ${DIR}/powershell/Microsoft.PowerShell_profile.ps1 ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1"
+    [post_install_command]="2"
+    [post_install_command1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
+    [post_install_command2]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
 )
 declare -A install_unityhub_beta=(
     [interface]="gui"
@@ -199,23 +186,21 @@ declare -A install_filezilla=(
     [arch]="sudo pacman -Syu --needed filezilla"
     [manjaro]="sudo pacman -Syu --needed filezilla"
 )
-declare -A install_neovim_nightly_bin=(     # Neovim or Neovim plugin dependancy
+declare -A install_neovim_nightly_bin=(
     [interface]="both"
     [message_process]="* Installing Neovim nightly "
     [arch]="yay -Syu --needed neovim-nightly-bin"
     [manjaro]="yay -Syu --needed neovim-nightly-bin"
-    # Create symlinks
-    [post_install_command]="2"
-    [post_install_command1]="mkdir ${HOME}/.config/gh"
-    [post_install_command2]="ln -fs '${HOME}/dotfiles/nvim' '${HOME}/.config/nvim'"
+    [dir]="mkdir ${HOME}/.config/gh"
+    [link]="ln -fs ${DIR}/nvim ${HOME}/.config/nvim"
 )
-declare -A install_python_pynvim=(          # Neovim or Neovim plugin dependancy
+declare -A install_python_pynvim=(
     [interface]="both"
     [message_process]="* Installing python-pynvim "
     [arch]="sudo pacman -Syu --needed python-pynvim"
     [manjaro]="sudo pacman -Syu --needed python-pynvim"
 )
-declare -A install_code_minimap_bin=(       # Neovim or Neovim plugin dependancy
+declare -A install_code_minimap_bin=(
     [interface]="both"
     [message_process]="* Installing code-minimap "
     [arch]="yay -Syu --needed code-minimap-bin"
@@ -241,19 +226,19 @@ declare -A install_nextcloud_client=(
     [manjaro]="sudo pacman -Syu --needed nextcloud-client"
 )
 # Utilities --------------------------------------------------------------------
-declare -A install_unzip=(                  # Neovim or Neovim plugin dependancy
+declare -A install_unzip=(
     [interface]="both"
     [message_process]="* Installing unzip "
     [arch]="sudo pacman -Syu --needed unzip"
     [manjaro]="sudo pacman -Syu --needed unzip"
 )
-declare -A install_fd=(                     # Neovim or Neovim plugin dependancy
+declare -A install_fd=(
     [interface]="both"
     [message_process]="* Installing fd "
     [arch]="sudo pacman -Syu --needed fd"
     [manjaro]="sudo pacman -Syu --needed fd"
 )
-declare -A install_ripgrep=(                # Neovim or Neovim plugin dependancy
+declare -A install_ripgrep=(
     [interface]="both"
     [message_process]="* Installing ripGREP "
     [arch]="sudo pacman -Syu --needed ripgrep"

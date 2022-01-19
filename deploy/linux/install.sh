@@ -66,6 +66,18 @@ get_interface() {
     fi
 }
 
+update_system() {
+    _process "* Updating system "
+    case ${DISTRO} in
+        arch)
+            echo pacman -Syu arch ;;
+        manjaro)
+            echo pacman -Syu manjaro ;;
+    esac
+
+    [[ $? ]] && _success "System updated"
+}
+
 clone_dotfiles() {
     # Install git
     _process "* Installing git"
@@ -115,9 +127,7 @@ install_sequence() {
         local action_process=${action}[message_process]
         local action_success=${action}[message_success]
         # If the action has an process message print it
-        if [[ ${!action_process} ]] ; then
-            _process "${!action_process}"
-        fi
+        [[ ${!action_process} ]] && _process "${!action_process}"
         # Go through action's commands
         if [[ ${!action_distro} ]] ; then
             if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
@@ -136,14 +146,17 @@ install_sequence() {
 create_symlinks() {
     _process "* Creating symlinks "
     local commands=("dir" "link")
-    for action in ${actions_list[@]} ; do
+    for action in ${package_list[@]} ; do
         action_interface=${action}[interface]
         action_distro=${action}[${DISTRO}]
+        action_dir=(${action}[dir])
+        action_dir_array=(${!action_dir})
         action_link=(${action}[link])
         action_link_array=(${!action_link})
         if [[ ${!action_distro} ]] ; then
             if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
-                _process "* Linking ${action_link_array[3]} → ${action_link_array[4]} "
+                [[ ${!action_dir} ]] && _process "* Creating directory ${action_dir_array[1]} "
+                [[ ${!action_link} ]] && _process "* Linking ${action_link_array[2]} → ${action_link_array[3]} "
                 execute $action "${commands[@]}"
             fi
         fi
@@ -152,20 +165,18 @@ create_symlinks() {
     [[ $? ]] && _success "dotfiles have been linked"
 }
 
-
 deploy() {
     get_distro
     get_interface
-    clone_dotfiles
-    install_sequence
-    create_symlinks
+    # Test again if a valid selection has been made by the user
+    if [[ " ${valid_array[*],,} " =~ " ${selection,,} " ]] ; then
+        update_system
+        clone_dotfiles
+        install_sequence
+        create_symlinks
+    fi
 }
 
 deploy
 
 [[ $? ]] && _success "OS installed and configured"
-
-# Change default shell to zsh
-chsh -s /bin/zsh
-# Start zsh
-zsh
