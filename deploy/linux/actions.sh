@@ -3,7 +3,7 @@
 # Array of actions to be taken by the auto installation script
 actions_list=(
 # Package Managers
-    "install_package_manager"
+    "install_yay"
 # Development
     "install_base_devel"
     "install_git"
@@ -46,7 +46,7 @@ actions_list=(
 )
 
 # Package managers -------------------------------------------------------------
-declare -A install_package_manager=(
+declare -A install_yay=(
     [interface]="both"
     [message_process]="* Installing yay "
     [arch]="6"
