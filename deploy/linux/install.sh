@@ -70,9 +70,9 @@ update_system() {
     _process "* Updating system "
     case ${DISTRO} in
         arch)
-            pacman -Syu ;;
+            sudo pacman -Syu ;;
         manjaro)
-            pacman -Syu ;;
+            sudo pacman -Syu ;;
     esac
 
     [[ $? ]] && _success "System updated"
