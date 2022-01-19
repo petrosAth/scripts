@@ -146,7 +146,7 @@ install_sequence() {
 create_symlinks() {
     _process "* Creating symlinks "
     local commands=("dir" "link")
-    for action in ${package_list[@]} ; do
+    for action in ${actions_list[@]} ; do
         action_interface=${action}[interface]
         action_distro=${action}[${DISTRO}]
         action_dir=(${action}[dir])
