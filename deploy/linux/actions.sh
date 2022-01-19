@@ -161,7 +161,7 @@ declare -A install_zsh=(
     [arch]="sudo pacman -Syu --needed zsh"
     [manjaro]="sudo pacman -Syu --needed zsh"
     [link]="ln -fs ${DIR}/zsh/.zshrc ${HOME}/.zshrc"
-    [post_install_command]="chsh -s /bin/zsh" # Change default shell to zsh
+    [post]="chsh -s /bin/zsh" # Change default shell to zsh
 )
 declare -A install_powershell_bin=(
     [interface]="both"
@@ -170,9 +170,9 @@ declare -A install_powershell_bin=(
     [manjaro]="yay -Syu --needed powershell-bin"
     [dir]="mkdir ${HOME}/.config/powershell"
     [link]="ln -fs ${DIR}/powershell/Microsoft.PowerShell_profile.ps1 ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1"
-    [post_install_command]="2"
-    [post_install_command1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
-    [post_install_command2]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
+    [post]="2"
+    [post1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
+    [post2]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
 )
 declare -A install_unityhub_beta=(
     [interface]="gui"
@@ -191,7 +191,7 @@ declare -A install_neovim_nightly_bin=(
     [message_process]="* Installing Neovim nightly "
     [arch]="yay -Syu --needed neovim-nightly-bin"
     [manjaro]="yay -Syu --needed neovim-nightly-bin"
-    [dir]="mkdir ${HOME}/.config/nvim"
+    [dir]="mkdir ${HOME}/.config"
     [link]="ln -fs ${DIR}/nvim ${HOME}/.config/nvim"
 )
 declare -A install_python_pynvim=(

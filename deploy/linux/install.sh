@@ -30,7 +30,7 @@ get_user_input() {
     local -n selection=$2
     local -n valid_array=$3
 
-    echo ${question}
+    printf '\n%s' "${question}"; echo
     # List the available options
     printf '* %s\n' "${valid_array[@]^}"; echo
 
@@ -124,11 +124,11 @@ install_sequence() {
         local action_distro=${action}[${DISTRO}]
         local action_process=${action}[message_process]
         local action_success=${action}[message_success]
-        # If the action has an process message print it
-        [[ ${!action_process} ]] && _process "${!action_process}"
         # Go through action's commands
         if [[ ${!action_distro} ]] ; then
             if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
+                # If the action has an process message print it
+                [[ ${!action_process} ]] && _process "${!action_process}"
                 execute $action "${commands[@]}"
                 # If the action completed successfully and has a success message, print it
                 if [[ ${!action_success} ]] && [[ $? ]] ; then
