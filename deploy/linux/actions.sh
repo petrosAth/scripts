@@ -50,73 +50,73 @@ declare -A install_package_manager=(
     [interface]="both"
     [message_process]="* Installing yay "
     [arch]="6"
-    [arch1]="sudo pacman -Suy --needed git base-devel"
+    [arch1]="sudo pacman -S --needed git base-devel"
     [arch2]="git clone https://aur.archlinux.org/yay-bin.git"
     [arch3]="cd yay-bin"
     [arch4]="makepkg -si"
     [arch5]="cd .."
     [arch6]="rm -rf yay-bin"
-    [manjaro]="sudo pacman -Syu yay"
+    [manjaro]="sudo pacman -S yay"
 )
 # Development ------------------------------------------------------------------
 declare -A install_base_devel=(
     [interface]="both"
     [message_process]="* Installing Package group base-devel "
-    [arch]="sudo pacman -Syu --needed base-devel"
-    [manjaro]="sudo pacman -Syu --needed base-devel"
+    [arch]="sudo pacman -S --needed base-devel"
+    [manjaro]="sudo pacman -S --needed base-devel"
 )
 declare -A install_git=(
     [interface]="both"
     [message_process]="* Installing Git "
-    [arch]="sudo pacman -Syu --needed git"
-    [manjaro]="sudo pacman -Syu --needed git"
+    [arch]="sudo pacman -S --needed git"
+    [manjaro]="sudo pacman -S --needed git"
     [link]="ln -fs ${DIR}/git/.gitconfig ${HOME}/.gitconfig"
 )
 declare -A install_github_cli=(
     [interface]="both"
     [message_process]="* Installing GitHub CLI "
-    [arch]="sudo pacman -Syu --needed github-cli"
-    [manjaro]="sudo pacman -Syu --needed github-cli"
+    [arch]="sudo pacman -S --needed github-cli"
+    [manjaro]="sudo pacman -S --needed github-cli"
     [dir]="mkdir -p ${HOME}/.config/gh"
     [link]="ln -fs ${DIR}/gh/config.yml ${HOME}/.config/gh/config.yml"
 )
 declare -A install_go=(
     [interface]="both"
     [message_process]="* Installing GO language "
-    [arch]="sudo pacman -Syu --needed go"
-    [manjaro]="sudo pacman -Syu --needed go"
+    [arch]="sudo pacman -S --needed go"
+    [manjaro]="sudo pacman -S --needed go"
 )
 declare -A install_nodejs=(
     [interface]="both"
     [message_process]="* Installing Node.js "
-    [arch]="sudo pacman -Syu --needed nodejs"
-    [manjaro]="sudo pacman -Syu --needed nodejs"
+    [arch]="sudo pacman -S --needed nodejs"
+    [manjaro]="sudo pacman -S --needed nodejs"
 )
 declare -A install_npm=(
     [interface]="both"
     [message_process]="* Installing Node.js package manager (npm) "
-    [arch]="sudo pacman -Syu --needed npm"
-    [manjaro]="sudo pacman -Syu --needed npm"
+    [arch]="sudo pacman -S --needed npm"
+    [manjaro]="sudo pacman -S --needed npm"
 )
 declare -A install_python_pip=(
     [interface]="both"
-    [message_process]="* Installing pip package manager "
-    [arch]="sudo pacman -Syu --needed python-pip"
-    [manjaro]="sudo pacman -Syu --needed python-pip"
+    [message_process]="* Installing Python package manager (pip) "
+    [arch]="sudo pacman -S --needed python-pip"
+    [manjaro]="sudo pacman -S --needed python-pip"
 )
 declare -A install_zsh=(
     [interface]="both"
-    [message_process]="* Installing Z shell "
-    [arch]="sudo pacman -Syu --needed zsh"
-    [manjaro]="sudo pacman -Syu --needed zsh"
+    [message_process]="* Installing Z shell (zsh) "
+    [arch]="sudo pacman -S --needed zsh"
+    [manjaro]="sudo pacman -S --needed zsh"
     [link]="ln -fs ${DIR}/zsh/.zshrc ${HOME}/.zshrc"
     [post]="chsh -s /bin/zsh" # Change default shell to zsh
 )
 declare -A install_powershell_bin=(
     [interface]="both"
     [message_process]="* Installing PowerShell "
-    [arch]="yay -Syu --needed powershell-bin"
-    [manjaro]="yay -Syu --needed powershell-bin"
+    [arch]="yay -S --needed powershell-bin"
+    [manjaro]="yay -S --needed powershell-bin"
     [dir]="mkdir -p ${HOME}/.config/powershell"
     [link]="ln -fs ${DIR}/powershell/Microsoft.PowerShell_profile.ps1 ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1"
     [post]="2"
@@ -126,84 +126,84 @@ declare -A install_powershell_bin=(
 declare -A install_unityhub_beta=(
     [interface]="gui"
     [message_process]="* Installing Unity Hub beta "
-    [arch]="yay -Syu --needed unityhub-beta"
-    [manjaro]="yay -Syu --needed unityhub-beta"
+    [arch]="yay -S --needed unityhub-beta"
+    [manjaro]="yay -S --needed unityhub-beta"
 )
 declare -A install_filezilla=(
     [interface]="gui"
     [message_process]="* Installing FileZilla "
-    [arch]="sudo pacman -Syu --needed filezilla"
-    [manjaro]="sudo pacman -Syu --needed filezilla"
+    [arch]="sudo pacman -S --needed filezilla"
+    [manjaro]="sudo pacman -S --needed filezilla"
 )
 declare -A install_neovim_nightly_bin=(
     [interface]="both"
     [message_process]="* Installing Neovim nightly "
-    [arch]="yay -Syu --needed neovim-nightly-bin"
-    [manjaro]="yay -Syu --needed neovim-nightly-bin"
+    [arch]="yay -S --needed neovim-nightly-bin"
+    [manjaro]="yay -S --needed neovim-nightly-bin"
     [dir]="mkdir -p ${HOME}/.config"
     [link]="ln -fs ${DIR}/nvim ${HOME}/.config/nvim"
 )
 declare -A install_python_pynvim=(
     [interface]="both"
     [message_process]="* Installing Pynvim "
-    [arch]="sudo pacman -Syu --needed python-pynvim"
-    [manjaro]="sudo pacman -Syu --needed python-pynvim"
+    [arch]="sudo pacman -S --needed python-pynvim"
+    [manjaro]="sudo pacman -S --needed python-pynvim"
 )
 declare -A install_code_minimap_bin=(
     [interface]="both"
     [message_process]="* Installing code-minimap "
-    [arch]="yay -Syu --needed code-minimap-bin"
-    [manjaro]="yay -Syu --needed code-minimap-bin"
+    [arch]="yay -S --needed code-minimap-bin"
+    [manjaro]="yay -S --needed code-minimap-bin"
 )
 # Remote and Cloud -------------------------------------------------------------
 declare -A install_openssh=(
     [interface]="both"
     [message_process]="* Installing OpenSSH "
-    [arch]="sudo pacman -Syu --needed openssh"
-    [manjaro]="sudo pacman -Syu --needed openssh"
+    [arch]="sudo pacman -S --needed openssh"
+    [manjaro]="sudo pacman -S --needed openssh"
 )
 declare -A install_bitwarden=(
     [interface]="gui"
     [message_process]="* Installing Bitwarden "
-    [arch]="sudo pacman -Syu --needed bitwarden"
-    [manjaro]="sudo pacman -Syu --needed bitwarden"
+    [arch]="sudo pacman -S --needed bitwarden"
+    [manjaro]="sudo pacman -S --needed bitwarden"
 )
 declare -A install_nextcloud_client=(
     [interface]="gui"
     [message_process]="* Installing Nextcloud client "
-    [arch]="sudo pacman -Syu --needed nextcloud-client"
-    [manjaro]="sudo pacman -Syu --needed nextcloud-client"
+    [arch]="sudo pacman -S --needed nextcloud-client"
+    [manjaro]="sudo pacman -S --needed nextcloud-client"
 )
 # Utilities --------------------------------------------------------------------
 declare -A install_unzip=(
     [interface]="both"
-    [message_process]="* Installing unzip "
-    [arch]="sudo pacman -Syu --needed unzip"
-    [manjaro]="sudo pacman -Syu --needed unzip"
+    [message_process]="* Installing Unzip "
+    [arch]="sudo pacman -S --needed unzip"
+    [manjaro]="sudo pacman -S --needed unzip"
 )
 declare -A install_fd=(
     [interface]="both"
     [message_process]="* Installing fd "
-    [arch]="sudo pacman -Syu --needed fd"
-    [manjaro]="sudo pacman -Syu --needed fd"
+    [arch]="sudo pacman -S --needed fd"
+    [manjaro]="sudo pacman -S --needed fd"
 )
 declare -A install_ripgrep=(
     [interface]="both"
     [message_process]="* Installing ripGREP "
-    [arch]="sudo pacman -Syu --needed ripgrep"
-    [manjaro]="sudo pacman -Syu --needed ripgrep"
+    [arch]="sudo pacman -S --needed ripgrep"
+    [manjaro]="sudo pacman -S --needed ripgrep"
 )
 declare -A install_starship=(
     [interface]="both"
     [message_process]="* Installing Starship "
-    [arch]="sudo pacman -Syu --needed starship"
-    [manjaro]="sudo pacman -Syu --needed starship"
+    [arch]="sudo pacman -S --needed starship"
+    [manjaro]="sudo pacman -S --needed starship"
 )
 declare -A install_wget=(
     [interface]="both"
-    [message_process]="* Installing wget "
-    [arch]="sudo pacman -Syu --needed wget"
-    [manjaro]="sudo pacman -Syu --needed wget"
+    [message_process]="* Installing Wget "
+    [arch]="sudo pacman -S --needed wget"
+    [manjaro]="sudo pacman -S --needed wget"
 )
 declare -A install_oh_my_posh=(
     [interface]="both"
@@ -218,63 +218,63 @@ declare -A install_oh_my_posh=(
 declare -A install_solaar=(
     [interface]="gui"
     [message_process]="* Installing Solaar "
-    [arch]="sudo pacman -Syu --needed solaar"
-    [manjaro]="sudo pacman -Syu --needed solaar"
+    [arch]="sudo pacman -S --needed solaar"
+    [manjaro]="sudo pacman -S --needed solaar"
 )
 declare -A install_kdeconnect=(
     [interface]="gui"
     [message_process]="* Installing KDE Connect "
-    [arch]="sudo pacman -Syu --needed kdeconnect"
-    [manjaro]="sudo pacman -Syu --needed kdeconnect"
+    [arch]="sudo pacman -S --needed kdeconnect"
+    [manjaro]="sudo pacman -S --needed kdeconnect"
 )
 # Editing ----------------------------------------------------------------------
 declare -A install_blender=(
     [interface]="gui"
     [message_process]="* Installing Blender "
-    [arch]="sudo pacman -Syu --needed blender"
-    [manjaro]="sudo pacman -Syu --needed blender"
+    [arch]="sudo pacman -S --needed blender"
+    [manjaro]="sudo pacman -S --needed blender"
 )
 declare -A install_handbrake=(
     [interface]="gui"
     [message_process]="* Installing Handbrake "
-    [arch]="sudo pacman -Syu --needed handbrake"
-    [manjaro]="sudo pacman -Syu --needed handbrake"
+    [arch]="sudo pacman -S --needed handbrake"
+    [manjaro]="sudo pacman -S --needed handbrake"
 )
 declare -A install_avidemux_qt=(
     [interface]="gui"
     [message_process]="* Installing Avidemux "
-    [arch]="sudo pacman -Syu --needed avidemux-qt"
-    [manjaro]="sudo pacman -Syu --needed avidemux-qt"
+    [arch]="sudo pacman -S --needed avidemux-qt"
+    [manjaro]="sudo pacman -S --needed avidemux-qt"
 )
 declare -A install_audacity=(
     [interface]="gui"
     [message_process]="* Installing Audacity "
-    [arch]="sudo pacman -Syu --needed audacity"
-    [manjaro]="sudo pacman -Syu --needed audacity"
+    [arch]="sudo pacman -S --needed audacity"
+    [manjaro]="sudo pacman -S --needed audacity"
 )
 # Web & Chat -------------------------------------------------------------------
 declare -A install_uget=(
     [interface]="gui"
-    [message_process]="* Installing uget "
-    [arch]="sudo pacman -Syu --needed uget"
-    [manjaro]="sudo pacman -Syu --needed uget"
+    [message_process]="* Installing uGet "
+    [arch]="sudo pacman -S --needed uget"
+    [manjaro]="sudo pacman -S --needed uget"
 )
 declare -A install_firefox=(
     [interface]="gui"
     [message_process]="* Installing Firefox "
-    [arch]="sudo pacman -Syu --needed firefox"
-    [manjaro]="sudo pacman -Syu --needed firefox"
+    [arch]="sudo pacman -S --needed firefox"
+    [manjaro]="sudo pacman -S --needed firefox"
 )
 declare -A install_thunderbird=(
     [interface]="gui"
     [message_process]="* Installing Thunderbird "
-    [arch]="sudo pacman -Syu --needed thunderbird"
-    [manjaro]="sudo pacman -Syu --needed thunderbird"
+    [arch]="sudo pacman -S --needed thunderbird"
+    [manjaro]="sudo pacman -S --needed thunderbird"
 )
 # Entertainment ----------------------------------------------------------------
 declare -A install_vlc=(
     [interface]="gui"
     [message_process]="* Installing VLC "
-    [arch]="sudo pacman -Syu --needed vlc"
-    [manjaro]="sudo pacman -Syu --needed vlc"
+    [arch]="sudo pacman -S --needed vlc"
+    [manjaro]="sudo pacman -S --needed vlc"
 )
