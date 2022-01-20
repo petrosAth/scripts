@@ -50,7 +50,6 @@ $apps = @(
     @{name = "9NGHP3DX8HDX"; source = "msstore"}, # Files file manager
     @{name = "Logitech.GHUB"                   },
     @{name = "AppWork.JDownloader"             },
-    @{name = "KeePassXCTeam.KeePassXC"         },
     @{name = "Bitwarden.Bitwarden"             },
     @{name = "7zip.7zip"                       },
     @{name = "Rufus.Rufus"                     },
@@ -63,7 +62,7 @@ $apps = @(
     @{name = "BlenderFoundation.Blender"       },
     @{name = "Avidemux.Avidemux"               },
     @{name = "Audacity.Audacity"               },
-    @{name = "brrd.abricotine"                 }, # Markdown editor
+    @{name = "MarkText.MarkText"               },
     @{name = "Mozilla.Thunderbird"             }, # Web & Chat #----------------
     @{name = "Mozilla.Firefox"                 },
     @{name = "9WZDNCRF0083"; source = "msstore"}, # Messenger
