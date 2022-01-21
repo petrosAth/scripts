@@ -23,7 +23,7 @@ DIR="${HOME}/dotfiles"
 SCRIPT_DIR="${DIR}/scripts/deploy/linux"
 
 VALID_INTERFACE=("CLI" "GUI" "both")
-VALID_DISTRO=("Arch" "Manjaro")
+VALID_DISTRO=("Arch" "Endeavour" "Manjaro")
 
 INTERFACE=""
 DISTRO=""
@@ -83,6 +83,8 @@ update_system() {
     case ${DISTRO} in
         arch)
             sudo pacman -Syu ;;
+        endeavour)
+            sudo pacman -Syu ;;
         manjaro)
             sudo pacman -Syu ;;
     esac
@@ -134,11 +136,13 @@ execute() {
 
 actions_sequence() {
     # Array of keys of which their commands will be executed
-    local commands=("pre" "${DISTRO}" "post")
+    local commands=("pre" "dir" "${DISTRO}" "post")
     for action in ${actions_list[@]} ; do
         local action_interface=${action}[interface]
         local action_distro=${action}[${DISTRO}]
         local action_process=${action}[message_process]
+        local action_dir=(${action}[dir])
+        local action_dir_array=(${!action_dir})
         local action_success=${action}[message_success]
         # If the action has a key with the current distro's name continue
         if [[ ${!action_distro} ]] ; then
@@ -146,6 +150,10 @@ actions_sequence() {
             if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
                 # If the action has an process message print it
                 [[ ${!action_process} ]] && _process "${!action_process}"
+                # Print the directory to be created
+                if [[ ! -d "${action_dir_array[2]}" ]] && [[ ${!action_dir} ]] ; then
+                    _process "* Creating directory ${action_dir_array[2]} "
+                fi
                 # Send the action's commands for execution
                 execute $action "${commands[@]}"
                 # If the action's commands completed successfully and has a success message, print it
@@ -162,25 +170,19 @@ actions_sequence() {
 create_symlinks() {
     _process "* Creating symlinks "
     # Array of keys of which their commands will be executed
-    local commands=("dir" "link")
+    local commands=("link")
     for action in ${actions_list[@]} ; do
         local action_interface=${action}[interface]
         local action_distro=${action}[${DISTRO}]
-        local action_dir=(${action}[dir])
-        local action_dir_array=(${!action_dir})
         local action_link=(${action}[link])
         local action_link_array=(${!action_link})
         # If the action has a key with the current distro's name continue
         if [[ ${!action_distro} ]] ; then
             # Check if the interface key has the value selected
             if [[ ${INTERFACE} == ${!action_interface} ]] || [[ ${INTERFACE} == "both" ]] || [[ ${!action_interface} == "both" ]] ; then
-                # Print the directory to be created
-                if [[ ! -d "${action_dir_array[2]}" ]] && [[ ${!action_dir} ]] ; then
-                    _process "* Creating directory ${action_dir_array[2]} "
-                fi
                 # Print the link to be made
                 [[ ${!action_link} ]] && _process "* Linking ${action_link_array[2]} → ${action_link_array[3]} "
-                # Send the action's mkdir and ln commands for execution
+                # Send the action's commands for execution
                 execute $action "${commands[@]}"
             fi
         fi
