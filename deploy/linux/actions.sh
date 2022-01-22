@@ -16,9 +16,9 @@ actions_list=(
     "install_powershell"
     "install_unityhub_beta"
     "install_filezilla"
-    "install_neovim_nightly" # Neovim or Neovim plugin dependancy
+    "install_neovim_git" # Neovim or Neovim plugin dependancy
     "install_python_pynvim"      # Neovim or Neovim plugin dependancy
-    "install_code_minimap_bin"   # Neovim or Neovim plugin dependancy
+    "install_code_minimap"   # Neovim or Neovim plugin dependancy
 # Remote and Cloud
     "install_openssh"
     "install_bitwarden"
@@ -27,7 +27,7 @@ actions_list=(
     "install_unzip"              # Neovim or Neovim plugin dependancy
     "install_fd"                 # Neovim or Neovim plugin dependancy
     "install_ripgrep"            # Neovim or Neovim plugin dependancy
-    "install_alacritty"
+    "install_alacritty_git"
     "install_starship"
     "install_wget"
     "install_oh_my_posh"
@@ -52,13 +52,11 @@ actions_list=(
 declare -A install_yay=(
     [interface]="both"
     [message_process]="* Installing yay "
-    [arch]="6"
+    [arch]="4"
     [arch1]="sudo pacman -S --needed git base-devel"
     [arch2]="git clone https://aur.archlinux.org/yay-bin.git"
-    [arch3]="cd yay-bin"
-    [arch4]="makepkg -si"
-    [arch5]="cd .."
-    [arch6]="rm -rf yay-bin"
+    [arch3]="cd yay-bin && makepkg -si"
+    [arch4]="cd .. && rm -rf yay-bin"
     [endeavour]="sudo pacman -S --needed yay"
     [manjaro]="sudo pacman -S --needed yay"
 )
@@ -81,10 +79,10 @@ declare -A install_git=(
 declare -A install_github_cli=(
     [interface]="both"
     [message_process]="* Installing GitHub CLI "
+    [dir]="mkdir -p ${HOME}/.config/gh"
     [arch]="sudo pacman -S --needed github-cli"
     [endeavour]="sudo pacman -S --needed github-cli"
     [manjaro]="sudo pacman -S --needed github-cli"
-    [dir]="mkdir -p ${HOME}/.config/gh"
     [link]="ln -fs ${DIR}/gh/config.yml ${HOME}/.config/gh/config.yml"
 )
 declare -A install_go=(
@@ -127,10 +125,10 @@ declare -A install_zsh=(
 declare -A install_powershell_bin=(
     [interface]="both"
     [message_process]="* Installing PowerShell "
+    [dir]="mkdir -p ${HOME}/.config/powershell"
     [arch]="yay -S --needed powershell"
     [endeavour]="yay -S --needed powershell"
     [manjaro]="yay -S --needed powershell"
-    [dir]="mkdir -p ${HOME}/.config/powershell"
     [link]="ln -fs ${DIR}/powershell/Microsoft.PowerShell_profile.ps1 ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1"
     [post]="2"
     [post1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
@@ -150,13 +148,13 @@ declare -A install_filezilla=(
     [endeavour]="sudo pacman -S --needed filezilla"
     [manjaro]="sudo pacman -S --needed filezilla"
 )
-declare -A install_neovim_nightly_bin=(
+declare -A install_neovim_git=(
     [interface]="both"
-    [message_process]="* Installing Neovim nightly "
-    [arch]="yay -S --needed neovim-nightly"
-    [endeavour]="yay -S --needed neovim-nightly"
-    [manjaro]="yay -S --needed neovim-nightly-bin"
+    [message_process]="* Installing Neovim (pulling from git) "
     [dir]="mkdir -p ${HOME}/.config"
+    [arch]="yay -S --needed neovim-git"
+    [endeavour]="yay -S --needed neovim-git"
+    [manjaro]="yay -S --needed neovim-git"
     [link]="ln -fs ${DIR}/nvim ${HOME}/.config/nvim"
 )
 declare -A install_python_pynvim=(
@@ -166,12 +164,12 @@ declare -A install_python_pynvim=(
     [endeavour]="sudo pacman -S --needed python-pynvim"
     [manjaro]="sudo pacman -S --needed python-pynvim"
 )
-declare -A install_code_minimap_bin=(
+declare -A install_code_minimap=(
     [interface]="both"
     [message_process]="* Installing code-minimap "
-    [arch]="yay -S --needed code-minimap-bin"
-    [endeavour]="yay -S --needed code-minimap-bin"
-    [manjaro]="yay -S --needed code-minimap-bin"
+    [arch]="yay -S --needed code-minimap"
+    [endeavour]="yay -S --needed code-minimap"
+    [manjaro]="yay -S --needed code-minimap"
 )
 # Remote and Cloud -------------------------------------------------------------
 declare -A install_openssh=(
@@ -219,10 +217,12 @@ declare -A install_ripgrep=(
 )
 declare -A install_alacritty=(
     [interface]="gui"
-    [message_process]="* Installing Alacritty "
-    [arch]="sudo pacman -S --needed alacritty"
-    [endeavour]="sudo pacman -S --needed alacritty"
-    [manjaro]="sudo pacman -S --needed alacritty"
+    [message_process]="* Installing Alacritty (pulling from git) "
+    [dir]="mkdir -p ${HOME}/.config/alacritty"
+    [arch]="yay -S --needed alacritty-git"
+    [endeavour]="yay -S --needed alacritty-git"
+    [manjaro]="yay -S --needed alacritty-git"
+    [link]="ln -fs ${DIR}/alacritty/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml"
 )
 declare -A install_starship=(
     [interface]="both"
@@ -269,19 +269,19 @@ declare -A install_kdeconnect=(
 declare -A install_fonts_firacode=(
     [interface]="gui"
     [message_process]="* Installing Fonts: Fira Code Regular "
-    [dir]="mkdir -p ${HOME}/.local/share/fonts/FiraCode"
+    [dir]="mkdir -p ${HOME}/.local/share/fonts/ttf/FiraCode"
     [arch]="3"
-    [arch1]="cd ${HOME}/.local/share/fonts/FiraCode"
-    [arch2]="curl -fLo 'Fira Code Regular Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"
-    [arch3]="curl -fLo 'Fira Code Regular Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
+    [arch1]="cd ${HOME}/.local/share/fonts/ttf/FiraCode"
+    [arch2]="curl -fLo 'Fira Code Regular Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"            =
+    [arch3]="curl -fLo 'Fira Code Regular Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"=
     [endeavour]="3"
-    [endeavour1]="cd ${HOME}/.local/share/fonts/FiraCode"
+    [endeavour1]="cd ${HOME}/.local/share/fonts/ttf/FiraCode"
     [endeavour2]="curl -fLo 'Fira Code Regular Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"
     [endeavour3]="curl -fLo 'Fira Code Regular Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
     [manjaro]="3"
-    [manjaro1]="cd ${HOME}/.local/share/fonts/FiraCode"
-    [manjaro2]="curl -fLo 'Fira Code Regular Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"
-    [manjaro3]="curl -fLo 'Fira Code Regular Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
+    [manjaro1]="cd ${HOME}/.local/share/fonts/ttf/FiraCode"
+    [manjaro2]="curl -fLo 'Fira Code Regular Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"            =
+    [manjaro3]="curl -fLo 'Fira Code Regular Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"=
     [post]="cd ${HOME}"
 )
 # Editing ----------------------------------------------------------------------

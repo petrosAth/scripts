@@ -124,11 +124,11 @@ execute() {
                 for (( i=1; i <= ${!execute}; ++i ))
                 do
                     command_number=${action}[${command}${i}]
-                    ${!command_number}
+                    eval "${!command_number}"
                 done
             # Else execute the key's commands
             else
-                ${!execute}
+                eval "${!execute}"
             fi
         fi
     done
