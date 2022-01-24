@@ -215,7 +215,7 @@ declare -A install_ripgrep=(
     [endeavour]="sudo pacman -S --needed ripgrep"
     [manjaro]="sudo pacman -S --needed ripgrep"
 )
-declare -A install_alacritty=(
+declare -A install_alacritty_git=(
     [interface]="gui"
     [message_process]="* Installing Alacritty (pulling from git) "
     [dir]="mkdir -p ${HOME}/.config/alacritty"
