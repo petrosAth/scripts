@@ -13,7 +13,7 @@ actions_list=(
     "install_npm"
     "install_python_pip"
     "install_zsh"
-    "install_powershell"
+    "install_powershell_bin"
     "install_unityhub_beta"
     "install_filezilla"
     "install_neovim_git" # Neovim or Neovim plugin dependancy
