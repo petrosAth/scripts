@@ -102,8 +102,6 @@ clone_dotfiles() {
     git clone --recurse-submodules https://github.com/${GITHUB_USER}/${GITHUB_REPO}.git ${DIR}
 	# Checkout all submodules on master branch to get rid of detached head state
 	cd ${DIR} && git submodule foreach 'git checkout master'
-	# Checkout git submodule on linux specific branch
-	cd ${DIR}/git && git checkout linux && cd ${HOME}
 
     [[ $? ]] && _success "dotfiles have been cloned"
 }

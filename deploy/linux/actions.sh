@@ -16,23 +16,26 @@ actions_list=(
     "install_powershell_bin"
     "install_unityhub_beta"
     "install_filezilla"
-    "install_neovim_git" # Neovim or Neovim plugin dependancy
-    "install_python_pynvim"      # Neovim or Neovim plugin dependancy
-    "install_code_minimap"   # Neovim or Neovim plugin dependancy
+    "install_neovim_git"         # Neovim dependancy
+    "install_python_pynvim"      # Neovim dependancy
+    "install_code_minimap"       # Neovim dependancy
 # Remote and Cloud
     "install_openssh"
     "install_bitwarden"
+    "install_synergy_git"
     "install_nextcloud_client"
 # Utilities
-    "install_unzip"              # Neovim or Neovim plugin dependancy
-    "install_fd"                 # Neovim or Neovim plugin dependancy
-    "install_ripgrep"            # Neovim or Neovim plugin dependancy
+    "install_unzip"              # Neovim dependancy
+    "install_fd"                 # Neovim dependancy
+    "install_ripgrep"            # Neovim dependancy
+    "install_xclip"              # Neovim dependancy
     "install_alacritty_git"
     "install_starship"
     "install_wget"
     "install_oh_my_posh"
     "install_solaar"
     "install_kdeconnect"
+    "install_glances"
 # Fonts
     "install_fonts_firacode"
 # Editing
@@ -71,6 +74,7 @@ declare -A install_base_devel=(
 declare -A install_git=(
     [interface]="both"
     [message_process]="* Installing Git "
+    [pre]="cd ${DIR}/git && git checkout linux"
     [arch]="sudo pacman -S --needed git"
     [endeavour]="sudo pacman -S --needed git"
     [manjaro]="sudo pacman -S --needed git"
@@ -144,9 +148,11 @@ declare -A install_unityhub_beta=(
 declare -A install_filezilla=(
     [interface]="gui"
     [message_process]="* Installing FileZilla "
+    [dir]="mkdir -p ${HOME}/.config"
     [arch]="sudo pacman -S --needed filezilla"
     [endeavour]="sudo pacman -S --needed filezilla"
     [manjaro]="sudo pacman -S --needed filezilla"
+    [link]="ln -fs ${DIR}/FileZilla ${HOME}/.config/filezilla"
 )
 declare -A install_neovim_git=(
     [interface]="both"
@@ -186,6 +192,16 @@ declare -A install_bitwarden=(
     [endeavour]="sudo pacman -S --needed bitwarden"
     [manjaro]="sudo pacman -S --needed bitwarden"
 )
+declare -A install_synergy_git=(
+    [interface]="gui"
+    [message_process]="* Installing Synergy "
+    [dir]="mkdir -p ${HOME}/.config"
+    [pre]="cd ${DIR}/synergy && git checkout linux"
+    [arch]="yay -S --needed synergy-git"
+    [endeavour]="yay -S --needed synergy-git"
+    [manjaro]="yay -S --needed synergy-git"
+    [link]="ln -fs ${DIR}/synergy ${HOME}/.config/Synergy"
+)
 declare -A install_nextcloud_client=(
     [interface]="gui"
     [message_process]="* Installing Nextcloud client "
@@ -215,10 +231,18 @@ declare -A install_ripgrep=(
     [endeavour]="sudo pacman -S --needed ripgrep"
     [manjaro]="sudo pacman -S --needed ripgrep"
 )
+declare -A install_xclip=(
+    [interface]="gui"
+    [message_process]="* Installing xclip "
+    [arch]="sudo pacman -S --needed xclip"
+    [endeavour]="sudo pacman -S --needed xclip"
+    [manjaro]="sudo pacman -S --needed xclip"
+)
 declare -A install_alacritty_git=(
     [interface]="gui"
     [message_process]="* Installing Alacritty (pulling from git) "
     [dir]="mkdir -p ${HOME}/.config/alacritty"
+    [pre]="cd ${DIR}/alacritty && git checkout linux"
     [arch]="yay -S --needed alacritty-git"
     [endeavour]="yay -S --needed alacritty-git"
     [manjaro]="yay -S --needed alacritty-git"
@@ -264,6 +288,13 @@ declare -A install_kdeconnect=(
     [arch]="sudo pacman -S --needed kdeconnect"
     [endeavour]="sudo pacman -S --needed kdeconnect"
     [manjaro]="sudo pacman -S --needed kdeconnect"
+)
+declare -A install_glances=(
+    [interface]="gui"
+    [message_process]="* Installing Glances"
+    [arch]="sudo pacman -S --needed glances"
+    [endeavour]="sudo pacman -S --needed glances"
+    [manjaro]="sudo pacman -S --needed glances"
 )
 # Fonts
 declare -A install_fonts_firacode=(
