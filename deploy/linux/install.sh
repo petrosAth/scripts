@@ -23,7 +23,7 @@ DIR="${HOME}/dotfiles"
 SCRIPT_DIR="${DIR}/scripts/deploy/linux"
 
 VALID_INTERFACE=("CLI" "GUI" "both")
-VALID_DISTRO=("Arch" "Endeavour" "Manjaro")
+VALID_DISTRO=("Arch" "Manjaro")
 
 INTERFACE=""
 DISTRO=""
@@ -82,8 +82,6 @@ update_system() {
     _process "* Updating system "
     case ${DISTRO} in
         arch)
-            sudo pacman -Syu ;;
-        endeavour)
             sudo pacman -Syu ;;
         manjaro)
             sudo pacman -Syu ;;
