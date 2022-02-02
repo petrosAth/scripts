@@ -16,28 +16,32 @@ actions_list=(
     "install_powershell_bin"
     "install_unityhub_beta"
     "install_filezilla"
-    "install_neovim_git"         # Neovim dependancy
-    "install_python_pynvim"      # Neovim dependancy
-    "install_code_minimap"       # Neovim dependancy
+    "install_neovim_git"                   # Neovim dependancy
+    "install_python_pynvim"                # Neovim dependancy
+    "install_code_minimap"                 # Neovim dependancy
 # Remote and Cloud
     "install_openssh"
     "install_bitwarden"
     "install_synergy_git"
     "install_nextcloud_client"
 # Utilities
-    "install_unzip"              # Neovim dependancy
-    "install_fd"                 # Neovim dependancy
-    "install_ripgrep"            # Neovim dependancy
-    "install_xclip"              # Neovim dependancy
+    "install_unzip"                        # Neovim dependancy
+    "install_fd"                           # Neovim dependancy
+    "install_ripgrep"                      # Neovim dependancy
+    "install_xclip"                        # Neovim dependancy
+    "install_zsh_syntax_highlighting"      # zsh dependancy
+    "install_zsh_completions"              # zsh dependancy
+    "install_zsh_autosuggestions"          # zsh dependancy
+    "install_zsh_history_substring_search" # zsh dependancy
     "install_alacritty_git"
     "install_wget"
     "install_solaar"
     "install_kdeconnect"
     "install_glances"
-    "install_korganizer"         # Integrate nextcloud to kde callendar widget
-    "install_kaddressbook"       # Integrate nextcloud to kde callendar widget
-    "install_kontact"            # Integrate nextcloud to kde callendar widget
-    "install_kdepim_addons"      # Integrate nextcloud to kde callendar widget
+    "install_korganizer"                   # Integrate nextcloud to kde callendar widget
+    "install_kaddressbook"                 # Integrate nextcloud to kde callendar widget
+    "install_kontact"                      # Integrate nextcloud to kde callendar widget
+    "install_kdepim_addons"                # Integrate nextcloud to kde callendar widget
 # Cosmetics
     "install_starship"
     "install_oh_my_posh"
@@ -123,7 +127,7 @@ declare -A install_zsh=(
     [arch]="sudo pacman -S --needed zsh"
     [manjaro]="sudo pacman -S --needed zsh"
     [link]="ln -fs ${DIR}/zsh/.zshrc ${HOME}/.zshrc"
-    [post]="chsh -s /bin/zsh" # Change default shell to zsh
+    [post]="chsh -s /bin/zsh"                                     # Change default shell to zsh
 )
 declare -A install_powershell_bin=(
     [interface]="both"
@@ -222,6 +226,36 @@ declare -A install_xclip=(
     [message_process]="* Installing xclip "
     [arch]="sudo pacman -S --needed xclip"
     [manjaro]="sudo pacman -S --needed xclip"
+)
+declare -A install_xclip=(
+    [interface]="gui"
+    [message_process]="* Installing xclip "
+    [arch]="sudo pacman -S --needed xclip"
+    [manjaro]="sudo pacman -S --needed xclip"
+)
+declare -A install_zsh_syntax_highlighting=(
+    [interface]="both"
+    [message_process]="* Installing Z shell syntax highlighting plugin "
+    [arch]="sudo pacman -S --needed zsh-syntax-highlighting"
+    [manjaro]="sudo pacman -S --needed zsh-syntax-highlighting"
+)
+declare -A install_zsh_completions=(
+    [interface]="both"
+    [message_process]="* Installing Z shell auto completion plugin "
+    [arch]="sudo pacman -S --needed zsh-completions"
+    [manjaro]="sudo pacman -S --needed zsh-completions"
+)
+declare -A install_zsh_autosuggestions=(
+    [interface]="both"
+    [message_process]="* Installing Z shell ghost text plugin "
+    [arch]="sudo pacman -S --needed zsh-autosuggestions"
+    [manjaro]="sudo pacman -S --needed zsh-autosuggestions"
+)
+declare -A install_zsh_history_substring_search=(
+    [interface]="both"
+    [message_process]="* Installing Z shell smart history search plugin "
+    [arch]="sudo pacman -S --needed zsh-history-substring-search"
+    [manjaro]="sudo pacman -S --needed zsh-history-substring-search"
 )
 declare -A install_alacritty_git=(
     [interface]="gui"
