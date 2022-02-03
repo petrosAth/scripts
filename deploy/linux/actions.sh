@@ -6,7 +6,6 @@ actions_list=(
     "install_yay"
 # Development
     "install_base_devel"
-    "install_git"
     "install_github_cli"
     "install_go"
     "install_nodejs"
@@ -16,32 +15,33 @@ actions_list=(
     "install_powershell_bin"
     "install_unityhub_beta"
     "install_filezilla"
-    "install_neovim_git"                   # Neovim dependancy
-    "install_python_pynvim"                # Neovim dependancy
-    "install_code_minimap"                 # Neovim dependancy
+    "install_neovim_git"                   # Neovim
+    "install_python_pynvim"                # Neovim
+    "install_code_minimap"                 # Neovim
 # Remote and Cloud
     "install_openssh"
     "install_bitwarden"
     "install_synergy_git"
     "install_nextcloud_client"
 # Utilities
-    "install_unzip"                        # Neovim dependancy
-    "install_fd"                           # Neovim dependancy
-    "install_ripgrep"                      # Neovim dependancy
-    "install_xclip"                        # Neovim dependancy
-    "install_zsh_syntax_highlighting"      # zsh dependancy
-    "install_zsh_completions"              # zsh dependancy
-    "install_zsh_autosuggestions"          # zsh dependancy
-    "install_zsh_history_substring_search" # zsh dependancy
+    "install_unzip"                        # Neovim
+    "install_fd"                           # Neovim
+    "install_ripgrep"                      # Neovim
+    "install_xclip"                        # Neovim
+    "install_zsh_syntax_highlighting"      # zsh
+    "install_zsh_completions"              # zsh
+    "install_zsh_autosuggestions"          # zsh
+    "install_zsh_history_substring_search" # zsh
     "install_alacritty_git"
     "install_wget"
     "install_solaar"
     "install_kdeconnect"
     "install_glances"
-    "install_korganizer"                   # Integrate nextcloud to kde callendar widget
-    "install_kaddressbook"                 # Integrate nextcloud to kde callendar widget
-    "install_kontact"                      # Integrate nextcloud to kde callendar widget
-    "install_kdepim_addons"                # Integrate nextcloud to kde callendar widget
+    "install_korganizer"                   # Nextcloud
+    "install_kaddressbook"                 # Nextcloud
+    "install_kontact"                      # Nextcloud
+    "install_kdepim_addons"                # Nextcloud
+    "install_birdtray"                     # Thunderbird
 # Cosmetics
     "install_starship"
     "install_oh_my_posh"
@@ -59,7 +59,6 @@ actions_list=(
     "install_uget"
     "install_firefox"
     "install_thunderbird"
-    "install_birdtray"
 # Entertainment
     "install_vlc"
 )
@@ -81,14 +80,6 @@ declare -A install_base_devel=(
     [message_process]="* Installing Package group base-devel "
     [arch]="sudo pacman -S --needed base-devel"
     [manjaro]="sudo pacman -S --needed base-devel"
-)
-declare -A install_git=(
-    [interface]="both"
-    [message_process]="* Installing Git "
-    [pre]="cd ${DIR}/git && git checkout linux"
-    [arch]="sudo pacman -S --needed git"
-    [manjaro]="sudo pacman -S --needed git"
-    [link]="ln -fs ${DIR}/git/.gitconfig ${HOME}/.gitconfig"
 )
 declare -A install_github_cli=(
     [interface]="both"
@@ -150,7 +141,6 @@ declare -A install_unityhub_beta=(
 declare -A install_filezilla=(
     [interface]="gui"
     [message_process]="* Installing FileZilla "
-    [dir]="mkdir -p ${HOME}/.config"
     [arch]="sudo pacman -S --needed filezilla"
     [manjaro]="sudo pacman -S --needed filezilla"
     [link]="ln -fs ${DIR}/FileZilla ${HOME}/.config/filezilla"
@@ -200,6 +190,7 @@ declare -A install_synergy_git=(
 declare -A install_nextcloud_client=(
     [interface]="gui"
     [message_process]="* Installing Nextcloud client "
+    [dir]="mkdir -p ${HOME}/.config"
     [arch]="sudo pacman -S --needed nextcloud-client"
     [manjaro]="sudo pacman -S --needed nextcloud-client"
 )
@@ -291,29 +282,35 @@ declare -A install_glances=(
     [arch]="sudo pacman -S --needed glances"
     [manjaro]="sudo pacman -S --needed glances"
 )
-declare -A install_korganizer=(
+declare -A install_korganizer=( # Sync nextcloud with kde callendar widget
     [interface]="gui"
     [message_process]="* Installing Korganizer "
     [arch]="sudo pacman -S --needed korganizer"
     [manjaro]="sudo pacman -S --needed korganizer"
 )
-declare -A install_kaddressbook=(
+declare -A install_kaddressbook=( # Sync nextcloud with kde callendar widget
     [interface]="gui"
     [message_process]="* Installing Kaddressbook "
     [arch]="sudo pacman -S --needed kaddressbook"
     [manjaro]="sudo pacman -S --needed kaddressbook"
 )
-declare -A install_kontact=(
+declare -A install_kontact=( # Sync nextcloud with kde callendar widget
     [interface]="gui"
     [message_process]="* Installing Kontact "
     [arch]="sudo pacman -S --needed kontact"
     [manjaro]="sudo pacman -S --needed kontact"
 )
-declare -A install_kdepim_addons=(
+declare -A install_kdepim_addons=( # Sync nextcloud with kde callendar widget
     [interface]="gui"
     [message_process]="* Installing KDE PIM addons "
     [arch]="sudo pacman -S --needed kdepim-addons"
     [manjaro]="sudo pacman -S --needed kdepim-addons"
+)
+declare -A install_birdtray=(
+    [interface]="gui"
+    [message_process]="* Installing Thunderbird tray plugin Birdtray "
+    [arch]="yay -S --needed birdtray"
+    [manjaro]="yay -S --needed birdtray"
 )
 # Cosmetics
 declare -A install_oh_my_posh=(
@@ -408,12 +405,6 @@ declare -A install_thunderbird=(
     [message_process]="* Installing Thunderbird "
     [arch]="sudo pacman -S --needed thunderbird"
     [manjaro]="sudo pacman -S --needed thunderbird"
-)
-declare -A install_birdtray=(
-    [interface]="gui"
-    [message_process]="* Installing Thunderbird tray plugin Birdtray "
-    [arch]="yay -S --needed birdtray"
-    [manjaro]="yay -S --needed birdtray"
 )
 # Entertainment ----------------------------------------------------------------
 declare -A install_vlc=(
