@@ -59,6 +59,7 @@ actions_list=(
     "install_uget"
     "install_firefox"
     "install_thunderbird"
+    "install_birdtray"
 # Entertainment
     "install_vlc"
 )
@@ -431,6 +432,12 @@ declare -A install_thunderbird=(
     [message_process]="* Installing Thunderbird "
     [arch]="sudo pacman -S --needed thunderbird"
     [manjaro]="sudo pacman -S --needed thunderbird"
+)
+declare -A install_birdtray=(
+    [interface]="gui"
+    [message_process]="* Installing Thunderbird tray plugin Birdtray "
+    [arch]="yay -S --needed birdtray"
+    [manjaro]="yay -S --needed birdtray"
 )
 # Entertainment ----------------------------------------------------------------
 declare -A install_vlc=(
