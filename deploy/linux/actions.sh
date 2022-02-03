@@ -48,7 +48,7 @@ actions_list=(
     "install_latte-dock"
 # Fonts
     "install_fonts_firacode"
-    "install_fonts_ubuntu"
+    "install_fonts_inter"
 # Editing
     "install_marktext"
     "install_blender"
@@ -341,7 +341,7 @@ declare -A install_latte_dock=(
 # Fonts
 declare -A install_fonts_firacode=(
     [interface]="gui"
-    [message_process]="* Installing Fonts: Fira Code Regular "
+    [message_process]="* Installing Fira Code Regular font "
     [dir]="mkdir -p ${HOME}/.local/share/fonts/ttf/FiraCode"
     [arch]="3"
     [arch1]="cd ${HOME}/.local/share/fonts/ttf/FiraCode"
@@ -353,35 +353,11 @@ declare -A install_fonts_firacode=(
     [manjaro3]="curl -fLo 'Fira Code Regular Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
     [post]="cd ${HOME}"
 )
-declare -A install_fonts_ubuntu=(
+declare -A install_fonts_inter=(
     [interface]="gui"
-    [message_process]="* Installing Fonts: Ubuntu family "
-    [dir]="mkdir -p ${HOME}/.local/share/fonts/ttf/Ubuntu"
-    [arch]="11"
-    [arch1]="cd ${HOME}/.local/share/fonts/ttf/Ubuntu"
-    [arch2]="curl -fLo 'Ubuntu Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Regular/complete/Ubuntu%20Nerd%20Font%20Complete%20Mono.ttf"
-    [arch3]="curl -fLo 'Ubuntu Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Regular/complete/Ubuntu%20Nerd%20Font%20Complete.ttf"
-    [arch4]="curl -fLo 'Ubuntu Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Regular-Italic/complete/Ubuntu%20Italic%20Nerd%20Font%20Complete.ttf"
-    [arch5]="curl -fLo 'Ubuntu Medium Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Medium/complete/Ubuntu%20Medium%20Nerd%20Font%20Complete.ttf"
-    [arch6]="curl -fLo 'Ubuntu Medium Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Medium-Italic/complete/Ubuntu%20Medium%20Italic%20Nerd%20Font%20Complete.ttf"
-    [arch7]="curl -fLo 'Ubuntu Light Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Light/complete/Ubuntu%20Light%20Nerd%20Font%20Complete.ttf"
-    [arch8]="curl -fLo 'Ubuntu Light Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Light-Italic/complete/Ubuntu%20Light%20Italic%20Nerd%20Font%20Complete.ttf"
-    [arch9]="curl -fLo 'Ubuntu Condensed Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Condensed/complete/Ubuntu%20Condensed%20Nerd%20Font%20Complete.ttf"
-    [arch10]="curl -fLo 'Ubuntu Bold Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Bold/complete/Ubuntu%20Bold%20Nerd%20Font%20Complete.ttf"
-    [arch11]="curl -fLo 'Ubuntu Bold Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Bold-Italic/complete/Ubuntu%20Bold%20Italic%20Nerd%20Font%20Complete.ttf"
-    [manjaro]="11"
-    [manjaro1]="cd ${HOME}/.local/share/fonts/ttf/Ubuntu"
-    [manjaro2]="curl -fLo 'Ubuntu Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Regular/complete/Ubuntu%20Nerd%20Font%20Complete%20Mono.ttf"
-    [manjaro3]="curl -fLo 'Ubuntu Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Regular/complete/Ubuntu%20Nerd%20Font%20Complete.ttf"
-    [manjaro4]="curl -fLo 'Ubuntu Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Regular-Italic/complete/Ubuntu%20Italic%20Nerd%20Font%20Complete.ttf"
-    [manjaro5]="curl -fLo 'Ubuntu Medium Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Medium/complete/Ubuntu%20Medium%20Nerd%20Font%20Complete.ttf"
-    [manjaro6]="curl -fLo 'Ubuntu Medium Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Medium-Italic/complete/Ubuntu%20Medium%20Italic%20Nerd%20Font%20Complete.ttf"
-    [manjaro7]="curl -fLo 'Ubuntu Light Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Light/complete/Ubuntu%20Light%20Nerd%20Font%20Complete.ttf"
-    [manjaro8]="curl -fLo 'Ubuntu Light Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Light-Italic/complete/Ubuntu%20Light%20Italic%20Nerd%20Font%20Complete.ttf"
-    [manjaro9]="curl -fLo 'Ubuntu Condensed Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Condensed/complete/Ubuntu%20Condensed%20Nerd%20Font%20Complete.ttf"
-    [manjaro10]="curl -fLo 'Ubuntu Bold Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Bold/complete/Ubuntu%20Bold%20Nerd%20Font%20Complete.ttf"
-    [manjaro11]="curl -fLo 'Ubuntu Bold Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Ubuntu/Bold-Italic/complete/Ubuntu%20Bold%20Italic%20Nerd%20Font%20Complete.ttf"
-    [post]="cd ${HOME}"
+    [message_process]="* Installing Inter font family "
+    [arch]="sudo pacman -S --needed inter-font"
+    [manjaro]="sudo pacman -S --needed inter-font"
 )
 # Editing ----------------------------------------------------------------------
 declare -A install_marktext=(
