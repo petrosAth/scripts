@@ -42,6 +42,7 @@ actions_list=(
     "install_kontact"                      # Nextcloud
     "install_kdepim_addons"                # Nextcloud
     "install_birdtray"                     # Thunderbird
+    "install_electrum"
 # Cosmetics
     "install_starship"
     "install_oh_my_posh"
@@ -311,6 +312,12 @@ declare -A install_birdtray=(
     [message_process]="* Installing Thunderbird tray plugin Birdtray "
     [arch]="yay -S --needed birdtray"
     [manjaro]="yay -S --needed birdtray"
+)
+declare -A install_electrum=(
+    [interface]="gui"
+    [message_process]="* Installing Electrum Bitcoin wallet "
+    [arch]="pacman -S --needed electrum"
+    [manjaro]="pacman -S --needed electrum"
 )
 # Cosmetics
 declare -A install_oh_my_posh=(
