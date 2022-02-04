@@ -323,12 +323,8 @@ declare -A install_electrum=(
 declare -A install_oh_my_posh=(
     [interface]="both"
     [message_process]="* Installing Oh My Posh "
-    [arch]="2"
-    [arch1]="sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh"
-    [arch2]="sudo chmod +x /usr/local/bin/oh-my-posh"
-    [manjaro]="2"
-    [manjaro1]="sudo wget https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-amd64 -O /usr/local/bin/oh-my-posh"
-    [manjaro2]="sudo chmod +x /usr/local/bin/oh-my-posh"
+    [arch]="yay -S oh-my-posh-git"
+    [manjaro]="yay -S oh-my-posh-git"
 )
 declare -A install_starship=(
     [interface]="both"
