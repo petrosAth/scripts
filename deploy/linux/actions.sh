@@ -46,7 +46,7 @@ actions_list=(
 # Cosmetics
     "install_starship"
     "install_oh_my_posh"
-    "install_latte-dock"
+    "install_latte_dock"
 # Fonts
     "install_fonts_firacode"
     "install_fonts_inter"
@@ -213,12 +213,6 @@ declare -A install_ripgrep=(
     [message_process]="* Installing ripGREP "
     [arch]="sudo pacman -S --needed ripgrep"
     [manjaro]="sudo pacman -S --needed ripgrep"
-)
-declare -A install_xclip=(
-    [interface]="gui"
-    [message_process]="* Installing xclip "
-    [arch]="sudo pacman -S --needed xclip"
-    [manjaro]="sudo pacman -S --needed xclip"
 )
 declare -A install_xclip=(
     [interface]="gui"
