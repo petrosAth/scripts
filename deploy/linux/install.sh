@@ -16,11 +16,11 @@
 # user of the github repo to be cloned
 GITHUB_USER="petrosAth"
 # name of the github repo to be cloned
-GITHUB_REPO="linux-config"
+GITHUB_REPO="dotfiles"
 # folder name where the dotfiles repo will be cloned
-DIR="${HOME}/dotfiles"
+DIR="${HOME}"
 # home of the script's files
-SCRIPT_DIR="${DIR}/scripts/deploy/linux"
+SCRIPT_DIR="${DIR}/Scripts/deploy/linux"
 
 VALID_INTERFACE=("CLI" "GUI" "both")
 VALID_DISTRO=("Arch" "Manjaro")
@@ -97,13 +97,10 @@ clone_dotfiles() {
 
     # Clone repository with its submodules
     _process "* Cloning repository ${GITHUB_REPO}"
-    git clone --recurse-submodules https://github.com/${GITHUB_USER}/${GITHUB_REPO}.git ${DIR}
+    git clone --recurse-submodules git@github.com:${GITHUB_USER}/${GITHUB_REPO}.git ${DIR}
 	# Checkout all submodules on master branch to get rid of detached head state
 	cd ${DIR} && git submodule foreach 'git checkout master'
     [[ $? ]] && _success "dotfiles have been cloned"
-
-    ln -fs ${DIR}/.gitconfig ${HOME}/.gitconfig
-    [[ $? ]] && _success "Git config file has been linked"
 }
 
 execute() {

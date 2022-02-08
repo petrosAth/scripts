@@ -41,7 +41,6 @@ actions_list=(
     "install_kaddressbook"                 # Nextcloud
     "install_kontact"                      # Nextcloud
     "install_kdepim_addons"                # Nextcloud
-    "install_birdtray"                     # Thunderbird
     "install_electrum"
 # Cosmetics
     "install_starship"
@@ -85,10 +84,8 @@ declare -A install_base_devel=(
 declare -A install_github_cli=(
     [interface]="both"
     [message_process]="* Installing GitHub CLI "
-    [dir]="mkdir -p ${HOME}/.config/gh"
     [arch]="sudo pacman -S --needed github-cli"
     [manjaro]="sudo pacman -S --needed github-cli"
-    [link]="ln -fs ${DIR}/gh/config.yml ${HOME}/.config/gh/config.yml"
 )
 declare -A install_go=(
     [interface]="both"
@@ -119,16 +116,13 @@ declare -A install_zsh=(
     [message_process]="* Installing Z shell (zsh) "
     [arch]="sudo pacman -S --needed zsh"
     [manjaro]="sudo pacman -S --needed zsh"
-    [link]="ln -fs ${DIR}/zsh/.zshrc ${HOME}/.zshrc"
     [post]="chsh -s /bin/zsh"                                     # Change default shell to zsh
 )
 declare -A install_powershell_bin=(
     [interface]="both"
     [message_process]="* Installing PowerShell "
-    [dir]="mkdir -p ${HOME}/.config/powershell"
-    [arch]="yay -S --needed powershell"
-    [manjaro]="yay -S --needed powershell"
-    [link]="ln -fs ${DIR}/powershell/Microsoft.PowerShell_profile.ps1 ${HOME}/.config/powershell/Microsoft.PowerShell_profile.ps1"
+    [arch]="yay -S --needed powershell-bin"
+    [manjaro]="yay -S --needed powershell-bin"
     [post]="2"
     [post1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
     [post2]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
@@ -144,15 +138,12 @@ declare -A install_filezilla=(
     [message_process]="* Installing FileZilla "
     [arch]="sudo pacman -S --needed filezilla"
     [manjaro]="sudo pacman -S --needed filezilla"
-    [link]="ln -fs ${DIR}/FileZilla ${HOME}/.config/filezilla"
 )
 declare -A install_neovim_git=(
     [interface]="both"
     [message_process]="* Installing Neovim (pulling from git) "
-    [dir]="mkdir -p ${HOME}/.config"
     [arch]="yay -S --needed neovim-git"
     [manjaro]="yay -S --needed neovim-git"
-    [link]="ln -fs ${DIR}/nvim ${HOME}/.config/nvim"
 )
 declare -A install_python_pynvim=(
     [interface]="both"
@@ -182,16 +173,13 @@ declare -A install_bitwarden=(
 declare -A install_synergy_git=(
     [interface]="gui"
     [message_process]="* Installing Synergy "
-    [dir]="mkdir -p ${HOME}/.config"
     [pre]="cd ${DIR}/synergy && git checkout linux"
     [arch]="yay -S --needed synergy-git"
     [manjaro]="yay -S --needed synergy-git"
-    [link]="ln -fs ${DIR}/synergy ${HOME}/.config/Synergy"
 )
 declare -A install_nextcloud_client=(
     [interface]="gui"
     [message_process]="* Installing Nextcloud client "
-    [dir]="mkdir -p ${HOME}/.config"
     [arch]="sudo pacman -S --needed nextcloud-client"
     [manjaro]="sudo pacman -S --needed nextcloud-client"
 )
@@ -247,11 +235,9 @@ declare -A install_zsh_history_substring_search=(
 declare -A install_alacritty_git=(
     [interface]="gui"
     [message_process]="* Installing Alacritty (pulling from git) "
-    [dir]="mkdir -p ${HOME}/.config/alacritty"
     [pre]="cd ${DIR}/alacritty && git checkout linux"
     [arch]="yay -S --needed alacritty-git"
     [manjaro]="yay -S --needed alacritty-git"
-    [link]="ln -fs ${DIR}/alacritty/alacritty.yml ${HOME}/.config/alacritty/alacritty.yml"
 )
 declare -A install_wget=(
     [interface]="both"
@@ -300,12 +286,6 @@ declare -A install_kdepim_addons=( # Sync nextcloud with kde callendar widget
     [message_process]="* Installing KDE PIM addons "
     [arch]="sudo pacman -S --needed kdepim-addons"
     [manjaro]="sudo pacman -S --needed kdepim-addons"
-)
-declare -A install_birdtray=(
-    [interface]="gui"
-    [message_process]="* Installing Thunderbird tray plugin Birdtray "
-    [arch]="yay -S --needed birdtray"
-    [manjaro]="yay -S --needed birdtray"
 )
 declare -A install_electrum=(
     [interface]="gui"
