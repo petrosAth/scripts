@@ -128,6 +128,7 @@ clone_dotfiles() {
     _process "* Cloning repository ${GITHUB_REPO}"
     cd ${HOME} && git init
     git remote add origin git@github.com:${GITHUB_USER}/${GITHUB_REPO}.git
+    git fetch
     read -p "Name of the branch you want to clone: " branchName
     git reset --hard origin/${branchName}
     git submodule update --init
