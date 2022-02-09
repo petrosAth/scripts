@@ -11,14 +11,12 @@ actions_list=(
     "install_go"
     "install_nodejs"
     "install_npm"
-    "install_github_cli"
     "install_zsh"
     "install_powershell_bin"
     "install_unityhub_beta"
     "install_filezilla"
     "install_neovim_git"                   # Neovim
 # Remote and Cloud
-    "install_openssh"
     "install_bitwarden"
     "install_synergy_git"
     "install_nextcloud_client"
@@ -111,12 +109,6 @@ declare -A install_npm=(
     [arch]="sudo pacman -S --needed npm"
     [manjaro]="sudo pacman -S --needed npm"
 )
-declare -A install_github_cli=(
-    [interface]="both"
-    [message_process]="* Installing GitHub CLI "
-    [arch]="sudo pacman -S --needed github-cli"
-    [manjaro]="sudo pacman -S --needed github-cli"
-)
 declare -A install_zsh=(
     [interface]="both"
     [message_process]="* Installing Z shell (zsh) "
@@ -152,12 +144,6 @@ declare -A install_neovim_git=(
     [manjaro]="yay -S --needed neovim-git"
 )
 # Remote and Cloud -------------------------------------------------------------
-declare -A install_openssh=(
-    [interface]="both"
-    [message_process]="* Installing OpenSSH "
-    [arch]="sudo pacman -S --needed openssh"
-    [manjaro]="sudo pacman -S --needed openssh"
-)
 declare -A install_bitwarden=(
     [interface]="gui"
     [message_process]="* Installing Bitwarden "
