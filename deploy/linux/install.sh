@@ -126,7 +126,8 @@ install_git_github_cli() {
 clone_dotfiles() {
     # Clone repository with its submodules
     _process "* Cloning repository ${GITHUB_REPO}"
-    cd ${HOME} && git stash && git fetch
+    cd ${HOME}
+    git init && git stash && git fetch
     git reset --hard origin/master
     git submodule update --init
     # Checkout all submodules on master branch to get rid of detached head state
@@ -225,7 +226,7 @@ deploy() {
     # Test again if a valid selection has been made by the user
     if [[ " ${valid_array[*],,} " =~ " ${selection,,} " ]] ; then
         update_system
-	install_git_github_cli
+        install_git_github_cli
         clone_dotfiles
 
         # Source actions list
