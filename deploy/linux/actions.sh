@@ -6,24 +6,25 @@ actions_list=(
     "install_yay"
 # Development
     "install_base_devel"
-    "install_github_cli"
+    "install_python_pip"
+    "install_jdk_openjdk"
     "install_go"
     "install_nodejs"
     "install_npm"
-    "install_python_pip"
+    "install_github_cli"
     "install_zsh"
     "install_powershell_bin"
     "install_unityhub_beta"
     "install_filezilla"
     "install_neovim_git"                   # Neovim
-    "install_python_pynvim"                # Neovim
-    "install_code_minimap"                 # Neovim
 # Remote and Cloud
     "install_openssh"
     "install_bitwarden"
     "install_synergy_git"
     "install_nextcloud_client"
 # Utilities
+    "install_python_pynvim"                # Neovim
+    "install_code_minimap"                 # Neovim
     "install_unzip"                        # Neovim
     "install_fd"                           # Neovim
     "install_ripgrep"                      # Neovim
@@ -33,8 +34,6 @@ actions_list=(
     "install_zsh_autosuggestions"          # zsh
     "install_zsh_history_substring_search" # zsh
     "install_alacritty_git"
-    "install_wget"
-    "install_solaar"
     "install_kdeconnect"
     "install_glances"
     "install_korganizer"                   # Nextcloud
@@ -42,6 +41,7 @@ actions_list=(
     "install_kontact"                      # Nextcloud
     "install_kdepim_addons"                # Nextcloud
     "install_electrum"
+    "install_etcher"
 # Cosmetics
     "install_starship"
     "install_oh_my_posh"
@@ -56,9 +56,9 @@ actions_list=(
     "install_avidemux_qt"
     "install_audacity"
 # Web & Chat
-    "install_uget"
     "install_firefox"
     "install_thunderbird"
+    "install_jdownloader2"
 # Entertainment
     "install_vlc"
 )
@@ -81,11 +81,17 @@ declare -A install_base_devel=(
     [arch]="sudo pacman -S --needed base-devel"
     [manjaro]="sudo pacman -S --needed base-devel"
 )
-declare -A install_github_cli=(
+declare -A install_python_pip=(
     [interface]="both"
-    [message_process]="* Installing GitHub CLI "
-    [arch]="sudo pacman -S --needed github-cli"
-    [manjaro]="sudo pacman -S --needed github-cli"
+    [message_process]="* Installing Python package manager (pip) "
+    [arch]="sudo pacman -S --needed python-pip"
+    [manjaro]="sudo pacman -S --needed python-pip"
+)
+declare -A install_jdk_openjdk=(
+    [interface]="both"
+    [message_process]="* Installing OpenJDK Java development kit "
+    [arch]="sudo pacman -S --needed jdk-openjdk"
+    [manjaro]="sudo pacman -S --needed jdk-openjdk"
 )
 declare -A install_go=(
     [interface]="both"
@@ -105,11 +111,11 @@ declare -A install_npm=(
     [arch]="sudo pacman -S --needed npm"
     [manjaro]="sudo pacman -S --needed npm"
 )
-declare -A install_python_pip=(
+declare -A install_github_cli=(
     [interface]="both"
-    [message_process]="* Installing Python package manager (pip) "
-    [arch]="sudo pacman -S --needed python-pip"
-    [manjaro]="sudo pacman -S --needed python-pip"
+    [message_process]="* Installing GitHub CLI "
+    [arch]="sudo pacman -S --needed github-cli"
+    [manjaro]="sudo pacman -S --needed github-cli"
 )
 declare -A install_zsh=(
     [interface]="both"
@@ -145,18 +151,6 @@ declare -A install_neovim_git=(
     [arch]="yay -S --needed neovim-git"
     [manjaro]="yay -S --needed neovim-git"
 )
-declare -A install_python_pynvim=(
-    [interface]="both"
-    [message_process]="* Installing Pynvim "
-    [arch]="sudo pacman -S --needed python-pynvim"
-    [manjaro]="sudo pacman -S --needed python-pynvim"
-)
-declare -A install_code_minimap=(
-    [interface]="both"
-    [message_process]="* Installing code-minimap "
-    [arch]="yay -S --needed code-minimap"
-    [manjaro]="yay -S --needed code-minimap"
-)
 # Remote and Cloud -------------------------------------------------------------
 declare -A install_openssh=(
     [interface]="both"
@@ -184,6 +178,18 @@ declare -A install_nextcloud_client=(
     [manjaro]="sudo pacman -S --needed nextcloud-client"
 )
 # Utilities --------------------------------------------------------------------
+declare -A install_python_pynvim=(
+    [interface]="both"
+    [message_process]="* Installing Pynvim "
+    [arch]="sudo pacman -S --needed python-pynvim"
+    [manjaro]="sudo pacman -S --needed python-pynvim"
+)
+declare -A install_code_minimap=(
+    [interface]="both"
+    [message_process]="* Installing code-minimap "
+    [arch]="yay -S --needed code-minimap"
+    [manjaro]="yay -S --needed code-minimap"
+)
 declare -A install_unzip=(
     [interface]="both"
     [message_process]="* Installing Unzip "
@@ -239,18 +245,6 @@ declare -A install_alacritty_git=(
     [arch]="yay -S --needed alacritty-git"
     [manjaro]="yay -S --needed alacritty-git"
 )
-declare -A install_wget=(
-    [interface]="both"
-    [message_process]="* Installing Wget "
-    [arch]="sudo pacman -S --needed wget"
-    [manjaro]="sudo pacman -S --needed wget"
-)
-declare -A install_solaar=(
-    [interface]="gui"
-    [message_process]="* Installing Solaar "
-    [arch]="sudo pacman -S --needed solaar"
-    [manjaro]="sudo pacman -S --needed solaar"
-)
 declare -A install_kdeconnect=(
     [interface]="gui"
     [message_process]="* Installing KDE Connect "
@@ -292,6 +286,12 @@ declare -A install_electrum=(
     [message_process]="* Installing Electrum Bitcoin wallet "
     [arch]="pacman -S --needed electrum"
     [manjaro]="pacman -S --needed electrum"
+)
+declare -A install_etcher=(
+    [interface]="gui"
+    [message_process]="* Installing Etcher OS image flasher "
+    [arch]="pacman -S --needed etcher"
+    [manjaro]="pacman -S --needed etcher"
 )
 # Cosmetics
 declare -A install_oh_my_posh=(
@@ -365,12 +365,6 @@ declare -A install_audacity=(
     [manjaro]="sudo pacman -S --needed audacity"
 )
 # Web & Chat -------------------------------------------------------------------
-declare -A install_uget=(
-    [interface]="gui"
-    [message_process]="* Installing uGet "
-    [arch]="sudo pacman -S --needed uget"
-    [manjaro]="sudo pacman -S --needed uget"
-)
 declare -A install_firefox=(
     [interface]="gui"
     [message_process]="* Installing Firefox "
@@ -382,6 +376,12 @@ declare -A install_thunderbird=(
     [message_process]="* Installing Thunderbird "
     [arch]="sudo pacman -S --needed thunderbird"
     [manjaro]="sudo pacman -S --needed thunderbird"
+)
+declare -A install_jdownloader2=(
+    [interface]="gui"
+    [message_process]="* Installing Jdownloader "
+    [arch]="yay -S --needed jdownloader2"
+    [manjaro]="yay -S --needed jdownloader2"
 )
 # Entertainment ----------------------------------------------------------------
 declare -A install_vlc=(
