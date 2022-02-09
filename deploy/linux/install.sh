@@ -126,13 +126,14 @@ install_git_github_cli() {
 clone_dotfiles() {
     # Clone repository with its submodules
     _process "* Cloning repository ${GITHUB_REPO}"
-    cd ${HOME}
-    git init && git stash && git fetch
-    git reset --hard origin/master
+    cd ${HOME} && git init
+    git remote add origin git@github.com:${GITHUB_USER}/${GITHUB_REPO}.git
+    read -p "Name of the branch you want to clone: " branchName
+    git reset --hard origin/${branchName}
     git submodule update --init
     # Checkout all submodules on master branch to get rid of detached head state
     git submodule foreach 'git checkout master'	
-    [[ $? ]] && _success "dotfiles have been cloned"
+    [[ $? ]] && _success "Configuration files have been cloned"
 }
 
 execute() {
