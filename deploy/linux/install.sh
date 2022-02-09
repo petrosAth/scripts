@@ -15,6 +15,8 @@
 
 # user of the github repo to be cloned
 GITHUB_USER="petrosAth"
+# user email
+GITHUB_EMAIL="develop@athanasoulis.me"
 # name of the github repo to be cloned
 GITHUB_REPO="dotfiles"
 # folder name where the dotfiles repo will be cloned
@@ -82,24 +84,53 @@ update_system() {
     _process "* Updating system "
     case ${DISTRO} in
         arch)
-            sudo pacman -Syu ;;
+            sudo pacman -Syu
+	    ;;
         manjaro)
-            sudo pacman -Syu ;;
+            sudo pacman -Syu
+	    ;;
     esac
 
     [[ $? ]] && _success "System updated"
 }
 
-clone_dotfiles() {
+install_git_github_cli() {
     # Install git
-    _process "* Installing git"
-    sudo pacman -S --needed git
+    _process "* Installing Git and GitHub CLI "
+        case ${DISTRO} in
+        arch)
+            sudo pacman -S --needed git
+	    sudo pacman -S --needed github-cli
+	    _process "* Installing OpenSSH "
+	    sudo pacman -S --needed openssh
+	    ;;
+        manjaro)
+            sudo pacman -S --needed git
+	    sudo pacman -S --needed github-cli
+	    ;;
+    esac    
+    [[ $? ]] && _success "OpenSSH, Git and GitHub CLI have been installed"
+    
+    # Configure github-cli ssh
+    _process "* Configuring GitHub SSH Authentication "
+    gh auth login
+    ssh-keygen -t ed25519 -C "${GITHUB_EMAIL}"
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_ed25519
+    read -p "Name your GitHub public key: " keyTitle
+    gh ssh-key add ~/.ssh/id_ed25519.pub --title "${keyTitle}"
+    ssh -T git@github.com    
+    [[ $? ]] && _success "GitHub SSH Authentication have been configured"
+}
 
+clone_dotfiles() {
     # Clone repository with its submodules
     _process "* Cloning repository ${GITHUB_REPO}"
-    git clone --recurse-submodules git@github.com:${GITHUB_USER}/${GITHUB_REPO}.git ${DIR}
-	# Checkout all submodules on master branch to get rid of detached head state
-	cd ${DIR} && git submodule foreach 'git checkout master'
+    cd ${HOME} && git stash && git fetch
+    git reset --hard origin/master
+    git submodule update --init
+    # Checkout all submodules on master branch to get rid of detached head state
+    git submodule foreach 'git checkout master'	
     [[ $? ]] && _success "dotfiles have been cloned"
 }
 
@@ -194,6 +225,7 @@ deploy() {
     # Test again if a valid selection has been made by the user
     if [[ " ${valid_array[*],,} " =~ " ${selection,,} " ]] ; then
         update_system
+	install_git_github_cli
         clone_dotfiles
 
         # Source actions list
