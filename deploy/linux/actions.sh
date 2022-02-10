@@ -41,8 +41,8 @@ actions_list=(
     "install_electrum"
     "install_etcher"
 # Cosmetics
-    "install_starship"
     "install_oh_my_posh"
+    "install_starship"
     "install_latte_dock"
 # Fonts
     "install_fonts_firacode"
