@@ -140,7 +140,7 @@ declare -A install_bitwarden=(
 declare -A install_synergy_git=(
     [interface]="gui"
     [message_process]="* Installing Synergy "
-    [pre]="cd ${HOME}/.config/synergy && git checkout linux"
+    [pre]="cd ${HOME}/.config/Synergy && git checkout linux"
     [arch]="paru -S --needed synergy-git"
     [manjaro]="paru -S --needed synergy-git"
 )
