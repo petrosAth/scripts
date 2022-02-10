@@ -85,10 +85,10 @@ update_system() {
     case ${DISTRO} in
         arch)
             sudo pacman -Syu
-	    ;;
+            ;;
         manjaro)
             sudo pacman -Syu
-	    ;;
+            ;;
     esac
 
     [[ $? ]] && _success "System updated"
@@ -100,17 +100,17 @@ install_git_github_cli() {
         case ${DISTRO} in
         arch)
             sudo pacman -S --needed git
-	    sudo pacman -S --needed github-cli
-	    _process "* Installing OpenSSH "
-	    sudo pacman -S --needed openssh
-	    ;;
+            sudo pacman -S --needed github-cli
+            _process "* Installing OpenSSH "
+            sudo pacman -S --needed openssh
+            ;;
         manjaro)
             sudo pacman -S --needed git
-	    sudo pacman -S --needed github-cli
-	    ;;
-    esac    
+            sudo pacman -S --needed github-cli
+            ;;
+    esac
     [[ $? ]] && _success "OpenSSH, Git and GitHub CLI have been installed"
-    
+
     # Configure github-cli ssh
     _process "* Configuring GitHub SSH Authentication "
     gh auth login
@@ -119,7 +119,7 @@ install_git_github_cli() {
     ssh-add ~/.ssh/id_ed25519
     read -p "Name your GitHub public key: " keyTitle
     gh ssh-key add ~/.ssh/id_ed25519.pub --title "${keyTitle}"
-    ssh -T git@github.com    
+    ssh -T git@github.com
     [[ $? ]] && _success "GitHub SSH Authentication have been configured"
 }
 
@@ -133,7 +133,7 @@ clone_dotfiles() {
     git reset --hard origin/${branchName}
     git submodule update --init
     # Checkout all submodules on master branch to get rid of detached head state
-    git submodule foreach 'git checkout master'	
+    git submodule foreach 'git checkout master'
     [[ $? ]] && _success "Configuration files have been cloned"
 }
 
