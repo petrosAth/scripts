@@ -203,14 +203,14 @@ declare -A install_glances=(
 declare -A install_electrum=(
     [interface]="gui"
     [message_process]="* Installing Electrum Bitcoin wallet "
-    [arch]="pacman -S --needed electrum"
-    [manjaro]="pacman -S --needed electrum"
+    [arch]="sudo pacman -S --needed electrum"
+    [manjaro]="sudo pacman -S --needed electrum"
 )
 declare -A install_etcher=(
     [interface]="gui"
     [message_process]="* Installing Etcher OS image flasher "
-    [arch]="pacman -S --needed etcher"
-    [manjaro]="pacman -S --needed etcher"
+    [arch]="sudo pacman -S --needed etcher"
+    [manjaro]="sudo pacman -S --needed etcher"
 )
 # Cosmetics
 declare -A install_oh_my_posh=(
