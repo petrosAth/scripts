@@ -32,18 +32,12 @@ actions_list=(
     "install_zsh_autosuggestions"          # zsh
     "install_zsh_history_substring_search" # zsh
     "install_alacritty_git"
-    "install_kdeconnect"
     "install_glances"
-    "install_korganizer"                   # Nextcloud
-    "install_kaddressbook"                 # Nextcloud
-    "install_kontact"                      # Nextcloud
-    "install_kdepim_addons"                # Nextcloud
     "install_electrum"
     "install_etcher"
 # Cosmetics
     "install_oh_my_posh"
     "install_starship"
-    "install_latte_dock"
 # Fonts
     "install_fonts_firacode"
     "install_fonts_inter"
@@ -231,41 +225,11 @@ declare -A install_alacritty_git=(
     [arch]="yay -S --needed alacritty-git"
     [manjaro]="yay -S --needed alacritty-git"
 )
-declare -A install_kdeconnect=(
-    [interface]="gui"
-    [message_process]="* Installing KDE Connect "
-    [arch]="sudo pacman -S --needed kdeconnect"
-    [manjaro]="sudo pacman -S --needed kdeconnect"
-)
 declare -A install_glances=(
     [interface]="gui"
     [message_process]="* Installing Glances "
     [arch]="sudo pacman -S --needed glances"
     [manjaro]="sudo pacman -S --needed glances"
-)
-declare -A install_korganizer=( # Sync nextcloud with kde callendar widget
-    [interface]="gui"
-    [message_process]="* Installing Korganizer "
-    [arch]="sudo pacman -S --needed korganizer"
-    [manjaro]="sudo pacman -S --needed korganizer"
-)
-declare -A install_kaddressbook=( # Sync nextcloud with kde callendar widget
-    [interface]="gui"
-    [message_process]="* Installing Kaddressbook "
-    [arch]="sudo pacman -S --needed kaddressbook"
-    [manjaro]="sudo pacman -S --needed kaddressbook"
-)
-declare -A install_kontact=( # Sync nextcloud with kde callendar widget
-    [interface]="gui"
-    [message_process]="* Installing Kontact "
-    [arch]="sudo pacman -S --needed kontact"
-    [manjaro]="sudo pacman -S --needed kontact"
-)
-declare -A install_kdepim_addons=( # Sync nextcloud with kde callendar widget
-    [interface]="gui"
-    [message_process]="* Installing KDE PIM addons "
-    [arch]="sudo pacman -S --needed kdepim-addons"
-    [manjaro]="sudo pacman -S --needed kdepim-addons"
 )
 declare -A install_electrum=(
     [interface]="gui"
@@ -291,12 +255,6 @@ declare -A install_starship=(
     [message_process]="* Installing Starship "
     [arch]="sudo pacman -S --needed starship"
     [manjaro]="sudo pacman -S --needed starship"
-)
-declare -A install_latte_dock=(
-    [interface]="gui"
-    [message_process]="* Installing Latte dock "
-    [arch]="sudo pacman -S --needed latte-dock"
-    [manjaro]="sudo pacman -S --needed latte-dock"
 )
 # Fonts
 declare -A install_fonts_firacode=(

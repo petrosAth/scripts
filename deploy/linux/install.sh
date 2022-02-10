@@ -134,6 +134,7 @@ clone_dotfiles() {
     git submodule update --init
     # Checkout all submodules on master branch to get rid of detached head state
     git submodule foreach 'git checkout master'
+    cd ${HOME}/Scripts && git checkout gnome
     [[ $? ]] && _success "Configuration files have been cloned"
 }
 
