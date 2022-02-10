@@ -61,7 +61,7 @@ declare -A install_base_devel=(
     [arch]="sudo pacman -S --needed base-devel"
     [manjaro]="sudo pacman -S --needed base-devel"
 )
-declare -A install_yay=(
+declare -A install_paru=(
     [interface]="both"
     [message_process]="* Installing Paru AUR helper "
     [arch]="5"

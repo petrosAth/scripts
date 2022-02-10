@@ -85,9 +85,11 @@ update_system() {
     case ${DISTRO} in
         arch)
             sudo pacman -Syu
+            sudo sed -i 's/#Color/Color/' /etc/pacman.conf # Add color to pacman output
             ;;
         manjaro)
             sudo pacman -Syu
+            sudo sed -i 's/#Color/Color/' /etc/pacman.conf # Add color to pacman output
             ;;
     esac
 
