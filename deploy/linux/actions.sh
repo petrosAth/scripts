@@ -2,10 +2,9 @@
 
 # Array of actions to be taken by the auto installation script
 actions_list=(
-# Package Managers
-    "install_yay"
 # Development
     "install_base_devel"
+    "install_paru"
     "install_python_pip"
     "install_jdk_openjdk"
     "install_go"
@@ -55,23 +54,28 @@ actions_list=(
     "install_vlc"
 )
 
-# Package managers -------------------------------------------------------------
-declare -A install_yay=(
-    [interface]="both"
-    [message_process]="* Installing yay "
-    [arch]="4"
-    [arch1]="sudo pacman -S --needed git base-devel"
-    [arch2]="git clone https://aur.archlinux.org/yay-bin.git"
-    [arch3]="cd yay-bin && makepkg -si"
-    [arch4]="cd .. && rm -rf yay-bin"
-    [manjaro]="sudo pacman -S --needed yay"
-)
 # Development ------------------------------------------------------------------
 declare -A install_base_devel=(
     [interface]="both"
     [message_process]="* Installing Package group base-devel "
     [arch]="sudo pacman -S --needed base-devel"
     [manjaro]="sudo pacman -S --needed base-devel"
+)
+declare -A install_yay=(
+    [interface]="both"
+    [message_process]="* Installing Paru AUR helper "
+    [arch]="5"
+    [arch1]="cd ${HOME}"
+    [arch2]="sudo pacman -S --needed git base-devel"
+    [arch3]="git clone https://aur.archlinux.org/paru.git"
+    [arch4]="cd paru && makepkg -si"
+    [arch5]="cd .. && rm -rf paru"
+    [manjaro]="5"
+    [manjaro1]="cd ${HOME}"
+    [manjaro2]="sudo pacman -S --needed git base-devel"
+    [manjaro3]="git clone https://aur.archlinux.org/paru.git"
+    [manjaro4]="cd paru && makepkg -si"
+    [manjaro5]="cd .. && rm -rf paru"
 )
 declare -A install_python_pip=(
     [interface]="both"
