@@ -8,28 +8,23 @@ actions_list=(
     "install_python_pip"
     "install_jdk_openjdk"
     "install_go"
-    "install_nodejs"
-    "install_npm"
+    "install_nodejs_npm"
     "install_zsh"
     "install_powershell_bin"
     "install_unityhub_beta"
     "install_filezilla"
     "install_neovim_git"                   # Neovim
+    "install_python_pynvim"                # Neovim dependancy
+    "install_xclip"                        # Neovim clipboard sync
+    "install_unzip"                        # Neovim LSP Installer dependancy
+    "install_fd"                           # Neovim plugin telescope dependancy
+    "install_ripgrep"                      # Neovim plugin telescope dependancy
+    "install_code_minimap"                 # Neovim plugin code minimap dependancy
 # Remote and Cloud
     "install_bitwarden"
     "install_synergy_git"
     "install_nextcloud_client"
 # Utilities
-    "install_python_pynvim"                # Neovim
-    "install_code_minimap"                 # Neovim
-    "install_unzip"                        # Neovim
-    "install_fd"                           # Neovim
-    "install_ripgrep"                      # Neovim
-    "install_xclip"                        # Neovim
-    "install_zsh_syntax_highlighting"      # zsh
-    "install_zsh_completions"              # zsh
-    "install_zsh_autosuggestions"          # zsh
-    "install_zsh_history_substring_search" # zsh
     "install_alacritty_git"
     "install_glances"
     "install_electrum"
@@ -79,9 +74,9 @@ declare -A install_paru=(
 )
 declare -A install_python_pip=(
     [interface]="both"
-    [message_process]="* Installing Python package manager (pip) "
-    [arch]="sudo pacman -S --needed python-pip"
-    [manjaro]="sudo pacman -S --needed python-pip"
+    [message_process]="* Installing Python and pip package manager "
+    [arch]="sudo pacman -S --needed python python-pip"
+    [manjaro]="sudo pacman -S --needed python python-pip"
 )
 declare -A install_jdk_openjdk=(
     [interface]="both"
@@ -95,30 +90,24 @@ declare -A install_go=(
     [arch]="sudo pacman -S --needed go"
     [manjaro]="sudo pacman -S --needed go"
 )
-declare -A install_nodejs=(
+declare -A install_nodejs_npm=(
     [interface]="both"
-    [message_process]="* Installing Node.js "
-    [arch]="sudo pacman -S --needed nodejs"
-    [manjaro]="sudo pacman -S --needed nodejs"
-)
-declare -A install_npm=(
-    [interface]="both"
-    [message_process]="* Installing Node.js package manager (npm) "
-    [arch]="sudo pacman -S --needed npm"
-    [manjaro]="sudo pacman -S --needed npm"
+    [message_process]="* Installing Node.js and npm package manager "
+    [arch]="sudo pacman -S --needed nodejs npm"
+    [manjaro]="sudo pacman -S --needed nodejs npm"
 )
 declare -A install_zsh=(
     [interface]="both"
-    [message_process]="* Installing Z shell (zsh) "
-    [arch]="sudo pacman -S --needed zsh"
-    [manjaro]="sudo pacman -S --needed zsh"
-    [post]="chsh -s /bin/zsh"                                     # Change default shell to zsh
+    [message_process]="* Installing Z shell (zsh) and plugins "
+    [arch]="sudo pacman -S --needed zsh zsh-syntax-highlighting zsh-completions zsh-autosuggestions zsh-history-substring-search"
+    [manjaro]="sudo pacman -S --needed zsh zsh-syntax-highlighting zsh-completions zsh-autosuggestions zsh-history-substring-search"
+    [post]="chsh -s /bin/zsh" # Change default shell to zsh
 )
 declare -A install_powershell_bin=(
     [interface]="both"
     [message_process]="* Installing PowerShell "
-    [arch]="yay -S --needed powershell-bin"
-    [manjaro]="yay -S --needed powershell-bin"
+    [arch]="paru -S --needed powershell-bin"
+    [manjaro]="paru -S --needed powershell-bin"
     [post]="2"
     [post1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
     [post2]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
@@ -126,8 +115,8 @@ declare -A install_powershell_bin=(
 declare -A install_unityhub_beta=(
     [interface]="gui"
     [message_process]="* Installing Unity Hub beta "
-    [arch]="yay -S --needed unityhub-beta"
-    [manjaro]="yay -S --needed unityhub-beta"
+    [arch]="paru -S --needed unityhub-beta"
+    [manjaro]="paru -S --needed unityhub-beta"
 )
 declare -A install_filezilla=(
     [interface]="gui"
@@ -138,8 +127,8 @@ declare -A install_filezilla=(
 declare -A install_neovim_git=(
     [interface]="both"
     [message_process]="* Installing Neovim (pulling from git) "
-    [arch]="yay -S --needed neovim-git"
-    [manjaro]="yay -S --needed neovim-git"
+    [arch]="paru -S --needed neovim-git"
+    [manjaro]="paru -S --needed neovim-git"
 )
 # Remote and Cloud -------------------------------------------------------------
 declare -A install_bitwarden=(
@@ -151,9 +140,9 @@ declare -A install_bitwarden=(
 declare -A install_synergy_git=(
     [interface]="gui"
     [message_process]="* Installing Synergy "
-    [pre]="cd ${DIR}/synergy && git checkout linux"
-    [arch]="yay -S --needed synergy-git"
-    [manjaro]="yay -S --needed synergy-git"
+    [pre]="cd ${HOME}/.config/synergy && git checkout linux"
+    [arch]="paru -S --needed synergy-git"
+    [manjaro]="paru -S --needed synergy-git"
 )
 declare -A install_nextcloud_client=(
     [interface]="gui"
@@ -171,8 +160,8 @@ declare -A install_python_pynvim=(
 declare -A install_code_minimap=(
     [interface]="both"
     [message_process]="* Installing code-minimap "
-    [arch]="yay -S --needed code-minimap"
-    [manjaro]="yay -S --needed code-minimap"
+    [arch]="paru -S --needed code-minimap"
+    [manjaro]="paru -S --needed code-minimap"
 )
 declare -A install_unzip=(
     [interface]="both"
@@ -198,36 +187,12 @@ declare -A install_xclip=(
     [arch]="sudo pacman -S --needed xclip"
     [manjaro]="sudo pacman -S --needed xclip"
 )
-declare -A install_zsh_syntax_highlighting=(
-    [interface]="both"
-    [message_process]="* Installing Z shell syntax highlighting plugin "
-    [arch]="sudo pacman -S --needed zsh-syntax-highlighting"
-    [manjaro]="sudo pacman -S --needed zsh-syntax-highlighting"
-)
-declare -A install_zsh_completions=(
-    [interface]="both"
-    [message_process]="* Installing Z shell auto completion plugin "
-    [arch]="sudo pacman -S --needed zsh-completions"
-    [manjaro]="sudo pacman -S --needed zsh-completions"
-)
-declare -A install_zsh_autosuggestions=(
-    [interface]="both"
-    [message_process]="* Installing Z shell ghost text plugin "
-    [arch]="sudo pacman -S --needed zsh-autosuggestions"
-    [manjaro]="sudo pacman -S --needed zsh-autosuggestions"
-)
-declare -A install_zsh_history_substring_search=(
-    [interface]="both"
-    [message_process]="* Installing Z shell smart history search plugin "
-    [arch]="sudo pacman -S --needed zsh-history-substring-search"
-    [manjaro]="sudo pacman -S --needed zsh-history-substring-search"
-)
 declare -A install_alacritty_git=(
     [interface]="gui"
     [message_process]="* Installing Alacritty (pulling from git) "
-    [pre]="cd ${DIR}/alacritty && git checkout linux"
-    [arch]="yay -S --needed alacritty-git"
-    [manjaro]="yay -S --needed alacritty-git"
+    [pre]="cd ${HOME}/.config/alacritty && git checkout linux"
+    [arch]="paru -S --needed alacritty-git"
+    [manjaro]="paru -S --needed alacritty-git"
 )
 declare -A install_glances=(
     [interface]="gui"
@@ -251,8 +216,8 @@ declare -A install_etcher=(
 declare -A install_oh_my_posh=(
     [interface]="both"
     [message_process]="* Installing Oh My Posh "
-    [arch]="yay -S oh-my-posh-git"
-    [manjaro]="yay -S oh-my-posh-git"
+    [arch]="paru -S oh-my-posh-git"
+    [manjaro]="paru -S oh-my-posh-git"
 )
 declare -A install_starship=(
     [interface]="both"
@@ -285,8 +250,8 @@ declare -A install_fonts_inter=(
 declare -A install_marktext=(
     [interface]="gui"
     [message_process]="* Installing Mark Text "
-    [arch]="yay -S --needed marktext"
-    [manjaro]="yay -S --needed marktext"
+    [arch]="paru -S --needed marktext"
+    [manjaro]="paru -S --needed marktext"
 )
 declare -A install_blender=(
     [interface]="gui"
@@ -328,8 +293,8 @@ declare -A install_thunderbird=(
 declare -A install_jdownloader2=(
     [interface]="gui"
     [message_process]="* Installing Jdownloader "
-    [arch]="yay -S --needed jdownloader2"
-    [manjaro]="yay -S --needed jdownloader2"
+    [arch]="paru -S --needed jdownloader2"
+    [manjaro]="paru -S --needed jdownloader2"
 )
 # Entertainment ----------------------------------------------------------------
 declare -A install_vlc=(
