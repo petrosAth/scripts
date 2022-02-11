@@ -26,6 +26,7 @@ actions_list=(
     "install_nextcloud_client"
 # Utilities
     "install_alacritty_git"
+    "install_neofetch"
     "install_glances"
     "install_electrum"
     "install_etcher"
@@ -193,6 +194,12 @@ declare -A install_alacritty_git=(
     [pre]="cd ${HOME}/.config/alacritty && git checkout linux"
     [arch]="paru -S --needed alacritty-git"
     [manjaro]="paru -S --needed alacritty-git"
+)
+declare -A install_neofetch=(
+    [interface]="both"
+    [message_process]="* Installing system information tool Neofetch "
+    [arch]="sudo pacman -S neofetch"
+    [manjaro]="sudo pacman -S neofetch"
 )
 declare -A install_glances=(
     [interface]="gui"
