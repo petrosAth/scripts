@@ -11,6 +11,7 @@ actions_list=(
     "install_nodejs_npm"
     "install_zsh"
     "install_powershell_bin"
+    "install_alacritty_git"
     "install_unityhub_beta"
     "install_filezilla"
     "install_neovim_git"                   # Neovim
@@ -25,7 +26,7 @@ actions_list=(
     "install_synergy_git"
     "install_nextcloud_client"
 # Utilities
-    "install_alacritty_git"
+    "install_tdrop"
     "install_neofetch"
     "install_glances"
     "install_electrum"
@@ -113,6 +114,13 @@ declare -A install_powershell_bin=(
     [post1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
     [post2]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
 )
+declare -A install_alacritty_git=(
+    [interface]="gui"
+    [message_process]="* Installing Alacritty (pulling from git) "
+    [pre]="cd ${HOME}/.config/alacritty && git checkout linux"
+    [arch]="paru -S --needed alacritty-git"
+    [manjaro]="paru -S --needed alacritty-git"
+)
 declare -A install_unityhub_beta=(
     [interface]="gui"
     [message_process]="* Installing Unity Hub beta "
@@ -188,12 +196,11 @@ declare -A install_xclip=(
     [arch]="sudo pacman -S --needed xclip"
     [manjaro]="sudo pacman -S --needed xclip"
 )
-declare -A install_alacritty_git=(
-    [interface]="gui"
-    [message_process]="* Installing Alacritty (pulling from git) "
-    [pre]="cd ${HOME}/.config/alacritty && git checkout linux"
-    [arch]="paru -S --needed alacritty-git"
-    [manjaro]="paru -S --needed alacritty-git"
+declare -A install_tdrop=(
+    [interface]="both"
+    [message_process]="* Installing dropdown terminal wrapper tdrop "
+    [arch]="sudo pacman -S tdrop"
+    [manjaro]="sudo pacman -S tdrop"
 )
 declare -A install_neofetch=(
     [interface]="both"
