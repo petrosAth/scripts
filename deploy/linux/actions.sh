@@ -26,6 +26,7 @@ actions_list=(
     "install_synergy_git"
     "install_nextcloud_client"
 # Utilities
+    "install_tmux"
     "install_tdrop"
     "install_neofetch"
     "install_glances"
@@ -195,6 +196,12 @@ declare -A install_xclip=(
     [message_process]="* Installing xclip "
     [arch]="sudo pacman -S --needed xclip"
     [manjaro]="sudo pacman -S --needed xclip"
+)
+declare -A install_tmux=(
+    [interface]="both"
+    [message_process]="* Installing terminal multiplexer tmux "
+    [arch]="sudo pacman -S tmux"
+    [manjaro]="sudo pacman -S tmux"
 )
 declare -A install_tdrop=(
     [interface]="both"
