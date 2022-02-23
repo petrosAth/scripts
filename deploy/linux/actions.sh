@@ -29,6 +29,8 @@ actions_list=(
     "install_sxhkd"
     "install_tmux"
     "install_tdrop"
+    "install_ranger"
+    "install_bat"
     "install_neofetch"
     "install_glances"
     "install_electrum"
@@ -215,6 +217,18 @@ declare -A install_tdrop=(
     [message_process]="* Installing dropdown terminal wrapper tdrop "
     [arch]="sudo pacman -S tdrop"
     [manjaro]="sudo pacman -S tdrop"
+)
+declare -A install_ranger=(
+    [interface]="both"
+    [message_process]="* Installing Ranger A VIM-inspired filemanager for the console"
+    [arch]="sudo pacman -S ranger"
+    [manjaro]="sudo pacman -S ranger"
+)
+declare -A install_bat=(
+    [interface]="both"
+    [message_process]="* Installing Bat, a cat(1) clone with syntax highlighting and Git integration "
+    [arch]="sudo pacman -S bat"
+    [manjaro]="sudo pacman -S bat"
 )
 declare -A install_neofetch=(
     [interface]="both"
