@@ -223,6 +223,9 @@ declare -A install_ranger=(
     [message_process]="* Installing Ranger A VIM-inspired filemanager for the console"
     [arch]="sudo pacman -S ranger"
     [manjaro]="sudo pacman -S ranger"
+    [post]="2"
+    [post1]="ranger --copy-config=scope"
+    [post2]="git clone https://github.com/alexanderjeurissen/ranger_devicons ${HOME}/.config/ranger/plugins/ranger_devicons"
 )
 declare -A install_bat=(
     [interface]="both"
