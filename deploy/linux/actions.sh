@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Array of actions to be taken by the auto installation script
+#|=< Array of actions to be taken by the auto installation script >===========|#
 actions_list=(
-# Development
+#|-< Development >------------------------------------------------------------|#
     "install_base_devel"
     "install_paru"
     "install_python_pip"
@@ -22,11 +22,11 @@ actions_list=(
     "install_fd"                           # Neovim plugin telescope dependancy
     "install_ripgrep"                      # Neovim plugin telescope dependancy
     "install_code_minimap"                 # Neovim plugin code minimap dependancy
-# Remote and Cloud
+#|-< Remote and Cloud >-------------------------------------------------------|#
     "install_bitwarden"
     "install_synergy_git"
     "install_nextcloud_client"
-# Utilities
+#|-< Utilities >--------------------------------------------------------------|#
     "install_sxhkd"
     "install_tmux"
     "install_tdrop"
@@ -36,27 +36,31 @@ actions_list=(
     "install_glances"
     "install_electrum"
     "install_etcher"
-# Cosmetics
+#|-< Cosmetics >--------------------------------------------------------------|#
     "install_oh_my_posh"
     "install_starship"
-# Fonts
+#|-< Fonts >------------------------------------------------------------------|#
     "install_fonts_firacode"
     "install_fonts_inter"
-# Editing
+#|-< Editing >----------------------------------------------------------------|#
+    "install_onlyoffice"
     "install_marktext"
     "install_blender"
     "install_handbrake"
     "install_avidemux_qt"
     "install_audacity"
-# Web & Chat
+#|-< Web & Chat >-------------------------------------------------------------|#
     "install_firefox"
     "install_thunderbird"
     "install_jdownloader2"
-# Entertainment
+#|-< Entertainment >----------------------------------------------------------|#
     "install_vlc"
 )
+#|============================================================================|#
 
-# Development ------------------------------------------------------------------
+
+#|=< Installation commands >==================================================|#
+#|-< Development >------------------------------------------------------------|#
 declare -A install_base_devel=(
     [interface]="both"
     [message_process]="* Installing Package group base-devel "
@@ -150,7 +154,7 @@ declare -A install_neovim_git=(
     [arch]="paru -S --needed neovim-git"
     [manjaro]="paru -S --needed neovim-git"
 )
-# Remote and Cloud -------------------------------------------------------------
+#|-< Remote and Cloud >-------------------------------------------------------|#
 declare -A install_bitwarden=(
     [interface]="gui"
     [message_process]="* Installing Bitwarden "
@@ -170,7 +174,7 @@ declare -A install_nextcloud_client=(
     [arch]="sudo pacman -S --needed nextcloud-client"
     [manjaro]="sudo pacman -S --needed nextcloud-client"
 )
-# Utilities --------------------------------------------------------------------
+#|-< Utilities >--------------------------------------------------------------|#
 declare -A install_python_pynvim=(
     [interface]="both"
     [message_process]="* Installing Pynvim "
@@ -264,7 +268,7 @@ declare -A install_etcher=(
     [arch]="sudo pacman -S --needed etcher"
     [manjaro]="sudo pacman -S --needed etcher"
 )
-# Cosmetics
+#|-< Cosmetics >--------------------------------------------------------------|#
 declare -A install_oh_my_posh=(
     [interface]="both"
     [message_process]="* Installing Oh My Posh "
@@ -277,7 +281,7 @@ declare -A install_starship=(
     [arch]="sudo pacman -S --needed starship"
     [manjaro]="sudo pacman -S --needed starship"
 )
-# Fonts
+#|-< Fonts >------------------------------------------------------------------|#
 declare -A install_fonts_firacode=(
     [interface]="gui"
     [message_process]="* Installing Fira Code Regular font "
@@ -298,7 +302,13 @@ declare -A install_fonts_inter=(
     [arch]="sudo pacman -S --needed inter-font"
     [manjaro]="sudo pacman -S --needed inter-font"
 )
-# Editing ----------------------------------------------------------------------
+#|-< Editing >----------------------------------------------------------------|#
+declare -A install_onlyoffice=(
+    [interface]="gui"
+    [message_process]="* Installing OnlyOffice. Open-source office suite that combines text, spreadsheet and presentation editors "
+    [arch]="paru -S --needed onlyoffice-bin"
+    [manjaro]="sudo pacman -S --needed onlyoffice-desktopeditors"
+)
 declare -A install_marktext=(
     [interface]="gui"
     [message_process]="* Installing Mark Text "
@@ -329,7 +339,7 @@ declare -A install_audacity=(
     [arch]="sudo pacman -S --needed audacity"
     [manjaro]="sudo pacman -S --needed audacity"
 )
-# Web & Chat -------------------------------------------------------------------
+#|-< Web & Chat >-------------------------------------------------------------|#
 declare -A install_firefox=(
     [interface]="gui"
     [message_process]="* Installing Firefox "
@@ -348,10 +358,11 @@ declare -A install_jdownloader2=(
     [arch]="paru -S --needed jdownloader2"
     [manjaro]="paru -S --needed jdownloader2"
 )
-# Entertainment ----------------------------------------------------------------
+#|-< Entertainment >----------------------------------------------------------|#
 declare -A install_vlc=(
     [interface]="gui"
     [message_process]="* Installing VLC "
     [arch]="sudo pacman -S --needed vlc"
     [manjaro]="sudo pacman -S --needed vlc"
 )
+#|============================================================================|#
