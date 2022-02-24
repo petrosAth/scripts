@@ -11,6 +11,7 @@ actions_list=(
     "install_nodejs_npm"
     "install_zsh"
     "install_powershell_bin"
+    "install_kitty"
     "install_alacritty_git"
     "install_unityhub_beta"
     "install_filezilla"
@@ -118,6 +119,12 @@ declare -A install_powershell_bin=(
     [post1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
     [post2]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
 )
+declare -A install_kitty=(
+    [interface]="gui"
+    [message_process]="* Installing kitty The fast, feature-rich, GPU based terminal emulator "
+    [arch]="sudo pacman -S --needed kitty"
+    [manjaro]="sudo pacman -S --needed kitty"
+)
 declare -A install_alacritty_git=(
     [interface]="gui"
     [message_process]="* Installing Alacritty (pulling from git) "
@@ -203,26 +210,26 @@ declare -A install_xclip=(
 declare -A install_sxhkd=(
     [interface]="gui"
     [message_process]="* Installing simple X hotkey daemon "
-    [arch]="sudo pacman -S sxhkd"
+    [arch]="sudo pacman -S --needed sxhkd"
     [manjaro]="sudo pacman -S sxhkd"
 )
 declare -A install_tmux=(
     [interface]="both"
     [message_process]="* Installing terminal multiplexer tmux "
-    [arch]="sudo pacman -S tmux"
-    [manjaro]="sudo pacman -S tmux"
+    [arch]="sudo pacman -S --needed tmux"
+    [manjaro]="sudo pacman -S --needed tmux"
 )
 declare -A install_tdrop=(
     [interface]="both"
     [message_process]="* Installing dropdown terminal wrapper tdrop "
-    [arch]="sudo pacman -S tdrop"
-    [manjaro]="sudo pacman -S tdrop"
+    [arch]="sudo pacman -S --needed tdrop"
+    [manjaro]="sudo pacman -S --needed tdrop"
 )
 declare -A install_ranger=(
     [interface]="both"
     [message_process]="* Installing Ranger A VIM-inspired filemanager for the console"
-    [arch]="sudo pacman -S ranger"
-    [manjaro]="sudo pacman -S ranger"
+    [arch]="sudo pacman -S --needed ranger"
+    [manjaro]="sudo pacman -S --needed ranger"
     [post]="2"
     [post1]="ranger --copy-config=scope"
     [post2]="git clone https://github.com/alexanderjeurissen/ranger_devicons ${HOME}/.config/ranger/plugins/ranger_devicons"
@@ -230,14 +237,14 @@ declare -A install_ranger=(
 declare -A install_bat=(
     [interface]="both"
     [message_process]="* Installing Bat, a cat(1) clone with syntax highlighting and Git integration "
-    [arch]="sudo pacman -S bat"
-    [manjaro]="sudo pacman -S bat"
+    [arch]="sudo pacman -S --needed bat"
+    [manjaro]="sudo pacman -S --needed bat"
 )
 declare -A install_neofetch=(
     [interface]="both"
     [message_process]="* Installing system information tool Neofetch "
-    [arch]="sudo pacman -S neofetch"
-    [manjaro]="sudo pacman -S neofetch"
+    [arch]="sudo pacman -S --needed neofetch"
+    [manjaro]="sudo pacman -S --needed neofetch"
 )
 declare -A install_glances=(
     [interface]="gui"
