@@ -52,6 +52,7 @@ actions_list=(
 #|-< Web & Chat >-------------------------------------------------------------|#
     "install_firefox"
     "install_thunderbird"
+    "install_ferdi"
     "install_jdownloader2"
 #|-< Entertainment >----------------------------------------------------------|#
     "install_vlc"
@@ -157,7 +158,7 @@ declare -A install_neovim_git=(
 #|-< Remote and Cloud >-------------------------------------------------------|#
 declare -A install_bitwarden=(
     [interface]="gui"
-    [message_process]="* Installing Bitwarden "
+    [message_process]="* Installing Bitwarden, the most trusted open source password manager for business "
     [arch]="sudo pacman -S --needed bitwarden"
     [manjaro]="sudo pacman -S --needed bitwarden"
 )
@@ -348,9 +349,15 @@ declare -A install_firefox=(
 )
 declare -A install_thunderbird=(
     [interface]="gui"
-    [message_process]="* Installing Thunderbird "
+    [message_process]="* Installing Thunderbird, a free email application that's easy to set up and customize "
     [arch]="sudo pacman -S --needed thunderbird"
     [manjaro]="sudo pacman -S --needed thunderbird"
+)
+declare -A install_ferdi=(
+    [interface]="gui"
+    [message_process]="* Installing Ferdi. Ferdi helps you organize how you use your favourite apps by combining them into one application "
+    [arch]="paru -S --needed ferdi"
+    [manjaro]="paru -S --needed ferdi"
 )
 declare -A install_jdownloader2=(
     [interface]="gui"
