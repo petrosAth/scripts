@@ -27,6 +27,7 @@ actions_list=(
     "install_synergy_git"
     "install_nextcloud_client"
 #|-< Utilities >--------------------------------------------------------------|#
+    "install_corectrl"
     "install_sxhkd"
     "install_tmux"
     "install_tdrop"
@@ -155,6 +156,36 @@ declare -A install_neovim_git=(
     [arch]="paru -S --needed neovim-git"
     [manjaro]="paru -S --needed neovim-git"
 )
+declare -A install_python_pynvim=(
+    [interface]="both"
+    [message_process]="* Installing Pynvim "
+    [arch]="sudo pacman -S --needed python-pynvim"
+    [manjaro]="sudo pacman -S --needed python-pynvim"
+)
+declare -A install_xclip=(
+    [interface]="gui"
+    [message_process]="* Installing xclip "
+    [arch]="sudo pacman -S --needed xclip"
+    [manjaro]="sudo pacman -S --needed xclip"
+)
+declare -A install_unzip=(
+    [interface]="both"
+    [message_process]="* Installing Unzip "
+    [arch]="sudo pacman -S --needed unzip"
+    [manjaro]="sudo pacman -S --needed unzip"
+)
+declare -A install_fd=(
+    [interface]="both"
+    [message_process]="* Installing fd "
+    [arch]="sudo pacman -S --needed fd"
+    [manjaro]="sudo pacman -S --needed fd"
+)
+declare -A install_ripgrep=(
+    [interface]="both"
+    [message_process]="* Installing ripGREP "
+    [arch]="sudo pacman -S --needed ripgrep"
+    [manjaro]="sudo pacman -S --needed ripgrep"
+)
 #|-< Remote and Cloud >-------------------------------------------------------|#
 declare -A install_bitwarden=(
     [interface]="gui"
@@ -176,41 +207,17 @@ declare -A install_nextcloud_client=(
     [manjaro]="sudo pacman -S --needed nextcloud-client"
 )
 #|-< Utilities >--------------------------------------------------------------|#
-declare -A install_python_pynvim=(
-    [interface]="both"
-    [message_process]="* Installing Pynvim "
-    [arch]="sudo pacman -S --needed python-pynvim"
-    [manjaro]="sudo pacman -S --needed python-pynvim"
-)
 declare -A install_code_minimap=(
     [interface]="both"
     [message_process]="* Installing code-minimap "
     [arch]="paru -S --needed code-minimap"
     [manjaro]="paru -S --needed code-minimap"
 )
-declare -A install_unzip=(
-    [interface]="both"
-    [message_process]="* Installing Unzip "
-    [arch]="sudo pacman -S --needed unzip"
-    [manjaro]="sudo pacman -S --needed unzip"
-)
-declare -A install_fd=(
-    [interface]="both"
-    [message_process]="* Installing fd "
-    [arch]="sudo pacman -S --needed fd"
-    [manjaro]="sudo pacman -S --needed fd"
-)
-declare -A install_ripgrep=(
-    [interface]="both"
-    [message_process]="* Installing ripGREP "
-    [arch]="sudo pacman -S --needed ripgrep"
-    [manjaro]="sudo pacman -S --needed ripgrep"
-)
-declare -A install_xclip=(
+declare -A install_corectrl=(
     [interface]="gui"
-    [message_process]="* Installing xclip "
-    [arch]="sudo pacman -S --needed xclip"
-    [manjaro]="sudo pacman -S --needed xclip"
+    [message_process]="* Installing CoreCtrl hardware control tool "
+    [arch]="paru -S --needed corectrl"
+    [manjaro]="paru -S --needed corectrl"
 )
 declare -A install_sxhkd=(
     [interface]="gui"
@@ -273,8 +280,8 @@ declare -A install_etcher=(
 declare -A install_oh_my_posh=(
     [interface]="both"
     [message_process]="* Installing Oh My Posh "
-    [arch]="paru -S oh-my-posh-git"
-    [manjaro]="paru -S oh-my-posh-git"
+    [arch]="paru -S --needed oh-my-posh-git"
+    [manjaro]="paru -S --needed oh-my-posh-git"
 )
 declare -A install_starship=(
     [interface]="both"
