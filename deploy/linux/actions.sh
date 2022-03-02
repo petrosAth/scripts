@@ -53,7 +53,6 @@ actions_list=(
 #|-< Web & Chat >-------------------------------------------------------------|#
     "install_firefox"
     "install_thunderbird"
-    "install_ferdi"
     "install_jdownloader2"
 #|-< Entertainment >----------------------------------------------------------|#
     "install_vlc"
@@ -359,12 +358,6 @@ declare -A install_thunderbird=(
     [message_process]="* Installing Thunderbird, a free email application that's easy to set up and customize "
     [arch]="sudo pacman -S --needed thunderbird"
     [manjaro]="sudo pacman -S --needed thunderbird"
-)
-declare -A install_ferdi=(
-    [interface]="gui"
-    [message_process]="* Installing Ferdi. Ferdi helps you organize how you use your favourite apps by combining them into one application "
-    [arch]="paru -S --needed ferdi"
-    [manjaro]="paru -S --needed ferdi"
 )
 declare -A install_jdownloader2=(
     [interface]="gui"
