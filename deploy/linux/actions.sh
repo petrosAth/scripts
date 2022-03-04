@@ -27,6 +27,7 @@ actions_list=(
     "install_synergy_git"
     "install_nextcloud_client"
 #|-< Utilities >--------------------------------------------------------------|#
+    "install_trash_cli"
     "install_corectrl"
     "install_sxhkd"
     "install_tmux"
@@ -185,6 +186,12 @@ declare -A install_ripgrep=(
     [arch]="sudo pacman -S --needed ripgrep"
     [manjaro]="sudo pacman -S --needed ripgrep"
 )
+declare -A install_code_minimap=(
+    [interface]="both"
+    [message_process]="* Installing code-minimap "
+    [arch]="paru -S --needed code-minimap"
+    [manjaro]="paru -S --needed code-minimap"
+)
 #|-< Remote and Cloud >-------------------------------------------------------|#
 declare -A install_bitwarden=(
     [interface]="gui"
@@ -206,11 +213,11 @@ declare -A install_nextcloud_client=(
     [manjaro]="sudo pacman -S --needed nextcloud-client"
 )
 #|-< Utilities >--------------------------------------------------------------|#
-declare -A install_code_minimap=(
+declare -A install_trash_cli=(
     [interface]="both"
-    [message_process]="* Installing code-minimap "
-    [arch]="paru -S --needed code-minimap"
-    [manjaro]="paru -S --needed code-minimap"
+    [message_process]="* Installing trash-cli, command line interface to the freedesktop.org trashcan "
+    [arch]="sudo pacman -S trash-cli"
+    [manjaro]="sudo pacman -S trash-cli"
 )
 declare -A install_corectrl=(
     [interface]="gui"
