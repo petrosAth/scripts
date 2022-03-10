@@ -9,10 +9,11 @@ actions_list=(
     "install_jdk_openjdk"
     "install_go"
     "install_nodejs_npm"
+    "install_stylua_git"
     "install_zsh"
     "install_powershell_bin"
     "install_kitty"
-    "install_alacritty_git"
+    "install_alacritty"
     "install_unityhub_beta"
     "install_filezilla"
     "install_neovim_git"                   # Neovim
@@ -21,7 +22,6 @@ actions_list=(
     "install_unzip"                        # Neovim LSP Installer dependancy
     "install_fd"                           # Neovim plugin telescope dependancy
     "install_ripgrep"                      # Neovim plugin telescope dependancy
-    "install_code_minimap"                 # Neovim plugin code minimap dependancy
 #|-< Remote and Cloud >-------------------------------------------------------|#
     "install_bitwarden"
     "install_synergy_git"
@@ -109,6 +109,12 @@ declare -A install_nodejs_npm=(
     [arch]="sudo pacman -S --needed nodejs npm"
     [manjaro]="sudo pacman -S --needed nodejs npm"
 )
+declare -A install_stylua_git=(
+    [interface]="both"
+    [message_process]="* Installing StyLua, an opinionated Lua code formatter "
+    [arch]="paru -S stylua-git"
+    [manjaro]="paru -S stylua-git"
+)
 declare -A install_zsh=(
     [interface]="both"
     [message_process]="* Installing Z shell (zsh) and plugins "
@@ -131,12 +137,12 @@ declare -A install_kitty=(
     [arch]="sudo pacman -S --needed kitty"
     [manjaro]="sudo pacman -S --needed kitty"
 )
-declare -A install_alacritty_git=(
+declare -A install_alacritty=(
     [interface]="gui"
-    [message_process]="* Installing Alacritty (pulling from git) "
+    [message_process]="* Installing Alacritty, a cross-platform, OpenGL terminal emulator "
     [pre]="cd ${HOME}/.config/alacritty && git checkout linux"
-    [arch]="paru -S --needed alacritty-git"
-    [manjaro]="paru -S --needed alacritty-git"
+    [arch]="sudo pacman -S alacritty"
+    [manjaro]="sudo pacman -S alacritty"
 )
 declare -A install_unityhub_beta=(
     [interface]="gui"
@@ -185,12 +191,6 @@ declare -A install_ripgrep=(
     [message_process]="* Installing ripGREP "
     [arch]="sudo pacman -S --needed ripgrep"
     [manjaro]="sudo pacman -S --needed ripgrep"
-)
-declare -A install_code_minimap=(
-    [interface]="both"
-    [message_process]="* Installing code-minimap "
-    [arch]="paru -S --needed code-minimap"
-    [manjaro]="paru -S --needed code-minimap"
 )
 #|-< Remote and Cloud >-------------------------------------------------------|#
 declare -A install_bitwarden=(
