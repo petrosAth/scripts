@@ -42,11 +42,11 @@ actions_list=(
     "install_oh_my_posh"
     "install_starship"
 #|-< Fonts >------------------------------------------------------------------|#
-    "install_fonts_firacode"
-    "install_fonts_inter"
+    "install_inter_font"
+    "install_fira_code_font"
+    "install_nerd_fonts_symbols"
 #|-< Editing >----------------------------------------------------------------|#
     "install_onlyoffice"
-    "install_marktext"
     "install_blender"
     "install_handbrake"
     "install_avidemux_qt"
@@ -112,8 +112,8 @@ declare -A install_nodejs_npm=(
 declare -A install_stylua_git=(
     [interface]="both"
     [message_process]="* Installing StyLua, an opinionated Lua code formatter "
-    [arch]="paru -S stylua-git"
-    [manjaro]="paru -S stylua-git"
+    [arch]="paru -S --needed stylua-git"
+    [manjaro]="paru -S --needed stylua-git"
 )
 declare -A install_zsh=(
     [interface]="both"
@@ -141,8 +141,8 @@ declare -A install_alacritty=(
     [interface]="gui"
     [message_process]="* Installing Alacritty, a cross-platform, OpenGL terminal emulator "
     [pre]="cd ${HOME}/.config/alacritty && git checkout linux"
-    [arch]="sudo pacman -S alacritty"
-    [manjaro]="sudo pacman -S alacritty"
+    [arch]="sudo pacman -S --needed alacritty"
+    [manjaro]="sudo pacman -S --needed alacritty"
 )
 declare -A install_unityhub_beta=(
     [interface]="gui"
@@ -216,8 +216,8 @@ declare -A install_nextcloud_client=(
 declare -A install_trash_cli=(
     [interface]="both"
     [message_process]="* Installing trash-cli, command line interface to the freedesktop.org trashcan "
-    [arch]="sudo pacman -S trash-cli"
-    [manjaro]="sudo pacman -S trash-cli"
+    [arch]="sudo pacman -S --needed trash-cli"
+    [manjaro]="sudo pacman -S --needed trash-cli"
 )
 declare -A install_corectrl=(
     [interface]="gui"
@@ -296,25 +296,23 @@ declare -A install_starship=(
     [manjaro]="sudo pacman -S --needed starship"
 )
 #|-< Fonts >------------------------------------------------------------------|#
-declare -A install_fonts_firacode=(
-    [interface]="gui"
-    [message_process]="* Installing Fira Code Regular font "
-    [dir]="mkdir -p ${HOME}/.local/share/fonts/ttf/FiraCode"
-    [arch]="3"
-    [arch1]="cd ${HOME}/.local/share/fonts/ttf/FiraCode"
-    [arch2]="curl -fLo 'Fira Code Regular Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"
-    [arch3]="curl -fLo 'Fira Code Regular Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
-    [manjaro]="3"
-    [manjaro1]="cd ${HOME}/.local/share/fonts/ttf/FiraCode"
-    [manjaro2]="curl -fLo 'Fira Code Regular Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"
-    [manjaro3]="curl -fLo 'Fira Code Regular Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
-    [post]="cd ${HOME}"
-)
-declare -A install_fonts_inter=(
+declare -A install_inter_font=(
     [interface]="gui"
     [message_process]="* Installing Inter font family "
     [arch]="sudo pacman -S --needed inter-font"
     [manjaro]="sudo pacman -S --needed inter-font"
+)
+declare -A install_fira_code_font=(
+    [interface]="gui"
+    [message_process]="* Installing Fira Code font family "
+    [arch]="sudo pacman -S --needed ttf-fira-code"
+    [manjaro]="sudo pacman -S --needed ttf-fira-code"
+)
+declare -A install_nerd_fonts_symbols=(
+    [interface]="gui"
+    [message_process]="* Installing Fira Code font family "
+    [arch]="paru -S --needed ttf-nerd-fonts-symbols"
+    [manjaro]="paru -S --needed ttf-nerd-fonts-symbols"
 )
 #|-< Editing >----------------------------------------------------------------|#
 declare -A install_onlyoffice=(
@@ -322,12 +320,6 @@ declare -A install_onlyoffice=(
     [message_process]="* Installing OnlyOffice. Open-source office suite that combines text, spreadsheet and presentation editors "
     [arch]="paru -S --needed onlyoffice-bin"
     [manjaro]="sudo pacman -S --needed onlyoffice-desktopeditors"
-)
-declare -A install_marktext=(
-    [interface]="gui"
-    [message_process]="* Installing Mark Text "
-    [arch]="paru -S --needed marktext"
-    [manjaro]="paru -S --needed marktext"
 )
 declare -A install_blender=(
     [interface]="gui"
