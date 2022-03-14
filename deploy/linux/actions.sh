@@ -311,8 +311,8 @@ declare -A install_fira_code_font=(
 declare -A install_nerd_fonts_symbols=(
     [interface]="gui"
     [message_process]="* Installing Fira Code font family "
-    [arch]="paru -S --needed ttf-nerd-fonts-symbols"
-    [manjaro]="paru -S --needed ttf-nerd-fonts-symbols"
+    [arch]="sudo pacman -S --needed ttf-nerd-fonts-symbols"
+    [manjaro]="sudo pacman -S --needed ttf-nerd-fonts-symbols"
 )
 #|-< Editing >----------------------------------------------------------------|#
 declare -A install_onlyoffice=(
