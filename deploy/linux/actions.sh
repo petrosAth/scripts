@@ -35,7 +35,7 @@ actions_list=(
     "install_ranger"
     "install_bat"
     "install_neofetch"
-    "install_glances"
+    "install_btop"
     "install_electrum"
     "install_etcher"
 #|-< Cosmetics >--------------------------------------------------------------|#
@@ -264,11 +264,11 @@ declare -A install_neofetch=(
     [arch]="sudo pacman -S --needed neofetch"
     [manjaro]="sudo pacman -S --needed neofetch"
 )
-declare -A install_glances=(
+declare -A install_btop=(
     [interface]="gui"
-    [message_process]="* Installing Glances "
-    [arch]="sudo pacman -S --needed glances"
-    [manjaro]="sudo pacman -S --needed glances"
+    [message_process]="* Installing BTOP++, a monitor of resources "
+    [arch]="sudo pacman -S --needed btop"
+    [manjaro]="sudo pacman -S --needed btop"
 )
 declare -A install_electrum=(
     [interface]="gui"
