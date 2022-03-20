@@ -22,10 +22,6 @@ actions_list=(
     "install_unzip"                        # Neovim LSP Installer dependancy
     "install_fd"                           # Neovim plugin telescope dependancy
     "install_ripgrep"                      # Neovim plugin telescope dependancy
-#|-< Remote and Cloud >-------------------------------------------------------|#
-    "install_bitwarden"
-    "install_synergy_git"
-    "install_nextcloud_client"
 #|-< Utilities >--------------------------------------------------------------|#
     "install_trash_cli"
     "install_corectrl"
@@ -38,6 +34,12 @@ actions_list=(
     "install_btop"
     "install_electrum"
     "install_etcher"
+#|-< Remote and Cloud >-------------------------------------------------------|#
+    "install_bitwarden"
+    "install_synergy_git"
+    "install_nextcloud_client"
+    "install_remmina"
+    "install_wakeonlan"                    # Used by remmina to wake remote desktops
 #|-< Cosmetics >--------------------------------------------------------------|#
     "install_oh_my_posh"
     "install_starship"
@@ -192,26 +194,6 @@ declare -A install_ripgrep=(
     [arch]="sudo pacman -S --needed ripgrep"
     [manjaro]="sudo pacman -S --needed ripgrep"
 )
-#|-< Remote and Cloud >-------------------------------------------------------|#
-declare -A install_bitwarden=(
-    [interface]="gui"
-    [message_process]="* Installing Bitwarden, the most trusted open source password manager for business "
-    [arch]="sudo pacman -S --needed bitwarden"
-    [manjaro]="sudo pacman -S --needed bitwarden"
-)
-declare -A install_synergy_git=(
-    [interface]="gui"
-    [message_process]="* Installing Synergy "
-    [pre]="cd ${HOME}/.config/Synergy && git checkout linux"
-    [arch]="paru -S --needed synergy-git"
-    [manjaro]="paru -S --needed synergy-git"
-)
-declare -A install_nextcloud_client=(
-    [interface]="gui"
-    [message_process]="* Installing Nextcloud client "
-    [arch]="sudo pacman -S --needed nextcloud-client"
-    [manjaro]="sudo pacman -S --needed nextcloud-client"
-)
 #|-< Utilities >--------------------------------------------------------------|#
 declare -A install_trash_cli=(
     [interface]="both"
@@ -281,6 +263,38 @@ declare -A install_etcher=(
     [message_process]="* Installing Etcher OS image flasher "
     [arch]="sudo pacman -S --needed etcher"
     [manjaro]="sudo pacman -S --needed etcher"
+)
+#|-< Remote and Cloud >-------------------------------------------------------|#
+declare -A install_bitwarden=(
+    [interface]="gui"
+    [message_process]="* Installing Bitwarden, the most trusted open source password manager for business "
+    [arch]="sudo pacman -S --needed bitwarden"
+    [manjaro]="sudo pacman -S --needed bitwarden"
+)
+declare -A install_synergy_git=(
+    [interface]="gui"
+    [message_process]="* Installing Synergy "
+    [pre]="cd ${HOME}/.config/Synergy && git checkout linux"
+    [arch]="paru -S --needed synergy-git"
+    [manjaro]="paru -S --needed synergy-git"
+)
+declare -A install_nextcloud_client=(
+    [interface]="gui"
+    [message_process]="* Installing Nextcloud client "
+    [arch]="sudo pacman -S --needed nextcloud-client"
+    [manjaro]="sudo pacman -S --needed nextcloud-client"
+)
+declare -A install_remmina=(
+    [interface]="gui"
+    [message_process]="* Installing Remmina the GTK+ Remote Desktop Client "
+    [arch]="sudo pacman -S --needed remmina freerdp"
+    [manjaro]="sudo pacman -S --needed remmina freerdp"
+)
+declare -A install_wakeonlan=(
+    [interface]="gui"
+    [message_process]="* Installing wakeonlan. Utility for waking up computers using UDP Wake-on-Lan packets "
+    [arch]="paru -S wakeonlan"
+    [manjaro]="paru -S wakeonlan"
 )
 #|-< Cosmetics >--------------------------------------------------------------|#
 declare -A install_oh_my_posh=(
