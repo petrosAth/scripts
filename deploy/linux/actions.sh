@@ -25,7 +25,6 @@ actions_list=(
 #|-< Utilities >--------------------------------------------------------------|#
     "install_trash_cli"
     "install_corectrl"
-    "install_sxhkd"
     "install_tmux"
     "install_tdrop"
     "install_ranger"
@@ -206,12 +205,6 @@ declare -A install_corectrl=(
     [message_process]="* Installing CoreCtrl hardware control tool "
     [arch]="paru -S --needed corectrl"
     [manjaro]="paru -S --needed corectrl"
-)
-declare -A install_sxhkd=(
-    [interface]="gui"
-    [message_process]="* Installing simple X hotkey daemon "
-    [arch]="sudo pacman -S --needed sxhkd"
-    [manjaro]="sudo pacman -S sxhkd"
 )
 declare -A install_tmux=(
     [interface]="both"
