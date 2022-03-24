@@ -16,12 +16,12 @@ actions_list=(
     "install_alacritty"
     "install_unityhub_beta"
     "install_filezilla"
-    "install_neovim_git"                   # Neovim
-    "install_python_pynvim"                # Neovim dependancy
-    "install_xclip"                        # Neovim clipboard sync
-    "install_unzip"                        # Neovim LSP Installer dependancy
-    "install_fd"                           # Neovim plugin telescope dependancy
-    "install_ripgrep"                      # Neovim plugin telescope dependancy
+    "install_neovim_git"         # Neovim
+    "install_python_pynvim"      # Neovim dependancy
+    "install_xclip"              # Neovim clipboard sync
+    "install_unzip"              # Neovim LSP Installer dependancy
+    "install_fd"                 # Neovim plugin telescope dependancy
+    "install_ripgrep"            # Neovim plugin telescope dependancy
 #|-< Utilities >--------------------------------------------------------------|#
     "install_trash_cli"
     "install_corectrl"
@@ -38,14 +38,17 @@ actions_list=(
     "install_synergy_git"
     "install_nextcloud_client"
     "install_remmina"
-    "install_wakeonlan"                    # Used by remmina to wake remote desktops
+    "install_wakeonlan"          # Used by remmina to wake remote desktops
 #|-< Cosmetics >--------------------------------------------------------------|#
     "install_oh_my_posh"
     "install_starship"
 #|-< Fonts >------------------------------------------------------------------|#
     "install_inter_font"
     "install_fira_code_font"
-    "install_nerd_fonts_symbols"
+    "install_ttf_hack"
+    "install_ibm_plex"
+    "install_chrome_os_fonts"
+    "install_nerd_fonts_symbols_only"
 #|-< Editing >----------------------------------------------------------------|#
     "install_onlyoffice"
     "install_blender"
@@ -315,11 +318,35 @@ declare -A install_fira_code_font=(
     [arch]="sudo pacman -S --needed ttf-fira-code"
     [manjaro]="sudo pacman -S --needed ttf-fira-code"
 )
-declare -A install_nerd_fonts_symbols=(
+declare -A install_ttf_hack=(
     [interface]="gui"
-    [message_process]="* Installing Fira Code font family "
-    [arch]="sudo pacman -S --needed ttf-nerd-fonts-symbols"
-    [manjaro]="sudo pacman -S --needed ttf-nerd-fonts-symbols"
+    [message_process]="* Installing Hack font family "
+    [arch]="sudo pacman -S --needed ttf-hack"
+    [manjaro]="sudo pacman -S --needed ttf-hack"
+)
+declare -A install_ibm_plex=(
+    [interface]="gui"
+    [message_process]="* Installing IBM Plex font family "
+    [arch]="sudo pacman -S --needed ttf-ibm-plex"
+    [manjaro]="sudo pacman -S --needed ttf-ibm-plex"
+)
+declare -A install_chrome_os_fonts=(
+    [interface]="gui"
+    [message_process]="* Installing Chrome OS core fonts "
+    [arch]="sudo pacman -S --needed ttf-croscore"
+    [manjaro]="sudo pacman -S --needed ttf-croscore"
+)
+declare -A install_nerd_fonts_symbols_only=(
+    [interface]="gui"
+    [message_process]="* Installing Nerd Fonts Symbols Only "
+    [dir]="mkdir -p ${HOME}/.local/share/fonts/ttf"
+    [arch]="2"
+    [arch1]="cd ${HOME}/.local/share/fonts/ttf"
+    [arch2]="curl -fLo 'Symbols-2048-em Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/complete/Symbols-2048-em%20Nerd%20Font%20Complete.ttf"
+    [manjaro]="2"
+    [manjaro1]="cd ${HOME}/.local/share/fonts/ttf"
+    [manjaro2]="curl -fLo 'Symbols-2048-em Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/complete/Symbols-2048-em%20Nerd%20Font%20Complete.ttf"
+    [post]="cd ${HOME}"
 )
 #|-< Editing >----------------------------------------------------------------|#
 declare -A install_onlyoffice=(
