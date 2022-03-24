@@ -2,9 +2,11 @@
 
 #|=< Array of actions to be taken by the auto installation script >===========|#
 actions_list=(
-#|-< Development >------------------------------------------------------------|#
+#|-< Core >-------------------------------------------------------------------|#
     "install_base_devel"
+    "install_reflector"
     "install_paru"
+#|-< Development >------------------------------------------------------------|#
     "install_python_pip"
     "install_jdk_openjdk"
     "install_go"
@@ -13,7 +15,6 @@ actions_list=(
     "install_zsh"
     "install_powershell_bin"
     "install_kitty"
-    "install_alacritty"
     "install_unityhub_beta"
     "install_filezilla"
     "install_neovim_git"         # Neovim
@@ -41,7 +42,6 @@ actions_list=(
     "install_wakeonlan"          # Used by remmina to wake remote desktops
 #|-< Cosmetics >--------------------------------------------------------------|#
     "install_oh_my_posh"
-    "install_starship"
 #|-< Fonts >------------------------------------------------------------------|#
     "install_inter_font"
     "install_fira_code_font"
@@ -66,12 +66,21 @@ actions_list=(
 
 
 #|=< Installation commands >==================================================|#
-#|-< Development >------------------------------------------------------------|#
+#|-< Core >-------------------------------------------------------------------|#
 declare -A install_base_devel=(
     [interface]="both"
-    [message_process]="* Installing Package group base-devel "
+    [message_process]="* Installing base-devel package group "
     [arch]="sudo pacman -S --needed base-devel"
     [manjaro]="sudo pacman -S --needed base-devel"
+)
+declare -A install_reflector=(
+    [interface]="both"
+    [message_process]="* Installing Reflector. A Pacman mirror list manager "
+    [arch]="4"
+    [arch1]="sudo pacman -S --needed reflector"
+    [arch2]="echo '--save /etc/pacman.d/mirrorlist\n--latest 5\n--sort rate' | sudo tee /etc/xdg/reflector/reflector.conf > /dev/null"
+    [arch3]="sudo systemctl enable --now reflector.service"
+    [arch4]="sudo systemctl enable --now reflector.timer"
 )
 declare -A install_paru=(
     [interface]="both"
@@ -89,6 +98,7 @@ declare -A install_paru=(
     [manjaro4]="cd paru && makepkg -si"
     [manjaro5]="cd .. && rm -rf paru"
 )
+#|-< Development >------------------------------------------------------------|#
 declare -A install_python_pip=(
     [interface]="both"
     [message_process]="* Installing Python and pip package manager "
@@ -140,13 +150,6 @@ declare -A install_kitty=(
     [message_process]="* Installing kitty The fast, feature-rich, GPU based terminal emulator "
     [arch]="sudo pacman -S --needed kitty"
     [manjaro]="sudo pacman -S --needed kitty"
-)
-declare -A install_alacritty=(
-    [interface]="gui"
-    [message_process]="* Installing Alacritty, a cross-platform, OpenGL terminal emulator "
-    [pre]="cd ${HOME}/.config/alacritty && git checkout linux"
-    [arch]="sudo pacman -S --needed alacritty"
-    [manjaro]="sudo pacman -S --needed alacritty"
 )
 declare -A install_unityhub_beta=(
     [interface]="gui"
@@ -298,12 +301,6 @@ declare -A install_oh_my_posh=(
     [message_process]="* Installing Oh My Posh "
     [arch]="paru -S --needed oh-my-posh-git"
     [manjaro]="paru -S --needed oh-my-posh-git"
-)
-declare -A install_starship=(
-    [interface]="both"
-    [message_process]="* Installing Starship "
-    [arch]="sudo pacman -S --needed starship"
-    [manjaro]="sudo pacman -S --needed starship"
 )
 #|-< Fonts >------------------------------------------------------------------|#
 declare -A install_inter_font=(
