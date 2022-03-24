@@ -42,6 +42,7 @@ actions_list=(
     "install_wakeonlan"          # Used by remmina to wake remote desktops
 #|-< Cosmetics >--------------------------------------------------------------|#
     "install_oh_my_posh"
+    # "install_conky"
 #|-< Fonts >------------------------------------------------------------------|#
     "install_inter_font"
     "install_fira_code_font"
@@ -298,9 +299,15 @@ declare -A install_wakeonlan=(
 #|-< Cosmetics >--------------------------------------------------------------|#
 declare -A install_oh_my_posh=(
     [interface]="both"
-    [message_process]="* Installing Oh My Posh "
+    [message_process]="* Installing Oh My Posh. A prompt theme engine for any shell "
     [arch]="paru -S --needed oh-my-posh-git"
     [manjaro]="paru -S --needed oh-my-posh-git"
+)
+declare -A install_conky=(
+    [interface]="gui"
+    [message_process]="* Installing Conky. a free, light-weight system monitor "
+    [arch]="paru -S --needed conky-lua-archers-git"
+    [manjaro]="paru -S --needed conky-lua-archers-git"
 )
 #|-< Fonts >------------------------------------------------------------------|#
 declare -A install_inter_font=(
