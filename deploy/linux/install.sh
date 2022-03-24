@@ -131,12 +131,11 @@ clone_dotfiles() {
     cd ${HOME} && git init
     git remote add origin git@github.com:${GITHUB_USER}/${GITHUB_REPO}.git
     git fetch
-    read -p "Name of the branch you want to clone: " branchName
+    read -p "Name the branch you want to clone: " branchName
     git reset --hard origin/${branchName}
     git submodule update --init
     # Checkout all submodules on master branch to get rid of detached head state
     git submodule foreach 'git checkout master'
-    cd ${HOME}/Scripts && git checkout gnome
     [[ $? ]] && _success "Configuration files have been cloned"
 }
 
