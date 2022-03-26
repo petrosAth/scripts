@@ -24,6 +24,7 @@ actions_list=(
     "install_fd"                 # Neovim plugin telescope dependancy
     "install_ripgrep"            # Neovim plugin telescope dependancy
 #|-< Utilities >--------------------------------------------------------------|#
+    "install_timeshift"
     "install_trash_cli"
     "install_corectrl"
     "install_tmux"
@@ -201,9 +202,21 @@ declare -A install_ripgrep=(
     [manjaro]="sudo pacman -S --needed ripgrep"
 )
 #|-< Utilities >--------------------------------------------------------------|#
+declare -A install_timeshift=(
+    [interface]="gui"
+    [message_process]="* Installing Timeshift. A system restore utility for Linux "
+    [arch]="paru -S --needed timeshift timeshift-autosnap"
+    [manjaro]="pacman -S --needed timeshift timeshift-autosnap"
+)
+declare -A install_grub_btrfs=(
+    [interface]="gui"
+    [message_process]="* Installing grub-btrfs. Include btrfs snapshots in GRUB boot options "
+    [arch]="paru -S --needed grub-btrfs"
+    [manjaro]="paru -S --needed grub-btrfs"
+)
 declare -A install_trash_cli=(
     [interface]="both"
-    [message_process]="* Installing trash-cli, command line interface to the freedesktop.org trashcan "
+    [message_process]="* Installing trash-cli. Command line interface to the freedesktop.org trashcan "
     [arch]="sudo pacman -S --needed trash-cli"
     [manjaro]="sudo pacman -S --needed trash-cli"
 )
@@ -293,8 +306,8 @@ declare -A install_remmina=(
 declare -A install_wakeonlan=(
     [interface]="gui"
     [message_process]="* Installing wakeonlan. Utility for waking up computers using UDP Wake-on-Lan packets "
-    [arch]="paru -S wakeonlan"
-    [manjaro]="paru -S wakeonlan"
+    [arch]="paru -S --needed wakeonlan"
+    [manjaro]="paru -S --needed wakeonlan"
 )
 #|-< Cosmetics >--------------------------------------------------------------|#
 declare -A install_oh_my_posh=(
