@@ -43,6 +43,7 @@ actions_list=(
 #|-< Remote and Cloud >-------------------------------------------------------|#
     "install_filezilla"
     "install_bitwarden"
+    "install_kdeconnect"
     "install_synergy_git"
     "install_nextcloud_client"
     "install_remmina"
@@ -66,6 +67,7 @@ actions_list=(
     "install_jdownloader2"
 #|-< Multimedia >-------------------------------------------------------------|#
     "install_vlc"
+    "install_gwenview"
 )
 #|============================================================================|#
 
@@ -307,6 +309,12 @@ declare -A install_bitwarden=(
     [message_process]="* Installing Bitwarden, the most trusted open source password manager for business "
     [arch]="sudo pacman -S --needed bitwarden"
 )
+declare -A install_kdeconnect=(
+    [interface]="gui"
+    [message_process]="* Installing KDE Connect. Adds communication between KDE and your smartphone "
+    [arch]="sudo pacman -S --needed kdeconnect"
+    [manjaro]="sudo pacman -S --needed kdeconnect"
+)
 declare -A install_synergy_git=(
     [interface]="gui"
     [message_process]="* Installing Synergy "
@@ -425,5 +433,11 @@ declare -A install_vlc=(
     [interface]="gui"
     [message_process]="* Installing VLC "
     [arch]="sudo pacman -S --needed vlc"
+)
+declare -A install_gwenview=(
+    [interface]="gui"
+    [message_process]="* Installing Gwenview. A fast and easy to use image viewer "
+    [arch]="sudo pacman -S --needed gwenview"
+    [manjaro]="sudo pacman -S --needed gwenview"
 )
 #|============================================================================|#
