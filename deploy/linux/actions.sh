@@ -223,8 +223,8 @@ declare -A install_timeshift=(
 declare -A install_grub_btrfs=(
     [interface]="gui"
     [message_process]="* Installing grub-btrfs. Include btrfs snapshots in GRUB boot options "
-    [arch]="paru -S --needed grub-btrfs"
-    [manjaro]="paru -S --needed grub-btrfs"
+    [arch]="sudo pacman -S --needed grub-btrfs"
+    [manjaro]="sudo pacman -S --needed grub-btrfs"
 )
 declare -A install_trash_cli=(
     [interface]="both"
