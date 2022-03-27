@@ -6,6 +6,9 @@ actions_list=(
     "install_base_devel"
     "install_reflector"
     "install_paru"
+#|-< Cosmetics >--------------------------------------------------------------|#
+    "install_oh_my_posh"
+    # "install_conky"
 #|-< Development >------------------------------------------------------------|#
     "install_python_pip"
     "install_jdk_openjdk"
@@ -17,7 +20,7 @@ actions_list=(
     "install_kitty"
     "install_unityhub_beta"
     "install_filezilla"
-    "install_neovim_git"         # Neovim
+    "install_neovim"             # Neovim
     "install_python_pynvim"      # Neovim dependancy
     "install_xclip"              # Neovim clipboard sync
     "install_unzip"              # Neovim LSP Installer dependancy
@@ -28,7 +31,6 @@ actions_list=(
     "install_trash_cli"
     "install_corectrl"
     "install_tmux"
-    "install_tdrop"
     "install_ranger"
     "install_bat"
     "install_neofetch"
@@ -41,9 +43,6 @@ actions_list=(
     "install_nextcloud_client"
     "install_remmina"
     "install_wakeonlan"          # Used by remmina to wake remote desktops
-#|-< Cosmetics >--------------------------------------------------------------|#
-    "install_oh_my_posh"
-    # "install_conky"
 #|-< Fonts >------------------------------------------------------------------|#
     "install_inter_font"
     "install_fira_code_font"
@@ -80,7 +79,7 @@ declare -A install_reflector=(
     [message_process]="* Installing Reflector. A Pacman mirror list manager "
     [arch]="4"
     [arch1]="sudo pacman -S --needed reflector"
-    [arch2]="echo '--save /etc/pacman.d/mirrorlist\n--latest 5\n--sort rate' | sudo tee /etc/xdg/reflector/reflector.conf > /dev/null"
+    [arch2]="echo -e '--save /etc/pacman.d/mirrorlist\n--latest 5\n--sort rate' | sudo tee /etc/xdg/reflector/reflector.conf > /dev/null"
     [arch3]="sudo systemctl enable --now reflector.service"
     [arch4]="sudo systemctl enable --now reflector.timer"
 )
@@ -99,6 +98,19 @@ declare -A install_paru=(
     [manjaro3]="git clone https://aur.archlinux.org/paru.git"
     [manjaro4]="cd paru && makepkg -si"
     [manjaro5]="cd .. && rm -rf paru"
+)
+#|-< Cosmetics >--------------------------------------------------------------|#
+declare -A install_oh_my_posh=(
+    [interface]="both"
+    [message_process]="* Installing Oh My Posh. A prompt theme engine for any shell "
+    [arch]="paru -S --needed oh-my-posh-git"
+    [manjaro]="paru -S --needed oh-my-posh-git"
+)
+declare -A install_conky=(
+    [interface]="gui"
+    [message_process]="* Installing Conky. a free, light-weight system monitor "
+    [arch]="paru -S --needed conky-lua-archers-git"
+    [manjaro]="paru -S --needed conky-lua-archers-git"
 )
 #|-< Development >------------------------------------------------------------|#
 declare -A install_python_pip=(
@@ -165,11 +177,11 @@ declare -A install_filezilla=(
     [arch]="sudo pacman -S --needed filezilla"
     [manjaro]="sudo pacman -S --needed filezilla"
 )
-declare -A install_neovim_git=(
+declare -A install_neovim=(
     [interface]="both"
-    [message_process]="* Installing Neovim (pulling from git) "
-    [arch]="paru -S --needed neovim-git"
-    [manjaro]="paru -S --needed neovim-git"
+    [message_process]="* Installing Neovim. Fork of Vim aiming to improve user experience, plugins, and GUIs "
+    [arch]="sudo pacman -S --needed neovim"
+    [manjaro]="sudo pacman -S --needed neovim"
 )
 declare -A install_python_pynvim=(
     [interface]="both"
@@ -232,12 +244,6 @@ declare -A install_tmux=(
     [arch]="sudo pacman -S --needed tmux"
     [manjaro]="sudo pacman -S --needed tmux"
 )
-declare -A install_tdrop=(
-    [interface]="both"
-    [message_process]="* Installing dropdown terminal wrapper tdrop "
-    [arch]="sudo pacman -S --needed tdrop"
-    [manjaro]="sudo pacman -S --needed tdrop"
-)
 declare -A install_ranger=(
     [interface]="both"
     [message_process]="* Installing Ranger A VIM-inspired filemanager for the console"
@@ -274,7 +280,7 @@ declare -A install_electrum=(
 declare -A install_etcher=(
     [interface]="gui"
     [message_process]="* Installing Etcher OS image flasher "
-    [arch]="sudo pacman -S --needed etcher"
+    [arch]="paru -S --needed balena-etcher"
     [manjaro]="sudo pacman -S --needed etcher"
 )
 #|-< Remote and Cloud >-------------------------------------------------------|#
@@ -308,19 +314,6 @@ declare -A install_wakeonlan=(
     [message_process]="* Installing wakeonlan. Utility for waking up computers using UDP Wake-on-Lan packets "
     [arch]="paru -S --needed wakeonlan"
     [manjaro]="paru -S --needed wakeonlan"
-)
-#|-< Cosmetics >--------------------------------------------------------------|#
-declare -A install_oh_my_posh=(
-    [interface]="both"
-    [message_process]="* Installing Oh My Posh. A prompt theme engine for any shell "
-    [arch]="paru -S --needed oh-my-posh-git"
-    [manjaro]="paru -S --needed oh-my-posh-git"
-)
-declare -A install_conky=(
-    [interface]="gui"
-    [message_process]="* Installing Conky. a free, light-weight system monitor "
-    [arch]="paru -S --needed conky-lua-archers-git"
-    [manjaro]="paru -S --needed conky-lua-archers-git"
 )
 #|-< Fonts >------------------------------------------------------------------|#
 declare -A install_inter_font=(
