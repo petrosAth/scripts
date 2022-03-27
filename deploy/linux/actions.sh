@@ -134,8 +134,8 @@ declare -A install_go=(
 declare -A install_nodejs_npm=(
     [interface]="both"
     [message_process]="* Installing Node.js and npm package manager "
-    [arch]="sudo pacman -S --needed nodejs npm"
-    [manjaro]="sudo pacman -S --needed nodejs npm"
+    [arch]="sudo pacman -S --needed nodejs-lts-gallium npm"
+    [manjaro]="sudo pacman -S --needed nodejs-lts-gallium npm"
 )
 declare -A install_stylua_git=(
     [interface]="both"
