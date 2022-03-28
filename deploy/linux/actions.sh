@@ -34,6 +34,7 @@ actions_list=(
     "install_trash_cli"
     "install_tmux"
     "install_xplr"
+    "install_ark"
     "install_bat"
     "install_neofetch"
     "install_btop"
@@ -264,6 +265,12 @@ declare -A install_xplr=(
     [message_process]="* Installing xplr, a hackable, minimal, fast TUI file explorer "
     [arch]="sudo pacman -S --needed xplr"
     [archWSL]="sudo pacman -S --needed xplr"
+)
+declare -A install_ark=(
+    [interface]="gui"
+    [message_process]="* Installing Ark archiving tool "
+    [arch]="sudo pacman -S --needed ark"
+    [manjaro]="sudo pacman -S --needed ark"
 )
 declare -A install_bat=(
     [interface]="both"
