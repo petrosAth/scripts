@@ -35,6 +35,7 @@ actions_list=(
     "install_tmux"
     "install_xplr"
     "install_ark"
+    "install_qalculate_qt"
     "install_bat"
     "install_neofetch"
     "install_btop"
@@ -271,6 +272,12 @@ declare -A install_ark=(
     [message_process]="* Installing Ark archiving tool "
     [arch]="sudo pacman -S --needed ark"
     [manjaro]="sudo pacman -S --needed ark"
+)
+declare -A install_qalculate_qt=(
+    [interface]="gui"
+    [message_process]="* Installing qalculate-qt. Qt frontend for libqalculate "
+    [arch]="sudo pacman -S --needed qalculate-qt"
+    [manjaro]="sudo pacman -S --needed qalculate-qt"
 )
 declare -A install_bat=(
     [interface]="both"
