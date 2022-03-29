@@ -32,6 +32,7 @@ actions_list=(
     "install_corectrl"
     "install_tmux"
     "install_ranger"
+    "install_ueberzug"           # Ranger dependancy for image viewing
     "install_bat"
     "install_neofetch"
     "install_btop"
@@ -79,7 +80,7 @@ declare -A install_reflector=(
     [message_process]="* Installing Reflector. A Pacman mirror list manager "
     [arch]="4"
     [arch1]="sudo pacman -S --needed reflector"
-    [arch2]="echo -e '--save /etc/pacman.d/mirrorlist\n--latest 5\n--sort rate' | sudo tee /etc/xdg/reflector/reflector.conf > /dev/null"
+    [arch2]="echo -e '--save /etc/pacman.d/mirrorlist\n--latest 10\n--sort rate' | sudo tee /etc/xdg/reflector/reflector.conf > /dev/null"
     [arch3]="sudo systemctl enable --now reflector.service"
     [arch4]="sudo systemctl enable --now reflector.timer"
 )
@@ -246,12 +247,18 @@ declare -A install_tmux=(
 )
 declare -A install_ranger=(
     [interface]="both"
-    [message_process]="* Installing Ranger A VIM-inspired filemanager for the console"
+    [message_process]="* Installing Ranger A VIM-inspired filemanager for the console "
     [arch]="sudo pacman -S --needed ranger"
     [manjaro]="sudo pacman -S --needed ranger"
     [post]="2"
     [post1]="ranger --copy-config=scope"
     [post2]="git clone https://github.com/alexanderjeurissen/ranger_devicons ${HOME}/.config/ranger/plugins/ranger_devicons"
+)
+declare -A install_ueberzug=(
+    [interface]="both"
+    [message_process]="* Installing Überzug. Command line util which allows to display images in combination with X11 "
+    [arch]="sudo pacman -S --needed ueberzug"
+    [manjaro]="sudo pacman -S --needed ueberzug"
 )
 declare -A install_bat=(
     [interface]="both"
