@@ -70,6 +70,7 @@ actions_list=(
 #|-< Multimedia >-------------------------------------------------------------|#
     "install_vlc"
     "install_gwenview"
+    "install_thumbnails"
 )
 #|============================================================================|#
 
@@ -453,5 +454,11 @@ declare -A install_gwenview=(
     [message_process]="* Installing Gwenview. A fast and easy to use image viewer "
     [arch]="sudo pacman -S --needed gwenview"
     [manjaro]="sudo pacman -S --needed gwenview"
+)
+declare -A install_thumbnails=(
+    [interface]="gui"
+    [message_process]="* Installing ffmpegthumbs and kdegraphics-thumbnailers for enabling thumbnails for video, blend, Raw, PostScript, PDF, DVI and Mobipocket files "
+    [arch]="sudo pacman -S --needed ffmpegthumbs kdegraphics-thumbnailers"
+    [manjaro]="sudo pacman -S --needed ffmpegthumbs kdegraphics-thumbnailers"
 )
 #|============================================================================|#
