@@ -61,7 +61,7 @@ actions_list=(
     "install_firefox"
     "install_thunderbird"
     "install_jdownloader2"
-#|-< Entertainment >----------------------------------------------------------|#
+#|-< Multimedia >-------------------------------------------------------------|#
     "install_vlc"
 )
 #|============================================================================|#
@@ -220,13 +220,14 @@ declare -A install_timeshift=(
     [message_process]="* Installing Timeshift. A system restore utility for Linux "
     [arch]="paru -S --needed timeshift timeshift-autosnap"
     [manjaro]="pacman -S --needed timeshift timeshift-autosnap"
-    [post]="sudo systemctl enable --now cronie.service"
+    [post]="sudo systemctl enable cronie.service"
 )
 declare -A install_grub_btrfs=(
     [interface]="gui"
     [message_process]="* Installing grub-btrfs. Include btrfs snapshots in GRUB boot options "
     [arch]="sudo pacman -S --needed grub-btrfs"
     [manjaro]="sudo pacman -S --needed grub-btrfs"
+    [post]="sudo systemctl enable grub-btrfs.path"
 )
 declare -A install_trash_cli=(
     [interface]="both"
@@ -416,7 +417,7 @@ declare -A install_jdownloader2=(
     [arch]="paru -S --needed jdownloader2"
     [manjaro]="paru -S --needed jdownloader2"
 )
-#|-< Entertainment >----------------------------------------------------------|#
+#|-< Multimedia >-------------------------------------------------------------|#
 declare -A install_vlc=(
     [interface]="gui"
     [message_process]="* Installing VLC "
