@@ -54,6 +54,7 @@ actions_list=(
 #|-< Editing >----------------------------------------------------------------|#
     "install_onlyoffice"
     "install_blender"
+    "install_inkscape"
     "install_handbrake"
     "install_avidemux_qt"
     "install_audacity"
@@ -377,9 +378,15 @@ declare -A install_onlyoffice=(
 )
 declare -A install_blender=(
     [interface]="gui"
-    [message_process]="* Installing Blender "
+    [message_process]="* Installing Blender. A fully integrated 3D graphics creation suite "
     [arch]="sudo pacman -S --needed blender"
     [manjaro]="sudo pacman -S --needed blender"
+)
+declare -A install_inkscape=(
+    [interface]="gui"
+    [message_process]="* Installing Inkscape. Professional vector graphics editor "
+    [arch]="sudo pacman -S --needed inkscape"
+    [manjaro]="sudo pacman -S --needed inkscape"
 )
 declare -A install_handbrake=(
     [interface]="gui"
