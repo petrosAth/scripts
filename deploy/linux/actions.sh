@@ -220,6 +220,7 @@ declare -A install_timeshift=(
     [message_process]="* Installing Timeshift. A system restore utility for Linux "
     [arch]="paru -S --needed timeshift timeshift-autosnap"
     [manjaro]="pacman -S --needed timeshift timeshift-autosnap"
+    [post]="sudo systemctl enable --now cronie.service"
 )
 declare -A install_grub_btrfs=(
     [interface]="gui"
