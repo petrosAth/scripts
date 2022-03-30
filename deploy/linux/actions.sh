@@ -227,6 +227,7 @@ declare -A install_grub_btrfs=(
     [message_process]="* Installing grub-btrfs. Include btrfs snapshots in GRUB boot options "
     [arch]="sudo pacman -S --needed grub-btrfs"
     [manjaro]="sudo pacman -S --needed grub-btrfs"
+    [post]="sudo sed -i 's/#GRUB_BTRFS_TITLE_FORMAT=("date" "snapshot" "type" "description")/GRUB_BTRFS_TITLE_FORMAT=("date" "type" "description")/' /etc/default/grub-btrfs/config" # Add color to pacman output
     [post]="sudo systemctl enable grub-btrfs.path"
 )
 declare -A install_trash_cli=(
