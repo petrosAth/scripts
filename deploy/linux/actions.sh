@@ -7,6 +7,7 @@ actions_list=(
     "install_reflector"
     "install_paru"
 #|-< Cosmetics >--------------------------------------------------------------|#
+    "install_papirus_icon_theme"
     "install_oh_my_posh"
     # "install_conky"
 #|-< Development >------------------------------------------------------------|#
@@ -102,6 +103,12 @@ declare -A install_paru=(
     [manjaro5]="cd .. && rm -rf paru"
 )
 #|-< Cosmetics >--------------------------------------------------------------|#
+declare -A install_papirus_icon_theme=(
+    [interface]="gui"
+    [message_process]="* Installing Papirus icon theme for Linux "
+    [arch]="sudo pacman -S --needed papirus-icon-theme"
+    [manjaro]="sudo pacman -S --needed papirus-icon-theme"
+)
 declare -A install_oh_my_posh=(
     [interface]="both"
     [message_process]="* Installing Oh My Posh. A prompt theme engine for any shell "
