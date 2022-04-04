@@ -15,6 +15,7 @@ actions_list=(
     "install_jdk_openjdk"
     "install_go"
     "install_nodejs_npm"
+    "install_dotnet"
     "install_stylua_git"
     "install_zsh"
     "install_powershell_bin"
@@ -145,6 +146,12 @@ declare -A install_nodejs_npm=(
     [message_process]="* Installing Node.js and npm package manager "
     [arch]="sudo pacman -S --needed nodejs-lts-gallium npm"
     [manjaro]="sudo pacman -S --needed nodejs-lts-gallium npm"
+)
+declare -A install_dotnet=(
+    [interface]="both"
+    [message_process]="* Installing the .NET Core runtime and SDK "
+    [arch]="sudo pacman -S --needed dotnet-runtime dotnet-sdk"
+    [manjaro]="sudo pacman -S --needed dotnet-runtime dotnet-sdk"
 )
 declare -A install_stylua_git=(
     [interface]="both"
