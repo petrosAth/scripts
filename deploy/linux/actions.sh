@@ -31,7 +31,7 @@ actions_list=(
 #|-< Utilities >--------------------------------------------------------------|#
     "install_timeshift"
     "install_trash_cli"
-    "install_corectrl"
+    # "install_corectrl"
     "install_tmux"
     "install_ranger"
     "install_ueberzug"           # Ranger dependancy for image viewing
@@ -107,8 +107,14 @@ declare -A install_paru=(
 declare -A install_papirus_icon_theme=(
     [interface]="gui"
     [message_process]="* Installing Papirus icon theme for Linux "
-    [arch]="sudo pacman -S --needed papirus-icon-theme"
-    [manjaro]="sudo pacman -S --needed papirus-icon-theme"
+    [arch]="3"
+    [arch1]="sudo pacman -S --needed papirus-icon-theme"
+    [arch2]="wget -qO- https://git.io/papirus-folders-install | sh"
+    [arch3]="papirus-folders -C nordic --theme Papirus-Dark"
+    [manjaro]="3"
+    [manjaro1]="sudo pacman -S --needed papirus-icon-theme"
+    [manjaro2]="wget -qO- https://git.io/papirus-folders-install | sh"
+    [manjaro3]="papirus-folders -C nordic --theme Papirus-Dark"
 )
 declare -A install_oh_my_posh=(
     [interface]="both"
