@@ -31,7 +31,6 @@ actions_list=(
 #|-< Utilities >--------------------------------------------------------------|#
     "install_timeshift"
     "install_trash_cli"
-    # "install_corectrl"
     "install_tmux"
     "install_ranger"
     "install_ueberzug"           # Ranger dependancy for image viewing
@@ -256,12 +255,6 @@ declare -A install_trash_cli=(
     [message_process]="* Installing trash-cli. Command line interface to the freedesktop.org trashcan "
     [arch]="sudo pacman -S --needed trash-cli"
     [manjaro]="sudo pacman -S --needed trash-cli"
-)
-declare -A install_corectrl=(
-    [interface]="gui"
-    [message_process]="* Installing CoreCtrl hardware control tool "
-    [arch]="paru -S --needed corectrl"
-    [manjaro]="paru -S --needed corectrl"
 )
 declare -A install_tmux=(
     [interface]="both"
