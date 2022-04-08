@@ -16,19 +16,19 @@ actions_list=(
     "install_go"
     "install_nodejs_npm"
     "install_dotnet"
-    "install_stylua_git"
-    "install_zsh"
     "install_powershell_bin"
-    "install_kitty"
+    "install_stylua_git"
     "install_unityhub_beta"
-    "install_filezilla"
     "install_neovim"             # Neovim
+#|-< Utilities >--------------------------------------------------------------|#
     "install_python_pynvim"      # Neovim dependancy
     "install_xclip"              # Neovim clipboard sync
     "install_unzip"              # Neovim LSP Installer dependancy
     "install_fd"                 # Neovim plugin telescope dependancy
     "install_ripgrep"            # Neovim plugin telescope dependancy
-#|-< Utilities >--------------------------------------------------------------|#
+    "install_zsh"
+    "install_exa"
+    "install_kitty"
     "install_timeshift"
     "install_trash_cli"
     "install_tmux"
@@ -40,6 +40,7 @@ actions_list=(
     "install_electrum"
     "install_etcher"
 #|-< Remote and Cloud >-------------------------------------------------------|#
+    "install_filezilla"
     "install_bitwarden"
     "install_synergy_git"
     "install_nextcloud_client"
@@ -158,19 +159,6 @@ declare -A install_dotnet=(
     [arch]="sudo pacman -S --needed dotnet-runtime dotnet-sdk"
     [manjaro]="sudo pacman -S --needed dotnet-runtime dotnet-sdk"
 )
-declare -A install_stylua_git=(
-    [interface]="both"
-    [message_process]="* Installing StyLua, an opinionated Lua code formatter "
-    [arch]="paru -S --needed stylua-git"
-    [manjaro]="paru -S --needed stylua-git"
-)
-declare -A install_zsh=(
-    [interface]="both"
-    [message_process]="* Installing Z shell (zsh) and plugins "
-    [arch]="sudo pacman -S --needed zsh zsh-syntax-highlighting zsh-completions zsh-autosuggestions zsh-history-substring-search"
-    [manjaro]="sudo pacman -S --needed zsh zsh-syntax-highlighting zsh-completions zsh-autosuggestions zsh-history-substring-search"
-    [post]="chsh -s /bin/zsh" # Change default shell to zsh
-)
 declare -A install_powershell_bin=(
     [interface]="both"
     [message_process]="* Installing PowerShell "
@@ -180,11 +168,11 @@ declare -A install_powershell_bin=(
     [post1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
     [post2]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
 )
-declare -A install_kitty=(
-    [interface]="gui"
-    [message_process]="* Installing kitty The fast, feature-rich, GPU based terminal emulator "
-    [arch]="sudo pacman -S --needed kitty"
-    [manjaro]="sudo pacman -S --needed kitty"
+declare -A install_stylua_git=(
+    [interface]="both"
+    [message_process]="* Installing StyLua, an opinionated Lua code formatter "
+    [arch]="paru -S --needed stylua-git"
+    [manjaro]="paru -S --needed stylua-git"
 )
 declare -A install_unityhub_beta=(
     [interface]="gui"
@@ -192,18 +180,13 @@ declare -A install_unityhub_beta=(
     [arch]="paru -S --needed unityhub-beta"
     [manjaro]="paru -S --needed unityhub-beta"
 )
-declare -A install_filezilla=(
-    [interface]="gui"
-    [message_process]="* Installing FileZilla "
-    [arch]="sudo pacman -S --needed filezilla"
-    [manjaro]="sudo pacman -S --needed filezilla"
-)
 declare -A install_neovim=(
     [interface]="both"
     [message_process]="* Installing Neovim. Fork of Vim aiming to improve user experience, plugins, and GUIs "
     [arch]="sudo pacman -S --needed neovim"
     [manjaro]="sudo pacman -S --needed neovim"
 )
+#|-< Utilities >--------------------------------------------------------------|#
 declare -A install_python_pynvim=(
     [interface]="both"
     [message_process]="* Installing Pynvim "
@@ -234,7 +217,25 @@ declare -A install_ripgrep=(
     [arch]="sudo pacman -S --needed ripgrep"
     [manjaro]="sudo pacman -S --needed ripgrep"
 )
-#|-< Utilities >--------------------------------------------------------------|#
+declare -A install_zsh=(
+    [interface]="both"
+    [message_process]="* Installing Z shell (zsh) and plugins "
+    [arch]="sudo pacman -S --needed zsh zsh-syntax-highlighting zsh-completions zsh-autosuggestions zsh-history-substring-search"
+    [manjaro]="sudo pacman -S --needed zsh zsh-syntax-highlighting zsh-completions zsh-autosuggestions zsh-history-substring-search"
+    [post]="chsh -s /bin/zsh" # Change default shell to zsh
+)
+declare -A install_exa=(
+    [interface]="both"
+    [message_process]="* Installing exa, a modern replacement for 'ls' "
+    [arch]="sudo pacman -S --needed exa"
+    [manjaro]="sudo pacman -S --needed exa"
+)
+declare -A install_kitty=(
+    [interface]="gui"
+    [message_process]="* Installing kitty The fast, feature-rich, GPU based terminal emulator "
+    [arch]="sudo pacman -S --needed kitty"
+    [manjaro]="sudo pacman -S --needed kitty"
+)
 declare -A install_timeshift=(
     [interface]="gui"
     [message_process]="* Installing Timeshift. A system restore utility for Linux "
@@ -308,6 +309,12 @@ declare -A install_etcher=(
     [manjaro]="sudo pacman -S --needed etcher"
 )
 #|-< Remote and Cloud >-------------------------------------------------------|#
+declare -A install_filezilla=(
+    [interface]="gui"
+    [message_process]="* Installing FileZilla "
+    [arch]="sudo pacman -S --needed filezilla"
+    [manjaro]="sudo pacman -S --needed filezilla"
+)
 declare -A install_bitwarden=(
     [interface]="gui"
     [message_process]="* Installing Bitwarden, the most trusted open source password manager for business "
