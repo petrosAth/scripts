@@ -39,6 +39,7 @@ actions_list=(
     "install_btop"
     "install_electrum"
     "install_etcher"
+    "install_virt_manager"
 #|-< Remote and Cloud >-------------------------------------------------------|#
     "install_filezilla"
     "install_bitwarden"
@@ -307,6 +308,13 @@ declare -A install_etcher=(
     [message_process]="* Installing Etcher OS image flasher "
     [arch]="paru -S --needed balena-etcher"
     [manjaro]="sudo pacman -S --needed etcher"
+)
+declare -A install_virt_manager=(
+    [interface]="gui"
+    [message_process]="* Installing Virtual Machine Manager "
+    [arch]="sudo pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat dmidecode"
+    [manjaro]="sudo pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat dmidecode"
+    [post]="sudo systemctl enable --now libvirtd"
 )
 #|-< Remote and Cloud >-------------------------------------------------------|#
 declare -A install_filezilla=(
