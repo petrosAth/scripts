@@ -26,6 +26,8 @@ actions_list=(
     "install_unzip"              # Neovim LSP Installer dependancy
     "install_fd"                 # Neovim plugin telescope dependancy
     "install_ripgrep"            # Neovim plugin telescope dependancy
+    "install_fzf"
+    "install_tree"
     "install_zsh"
     "install_exa"
     "install_kitty"
@@ -208,15 +210,27 @@ declare -A install_unzip=(
 )
 declare -A install_fd=(
     [interface]="both"
-    [message_process]="* Installing fd "
+    [message_process]="* Installing fd, a simple, fast and user-friendly alternative to 'find' "
     [arch]="sudo pacman -S --needed fd"
     [manjaro]="sudo pacman -S --needed fd"
 )
 declare -A install_ripgrep=(
     [interface]="both"
-    [message_process]="* Installing ripGREP "
+    [message_process]="* Installing ripGREP, a search tool that combines the usability of 'ag' with the raw speed of 'grep' "
     [arch]="sudo pacman -S --needed ripgrep"
     [manjaro]="sudo pacman -S --needed ripgrep"
+)
+declare -A install_fzf=(
+    [interface]="both"
+    [message_process]="* Installing fzf, a command-line fuzzy finder "
+    [arch]="sudo pacman -S --needed fzf"
+    [manjaro]="sudo pacman -S --needed fzf"
+)
+declare -A install_tree=(
+    [interface]="both"
+    [message_process]="* Installing Tree, a directory listing program displaying a depth indented list of files "
+    [arch]="sudo pacman -S --needed tree"
+    [manjaro]="sudo pacman -S --needed tree"
 )
 declare -A install_zsh=(
     [interface]="both"
