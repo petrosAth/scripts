@@ -18,7 +18,7 @@ actions_list=(
     "install_dotnet"
     "install_powershell_bin"
     "install_stylua_git"
-    "install_unityhub_beta"
+    "install_unityhub"
     "install_neovim"             # Neovim
 #|-< Utilities >--------------------------------------------------------------|#
     "install_python_pynvim"      # Neovim dependancy
@@ -177,11 +177,11 @@ declare -A install_stylua_git=(
     [arch]="paru -S --needed stylua-git"
     [manjaro]="paru -S --needed stylua-git"
 )
-declare -A install_unityhub_beta=(
+declare -A install_unityhub=(
     [interface]="gui"
-    [message_process]="* Installing Unity Hub beta "
-    [arch]="paru -S --needed unityhub-beta"
-    [manjaro]="paru -S --needed unityhub-beta"
+    [message_process]="* Installing Unity Hub, a standalone application that streamlines the way you find, download, and manage your Unity Projects and installations. "
+    [arch]="paru -S --needed unityhub"
+    [manjaro]="paru -S --needed unityhub"
 )
 declare -A install_neovim=(
     [interface]="both"
