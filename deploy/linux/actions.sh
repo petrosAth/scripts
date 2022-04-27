@@ -15,6 +15,7 @@ actions_list=(
     "install_jdk_openjdk"
     "install_go"
     "install_nodejs_npm"
+    "install_mono"
     "install_dotnet"
     "install_powershell_bin"
     "install_stylua_git"
@@ -155,6 +156,12 @@ declare -A install_nodejs_npm=(
     [message_process]="* Installing Node.js and npm package manager "
     [arch]="sudo pacman -S --needed nodejs-lts-gallium npm"
     [manjaro]="sudo pacman -S --needed nodejs-lts-gallium npm"
+)
+declare -A install_mono=(
+    [interface]="both"
+    [message_process]="* Installing mono. Free implementation of the .NET platform including runtime and compiler "
+    [arch]="sudo pacman -S --needed mono mono-msbuild mono-msbuild-sdkresolver"
+    [manjaro]="sudo pacman -S --needed mono mono-msbuild mono-msbuild-sdkresolver"
 )
 declare -A install_dotnet=(
     [interface]="both"
