@@ -58,6 +58,7 @@ actions_list=(
     "install_fira_code_font"
 #|-< Editing >----------------------------------------------------------------|#
     "install_onlyoffice"
+    "install_okular"
     "install_blender"
     "install_inkscape"
     "install_handbrake"
@@ -383,6 +384,12 @@ declare -A install_onlyoffice=(
     [interface]="gui"
     [message_process]="* Installing OnlyOffice. Open-source office suite that combines text, spreadsheet and presentation editors "
     [arch]="paru -S --needed onlyoffice-bin"
+)
+declare -A install_okular=(
+    [interface]="gui"
+    [message_process]="* Installing Okular document viewer "
+    [arch]="sudo pacman -S --needed okular"
+    [manjaro]="sudo pacman -S --needed okular"
 )
 declare -A install_blender=(
     [interface]="gui"
