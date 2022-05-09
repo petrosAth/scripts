@@ -320,7 +320,7 @@ declare -A install_etcher=(
 declare -A install_virt_manager=(
     [interface]="gui"
     [message_process]="* Installing Virtual Machine Manager "
-    [arch]="sudo pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat dmidecode edk2-ovmf"
+    [arch]="sudo pacman -S qemu-desktop virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat dmidecode edk2-ovmf"
     [post]="sudo systemctl enable --now libvirtd"
 )
 #|-< Remote and Cloud >-------------------------------------------------------|#
