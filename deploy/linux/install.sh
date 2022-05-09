@@ -25,7 +25,7 @@ DIR="${HOME}"
 SCRIPT_DIR="${DIR}/Scripts/deploy/linux"
 
 VALID_INTERFACE=("CLI" "GUI" "both")
-VALID_DISTRO=("Arch" "Manjaro")
+VALID_DISTRO=("Arch" "ArchWSL")
 
 INTERFACE=""
 DISTRO=""
@@ -87,7 +87,7 @@ update_system() {
             sudo pacman -Syu
             sudo sed -i 's/#Color/Color/' /etc/pacman.conf # Add color to pacman output
             ;;
-        manjaro)
+        archWSL)
             sudo pacman -Syu
             sudo sed -i 's/#Color/Color/' /etc/pacman.conf # Add color to pacman output
             ;;
@@ -106,7 +106,7 @@ install_git_github_cli() {
             _process "* Installing OpenSSH "
             sudo pacman -S --needed openssh
             ;;
-        manjaro)
+        archWSL)
             sudo pacman -S --needed git
             sudo pacman -S --needed github-cli
             ;;
