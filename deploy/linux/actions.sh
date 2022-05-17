@@ -56,6 +56,7 @@ actions_list=(
     "install_ttf_hack"
     "install_ibm_plex"
     "install_chrome_os_fonts"
+    "install_twitter_emoji_font"
     "install_nerd_fonts_symbols_only"
 #|-< Editing >----------------------------------------------------------------|#
     "install_onlyoffice"
@@ -380,6 +381,11 @@ declare -A install_chrome_os_fonts=(
     [interface]="gui"
     [message_process]="* Installing Chrome OS core fonts "
     [arch]="sudo pacman -S --needed ttf-croscore"
+)
+declare -A install_twitter_emoji_font=(
+    [interface]="gui"
+    [message_process]="* Installing Twitter Emoji font "
+    [arch]="paru -S --needed ttf-twemoji"
 )
 declare -A install_nerd_fonts_symbols_only=(
     [interface]="gui"
