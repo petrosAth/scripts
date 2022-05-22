@@ -273,13 +273,11 @@ declare -A install_ark=(
     [interface]="gui"
     [message_process]="* Installing Ark archiving tool "
     [arch]="sudo pacman -S --needed ark"
-    [manjaro]="sudo pacman -S --needed ark"
 )
 declare -A install_qalculate_qt=(
     [interface]="gui"
     [message_process]="* Installing qalculate-qt. Qt frontend for libqalculate "
     [arch]="sudo pacman -S --needed qalculate-qt"
-    [manjaro]="sudo pacman -S --needed qalculate-qt"
 )
 declare -A install_bat=(
     [interface]="both"
@@ -328,8 +326,7 @@ declare -A install_bitwarden=(
 declare -A install_kdeconnect=(
     [interface]="gui"
     [message_process]="* Installing KDE Connect. Adds communication between KDE and your smartphone "
-    [arch]="sudo pacman -S --needed kdeconnect"
-    [manjaro]="sudo pacman -S --needed kdeconnect"
+    [arch]="sudo pacman -S --needed sshfs kdeconnect"
 )
 declare -A install_synergy_git=(
     [interface]="gui"
@@ -407,7 +404,6 @@ declare -A install_okular=(
     [interface]="gui"
     [message_process]="* Installing Okular document viewer "
     [arch]="sudo pacman -S --needed okular"
-    [manjaro]="sudo pacman -S --needed okular"
 )
 declare -A install_blender=(
     [interface]="gui"
@@ -460,12 +456,10 @@ declare -A install_gwenview=(
     [interface]="gui"
     [message_process]="* Installing Gwenview. A fast and easy to use image viewer "
     [arch]="sudo pacman -S --needed gwenview"
-    [manjaro]="sudo pacman -S --needed gwenview"
 )
 declare -A install_thumbnails=(
     [interface]="gui"
     [message_process]="* Installing ffmpegthumbs and kdegraphics-thumbnailers for enabling thumbnails for video, blend, Raw, PostScript, PDF, DVI and Mobipocket files "
     [arch]="sudo pacman -S --needed ffmpegthumbs kdegraphics-thumbnailers"
-    [manjaro]="sudo pacman -S --needed ffmpegthumbs kdegraphics-thumbnailers"
 )
 #|============================================================================|#
