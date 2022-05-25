@@ -235,9 +235,9 @@ declare -A install_tree=(
 )
 declare -A install_zsh=(
     [interface]="both"
-    [message_process]="* Installing Z shell (zsh) and plugins "
-    [arch]="sudo pacman -S --needed zsh zsh-syntax-highlighting zsh-completions zsh-autosuggestions zsh-history-substring-search"
-    [archWSL]="sudo pacman -S --needed zsh zsh-syntax-highlighting zsh-completions zsh-autosuggestions zsh-history-substring-search"
+    [message_process]="* Installing Z shell (zsh) "
+    [arch]="sudo pacman -S --needed zsh"
+    [archWSL]="sudo pacman -S --needed zsh"
     [post]="chsh -s /bin/zsh" # Change default shell to zsh
 )
 declare -A install_exa=(
