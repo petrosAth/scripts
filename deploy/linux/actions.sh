@@ -8,7 +8,6 @@ actions_list=(
     "install_paru"
 #|-< Cosmetics >--------------------------------------------------------------|#
     "install_papirus_icon_theme"
-    "install_oh_my_posh"
     # "install_conky"
 #|-< Development >------------------------------------------------------------|#
     "install_python_pip"
@@ -116,12 +115,6 @@ declare -A install_papirus_icon_theme=(
     [arch1]="sudo pacman -S --needed papirus-icon-theme"
     [arch2]="wget -qO- https://git.io/papirus-folders-install | sh"
     [arch3]="papirus-folders -C nordic --theme Papirus-Dark"
-)
-declare -A install_oh_my_posh=(
-    [interface]="both"
-    [message_process]="* Installing Oh My Posh. A prompt theme engine for any shell "
-    [arch]="paru -S --needed oh-my-posh-git"
-    [archWSL]="paru -S --needed oh-my-posh-git"
 )
 declare -A install_conky=(
     [interface]="gui"
