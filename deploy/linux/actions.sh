@@ -34,8 +34,7 @@ actions_list=(
     "install_timeshift"
     "install_trash_cli"
     "install_tmux"
-    "install_ranger"
-    "install_ueberzug"           # Ranger dependancy for image viewing
+    "install_xplr"
     "install_bat"
     "install_neofetch"
     "install_btop"
@@ -269,20 +268,11 @@ declare -A install_tmux=(
     [arch]="sudo pacman -S --needed tmux"
     [archWSL]="sudo pacman -S --needed tmux"
 )
-declare -A install_ranger=(
+declare -A install_xplr=(
     [interface]="both"
-    [message_process]="* Installing Ranger A VIM-inspired filemanager for the console "
-    [arch]="sudo pacman -S --needed ranger"
-    [archWSL]="sudo pacman -S --needed ranger"
-    [post]="2"
-    [post1]="ranger --copy-config=scope"
-    [post2]="git clone https://github.com/alexanderjeurissen/ranger_devicons ${HOME}/.config/ranger/plugins/ranger_devicons"
-)
-declare -A install_ueberzug=(
-    [interface]="both"
-    [message_process]="* Installing Überzug. Command line util which allows to display images in combination with X11 "
-    [arch]="sudo pacman -S --needed ueberzug"
-    [archWSL]="sudo pacman -S --needed ueberzug"
+    [message_process]="* Installing xplr, a hackable, minimal, fast TUI file explorer "
+    [arch]="sudo pacman -S --needed xplr"
+    [archWSL]="sudo pacman -S --needed xplr"
 )
 declare -A install_bat=(
     [interface]="both"
