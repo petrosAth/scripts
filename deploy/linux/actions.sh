@@ -50,13 +50,10 @@ actions_list=(
     "install_wakeonlan"          # Used by remmina to wake remote desktops
 #|-< Fonts >------------------------------------------------------------------|#
     "install_inter_font"
-    "install_ttf_victor_mono"
     "install_ibm_plex"
     "install_chrome_os_fonts"
     "install_twitter_emoji_font"
-    "install_nerd_fonts_fira_code"
-    "install_nerd_fonts_fira_code_mono"
-    "install_nerd_fonts_symbols_only"
+    "install_fira_code_font"
 #|-< Editing >----------------------------------------------------------------|#
     "install_onlyoffice"
     "install_blender"
@@ -346,11 +343,6 @@ declare -A install_inter_font=(
     [message_process]="* Installing Inter font family "
     [arch]="sudo pacman -S --needed inter-font"
 )
-declare -A install_ttf_victor_mono=(
-    [interface]="gui"
-    [message_process]="* Installing Victor Mono font family "
-    [arch]="paru -S ttf-victor-mono"
-)
 declare -A install_ibm_plex=(
     [interface]="gui"
     [message_process]="* Installing IBM Plex font family "
@@ -366,42 +358,10 @@ declare -A install_twitter_emoji_font=(
     [message_process]="* Installing Twitter Emoji font "
     [arch]="paru -S --needed ttf-twemoji"
 )
-declare -A install_nerd_fonts_fira_code=(
+declare -A install_fira_code_font=(
     [interface]="gui"
-    [message_process]="* Installing Nerd Fonts Fira Code "
-    [dir]="mkdir -p ${HOME}/.local/share/fonts/ttf"
-    [arch]="7"
-    [arch1]="cd ${HOME}/.local/share/fonts/ttf"
-    [arch2]="curl -fLo 'Fira Code Light Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/Light/complete/Fira%20Code%20Light%20Nerd%20Font%20Complete.ttf"
-    [arch3]="curl -fLo 'Fira Code Retina Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/Retina/complete/Fira%20Code%20Retina%20Nerd%20Font%20Complete.ttf"
-    [arch4]="curl -fLo 'Fira Code Regular Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"
-    [arch5]="curl -fLo 'Fira Code Medium Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/Medium/complete/Fira%20Code%20Medium%20Nerd%20Font%20Complete.ttf"
-    [arch6]="curl -fLo 'Fira Code SemiBold Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/SemiBold/complete/Fira%20Code%20SemiBold%20Nerd%20Font%20Complete.ttf"
-    [arch7]="curl -fLo 'Fira Code Bold Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/Bold/complete/Fira%20Code%20Bold%20Nerd%20Font%20Complete.ttf"
-    [post]="cd ${HOME}"
-)
-declare -A install_nerd_fonts_fira_code_mono=(
-    [interface]="gui"
-    [message_process]="* Installing Nerd Fonts Fira Code Mono "
-    [dir]="mkdir -p ${HOME}/.local/share/fonts/ttf"
-    [arch]="7"
-    [arch1]="cd ${HOME}/.local/share/fonts/ttf"
-    [arch2]="curl -fLo 'Fira Code Light Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/Light/complete/Fira%20Code%20Light%20Nerd%20Font%20Complete%20Mono.ttf"
-    [arch3]="curl -fLo 'Fira Code Retina Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/Retina/complete/Fira%20Code%20Retina%20Nerd%20Font%20Complete%20Mono.ttf"
-    [arch4]="curl -fLo 'Fira Code Regular Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete%20Mono.ttf"
-    [arch5]="curl -fLo 'Fira Code Medium Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/Medium/complete/Fira%20Code%20Medium%20Nerd%20Font%20Complete%20Mono.ttf"
-    [arch6]="curl -fLo 'Fira Code SemiBold Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/SemiBold/complete/Fira%20Code%20SemiBold%20Nerd%20Font%20Complete%20Mono.ttf"
-    [arch7]="curl -fLo 'Fira Code Bold Nerd Font Complete Mono.ttf' https://github.com/ryanoasis/nerd-fonts/raw/fa024b3b013769c1189b7eaca3bebbfcb1d22d99/patched-fonts/FiraCode/Bold/complete/Fira%20Code%20Bold%20Nerd%20Font%20Complete%20Mono.ttf"
-    [post]="cd ${HOME}"
-)
-declare -A install_nerd_fonts_symbols_only=(
-    [interface]="gui"
-    [message_process]="* Installing Nerd Fonts Symbols Only "
-    [dir]="mkdir -p ${HOME}/.local/share/fonts/ttf"
-    [arch]="2"
-    [arch1]="cd ${HOME}/.local/share/fonts/ttf"
-    [arch2]="curl -fLo 'Symbols-2048-em Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/NerdFontsSymbolsOnly/complete/Symbols-2048-em%20Nerd%20Font%20Complete.ttf"
-    [post]="cd ${HOME}"
+    [message_process]="* Installing Fira Code font "
+    [arch]="sudo pacman -S --needed ttf-fira-code"
 )
 #|-< Editing >----------------------------------------------------------------|#
 declare -A install_onlyoffice=(
