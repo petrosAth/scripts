@@ -19,7 +19,6 @@ actions_list=(
     "install_powershell_bin"
     "install_stylua_git"
     "install_unityhub"
-    "install_neovim"             # Neovim
 #|-< Utilities >--------------------------------------------------------------|#
     "install_python_pynvim"      # Neovim dependancy
     "install_xclip"              # Neovim clipboard sync
@@ -69,7 +68,6 @@ actions_list=(
     "install_vlc"
 )
 #|============================================================================|#
-
 
 #|=< Installation commands >==================================================|#
 #|-< Core >-------------------------------------------------------------------|#
@@ -174,12 +172,6 @@ declare -A install_unityhub=(
     [interface]="gui"
     [message_process]="* Installing Unity Hub, a standalone application that streamlines the way you find, download, and manage your Unity Projects and installations "
     [arch]="paru -S --needed unityhub"
-)
-declare -A install_neovim=(
-    [interface]="both"
-    [message_process]="* Installing Neovim. Fork of Vim aiming to improve user experience, plugins, and GUIs "
-    [arch]="sudo pacman -S --needed neovim"
-    [archWSL]="sudo pacman -S --needed neovim"
 )
 #|-< Utilities >--------------------------------------------------------------|#
 declare -A install_python_pynvim=(
