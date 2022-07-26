@@ -17,7 +17,6 @@ actions_list=(
     "install_mono"
     "install_dotnet"
     "install_powershell_bin"
-    "install_stylua_git"
     "install_unityhub"
 #|-< Utilities >--------------------------------------------------------------|#
     "install_python_pynvim"      # Neovim dependancy
@@ -161,12 +160,6 @@ declare -A install_powershell_bin=(
     [post]="2"
     [post1]="pwsh -Command Install-Module -Name PowerShellGet  -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
     [post2]="pwsh -Command Install-Module -Name PSReadLine     -Repository PSGallery -Scope CurrentUser -AllowPrerelease -Force"
-)
-declare -A install_stylua_git=(
-    [interface]="both"
-    [message_process]="* Installing StyLua, an opinionated Lua code formatter "
-    [arch]="paru -S --needed stylua-git"
-    [archWSL]="paru -S --needed stylua-git"
 )
 declare -A install_unityhub=(
     [interface]="gui"
