@@ -29,6 +29,7 @@ actions_list=(
     "install_zsh"
     "install_exa"
     "install_kitty"
+    "install_lazygit"
     "install_timeshift"
     "install_trash_cli"
     "install_tmux"
@@ -225,6 +226,11 @@ declare -A install_kitty=(
     [interface]="gui"
     [message_process]="* Installing kitty The fast, feature-rich, GPU based terminal emulator "
     [arch]="sudo pacman -S --needed kitty"
+)
+declare -A install_lazygit=(
+    [interface]="both"
+    [message_process]="* Installing lazygit. A simple terminal UI for git commands "
+    [arch]="sudo pacman -S --needed lazygit"
 )
 declare -A install_timeshift=(
     [interface]="gui"
