@@ -52,7 +52,7 @@ actions_list=(
     "install_ibm_plex"
     "install_chrome_os_fonts"
     "install_twitter_emoji_font"
-    "install_fira_code_font"
+    "install_nerd_fonts_jetbrains_mono"
 #|-< Editing >----------------------------------------------------------------|#
     "install_onlyoffice"
     "install_blender"
@@ -349,10 +349,29 @@ declare -A install_twitter_emoji_font=(
     [message_process]="* Installing Twitter Emoji font "
     [arch]="paru -S --needed ttf-twemoji"
 )
-declare -A install_fira_code_font=(
+declare -A install_nerd_fonts_jetbrains_mono=(
     [interface]="gui"
-    [message_process]="* Installing Fira Code font "
-    [arch]="sudo pacman -S --needed ttf-fira-code"
+    [message_process]="* Installing Nerd Fonts JetBrains Mono "
+    [dir]="mkdir -p ${HOME}/.local/share/fonts/TTF"
+    [arch]="17"
+    [arch1]="cd ${HOME}/.local/share/fonts/TTF"
+    [arch2]="curl -fLo 'JetBrains Mono Bold Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Bold/complete/JetBrains%20Mono%20Bold%20Nerd%20Font%20Complete.ttf"
+    [arch3]="curl -fLo 'JetBrains Mono Bold Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/BoldItalic/complete/JetBrains%20Mono%20Bold%20Italic%20Nerd%20Font%20Complete.ttf"
+    [arch4]="curl -fLo 'JetBrains Mono ExtraBold Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/ExtraBold/complete/JetBrains%20Mono%20ExtraBold%20Nerd%20Font%20Complete.ttf"
+    [arch5]="curl -fLo 'JetBrains Mono ExtraBold Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/ExtraBoldItalic/complete/JetBrains%20Mono%20ExtraBold%20Italic%20Nerd%20Font%20Complete.ttf"
+    [arch6]="curl -fLo 'JetBrains Mono ExtraLight Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/ExtraLight/complete/JetBrains%20Mono%20ExtraLight%20Nerd%20Font%20Complete.ttf"
+    [arch7]="curl -fLo 'JetBrains Mono ExtraLight Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/ExtraLightItalic/complete/JetBrains%20Mono%20ExtraLight%20Italic%20Nerd%20Font%20Complete.ttf"
+    [arch8]="curl -fLo 'JetBrains Mono Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Italic/complete/JetBrains%20Mono%20Italic%20Nerd%20Font%20Complete.ttf"
+    [arch9]="curl -fLo 'JetBrains Mono Light Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Light/complete/JetBrains%20Mono%20Light%20Nerd%20Font%20Complete.ttf"
+    [arch10]="curl -fLo 'JetBrains Mono Light Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/LightItalic/complete/JetBrains%20Mono%20Light%20Italic%20Nerd%20Font%20Complete.ttf"
+    [arch11]="curl -fLo 'JetBrains Mono Medium Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Medium/complete/JetBrains%20Mono%20Medium%20Nerd%20Font%20Complete.ttf"
+    [arch12]="curl -fLo 'JetBrains Mono Medium Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/MediumItalic/complete/JetBrains%20Mono%20Medium%20Italic%20Nerd%20Font%20Complete.ttf"
+    [arch13]="curl -fLo 'JetBrains Mono Regular Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf"
+    [arch14]="curl -fLo 'JetBrains Mono SemiBold Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/SemiBold/complete/JetBrains%20Mono%20SemiBold%20Nerd%20Font%20Complete.ttf"
+    [arch15]="curl -fLo 'JetBrains Mono SemiBold Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/SemiBoldItalic/complete/JetBrains%20Mono%20SemiBold%20Italic%20Nerd%20Font%20Complete.ttf"
+    [arch16]="curl -fLo 'JetBrains Mono Thin Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Thin/complete/JetBrains%20Mono%20Thin%20Nerd%20Font%20Complete.ttf"
+    [arch17]="curl -fLo 'JetBrains Mono Thin Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/ThinItalic/complete/JetBrains%20Mono%20Thin%20Italic%20Nerd%20Font%20Complete.ttf"
+    [post]="cd ${HOME}"
 )
 #|-< Editing >----------------------------------------------------------------|#
 declare -A install_onlyoffice=(
