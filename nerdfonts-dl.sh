@@ -21,38 +21,37 @@ debug_sep() {
 }
 
 font_name=""
-font_flag_mono=""
+font_flag_var=""
 font_flag_lig=""
-font_prop1=""
-font_prop2=""
+font_prop=""
 font_file_name=""
 font_link=""
 
 JetBrainsMono=(
     "Bold"
-    "Bold Italic"
+    "BoldItalic"
     "ExtraBold"
-    "ExtraBold Italic"
+    "ExtraBoldItalic"
     "ExtraLight"
-    "ExtraLight Italic"
+    "ExtraLightItalic"
     "Italic"
     "Light"
-    "Light Italic"
+    "LightItalic"
     "Medium"
-    "Medium Italic"
+    "MediumItalic"
     "Regular"
     "SemiBold"
-    "SemiBold Italic"
+    "SemiBoldItalic"
     "Thin"
-    "Thin Italic"
+    "ThinItalic"
 )
 
 get_font_name() {
     name=$1
-    if [[ ${name:(-4)} = "Mono" ]]; then
-        font_name=(${name:0:-4} "%20" "Mono" "%20")
+    if [[ ${name:-4} = "Mono" ]]; then
+        font_name=(${name:0:-4} "Mono")
     else
-        font_name=(${name} "%20")
+        font_name=(${name})
     fi
 
     debug_sep
@@ -62,25 +61,27 @@ get_font_name() {
     fi
 }
 
-get_font_flag_mono() {
-    mono=$1
-    font_flag_mono=""
-    if [[ ${mono} = true ]]; then
-        font_flag_mono="Mono%20"
-    fi
+get_font_flag_var() {
+    var=$1
+    font_flag_var=${var}
 
     debug_sep
     if [[ ${debug_active} = true ]]; then
         echo "Function: "${FUNCNAME[0]}
-        echo "font_flag_mono: "${font_flag_mono}
+        echo "font_flag_var: "${font_flag_var}
     fi
 }
 
 get_font_flag_lig() {
-    lig=$1
+    if [ $# -eq 0 ]; then
+        lig=true
+    else
+        lig=$1
+    fi
+
     font_flag_lig=("Ligatures" "")
     if [[ ${lig} = false ]]; then
-        font_flag_lig=("NoLigatures" "%20" "NL")
+        font_flag_lig=("NoLigatures" "NL")
     fi
 
     debug_sep
@@ -94,18 +95,12 @@ get_font_prop_and_style() {
     weight_and_style=("$@")
     # Source: https://unix.stackexchange.com/a/719138
     # Split words in string
-    set -- ${weight_and_style}
-    font_prop1=$1
-    font_prop2=("" $2)
-    if [[ -n $2 ]]; then
-        font_prop2[0]="%20"
-    fi
+    # set -- ${weight_and_style}
+    font_prop=$1
 
     if [[ ${debug_active} = true ]]; then
         echo "Function: "${FUNCNAME[0]}
-        echo "font_prop1: "${font_prop1}
-        echo "font_prop2[0]: "${font_prop2[0]}
-        echo "font_prop2[1]: "${font_prop2[1]}
+        echo "font_prop: "${font_prop}
     fi
 }
 
@@ -114,15 +109,15 @@ get_font_file_name() {
     file_name_elements=(
         ${font_name[0]}
         ${font_name[2]}
-        ${font_flag_lig[2]}
-        "Nerd Font Complete"
-        ${font_prop1}
-        ${font_prop2[1]}
+        ${font_flag_lig[1]}
+        "Nerd Font"
+        ${font_flag_var}
+        ${font_prop}
     )
     for element in ${file_name_elements[@]}; do
         font_file_name+=${element}" "
     done
-    font_file_name='"'${font_file_name:0:-1}'.ttf"' # Remove last space
+    font_file_name=${font_file_name:0:-1}".ttf" # Remove last space
 
     debug_sep
     if [[ ${debug_active} = true ]]; then
@@ -138,19 +133,16 @@ get_font_link() {
         ${font_name[0]}
         ${font_name[2]}"/"
         ${font_flag_lig[0]}"/"
-        ${font_prop1}
-        ${font_prop2[1]}"/"
-        "complete/"
+        ${font_prop}"/"
         ${font_name[0]}
         ${font_name[1]}
         ${font_name[2]}
         ${font_name[3]}
-        ${font_flag_lig[2]}
         ${font_flag_lig[1]}
-        "Nerd%20Font%20Complete%20"
-        ${font_prop1}
-        ${font_prop2[0]}
-        ${font_prop2[1]}
+        "NerdFont"
+        ${font_flag_var}
+        "-"
+        ${font_prop}
         ".ttf"
     )
     for element in ${link_elements[@]}; do
@@ -198,7 +190,7 @@ download() {
 init() {
     font=$1
     lig=$2
-    mono=$3
+    var=$3
 
     if [[ ${debug_active} = true ]]; then
         echo "Function: "${FUNCNAME[0]}
@@ -209,7 +201,9 @@ init() {
 
     get_font_name ${font}
     get_font_flag_lig ${lig}
-    get_font_flag_mono ${mono}
+    if [ $# -eq 3 ]; then
+        get_font_flag_var ${var}
+    fi
 
     change_dir
 
@@ -221,5 +215,5 @@ init() {
 
 # arg[1] string Font name
 # arg[2] boolean Use ligatures
-# arg[3] boolean Use monospaced variant
+# arg[3] string Use Mono or Propo variant
 init $1 $2 $3
