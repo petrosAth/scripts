@@ -4,66 +4,77 @@
 actions_list=(
 #|-< Core >-------------------------------------------------------------------|#
     "install_base_devel"
-    "install_reflector"
+    # "install_reflector"
     "install_paru"
 #|-< Cosmetics >--------------------------------------------------------------|#
-    "install_papirus_icon_theme"
+    # "install_papirus_icon_theme"
     # "install_conky"
 #|-< Development >------------------------------------------------------------|#
     "install_python_pip"
     "install_jdk_openjdk"
     "install_go"
     "install_nodejs_npm"
-    "install_mono"
-    "install_dotnet"
-    "install_powershell_bin"
-    "install_unityhub"
+    "install_vscode"
+    # "install_mono"
+    # "install_dotnet"
+    # "install_powershell_bin"
+    # "install_unityhub"
 #|-< Utilities >--------------------------------------------------------------|#
-    "install_python_pynvim"      # Neovim dependancy
-    "install_xclip"              # Neovim clipboard sync
-    "install_unzip"              # Neovim LSP Installer dependancy
-    "install_fd"                 # Neovim plugin telescope dependancy
-    "install_ripgrep"            # Neovim plugin telescope dependancy
+    "install_corectrl"
+    "install_python_pynvim" # Neovim dependancy
+    "install_xclip"         # Neovim clipboard sync
+    "install_unzip"         # Neovim LSP Installer dependancy
+    "install_fd"            # Neovim plugin telescope dependancy
+    "install_ripgrep"       # Neovim plugin telescope dependancy
     "install_fzf"
     "install_tree"
     "install_zsh"
     "install_exa"
-    "install_kitty"
+    # "install_kitty"
+    "install_wezterm"
     "install_lazygit"
-    "install_timeshift"
+    # "install_timeshift"
     "install_trash_cli"
-    "install_tmux"
+    # "install_tmux"
     "install_xplr"
     "install_bat"
     "install_neofetch"
     "install_btop"
-    "install_electrum"
-    "install_etcher"
+    # "install_electrum"
+    # "install_etcher"
+    "install_gparted"
+    "install_ventoy"
     "install_virt_manager"
 #|-< Remote and Cloud >-------------------------------------------------------|#
     "install_filezilla"
-    "install_bitwarden"
+    # "install_bitwarden"
     "install_synergy_git"
     "install_nextcloud_client"
     "install_remmina"
-    "install_wakeonlan"          # Used by remmina to wake remote desktops
+    # "install_wakeonlan"          # Used by remmina to wake remote desktops
 #|-< Fonts >------------------------------------------------------------------|#
-    "install_inter_font"
-    "install_ibm_plex"
+    "install_noto_fonts"
+    "install_noto_fonts_cjk"
+    "install_noto_fonts_emoji"
+    "install_noto_fonts_extra"
     "install_chrome_os_fonts"
-    "install_twitter_emoji_font"
+    "install_jetbrains_mono"
     "install_nerd_fonts_jetbrains_mono"
+    "install_nerd_fonts_symbols"
 #|-< Editing >----------------------------------------------------------------|#
     "install_onlyoffice"
-    "install_blender"
-    "install_inkscape"
+    "install_libreoffice"
+    # "install_blender"
+    # "install_inkscape"
     "install_handbrake"
     "install_avidemux_qt"
     "install_audacity"
 #|-< Web & Chat >-------------------------------------------------------------|#
     "install_firefox"
+    "install_firefox_dev"
+    "install_chromium"
     "install_thunderbird"
-    "install_jdownloader2"
+    # "install_jdownloader2"
 #|-< Multimedia >-------------------------------------------------------------|#
     "install_vlc"
 )
@@ -138,8 +149,13 @@ declare -A install_go=(
 declare -A install_nodejs_npm=(
     [interface]="both"
     [message_process]="* Installing Node.js and npm package manager "
-    [arch]="sudo pacman -S --needed nodejs-lts-gallium npm"
-    [archWSL]="sudo pacman -S --needed nodejs-lts-gallium npm"
+    [arch]="sudo pacman -S --needed nodejs npm"
+    [archWSL]="sudo pacman -S --needed nodejs npm"
+)
+declare -A install_vscode=(
+    [interface]="gui"
+    [message_process]="* Installing Visual Studio Code. Editor for building and debugging modern web and cloud applications "
+    [arch]="sudo pacman -S --needed code"
 )
 declare -A install_mono=(
     [interface]="both"
@@ -168,6 +184,11 @@ declare -A install_unityhub=(
     [arch]="paru -S --needed unityhub"
 )
 #|-< Utilities >--------------------------------------------------------------|#
+declare -A install_corectrl=(
+    [interface]="gui"
+    [message_process]="* Installing CoreCtrl, a Free and Open Source GNU/Linux application that allows you to control with ease your computer hardware "
+    [arch]="sudo pacman -S --needed corectrl"
+)
 declare -A install_python_pynvim=(
     [interface]="both"
     [message_process]="* Installing Pynvim "
@@ -226,6 +247,11 @@ declare -A install_kitty=(
     [interface]="gui"
     [message_process]="* Installing kitty The fast, feature-rich, GPU based terminal emulator "
     [arch]="sudo pacman -S --needed kitty"
+)
+declare -A install_wezterm=(
+    [interface]="gui"
+    [message_process]="* Installing wezterm. A GPU-accelerated cross-platform terminal emulator and multiplexer "
+    [arch]="sudo pacman -S --needed wezterm"
 )
 declare -A install_lazygit=(
     [interface]="both"
@@ -290,6 +316,16 @@ declare -A install_etcher=(
     [message_process]="* Installing Etcher OS image flasher "
     [arch]="paru -S --needed balena-etcher"
 )
+declare -A install_gparted=(
+    [interface]="gui"
+    [message_process]="* Installing GParted, a Partition Magic clone, frontend to GNU Parted "
+    [arch]="sudo pacman -S --needed gparted"
+)
+declare -A install_ventoy=(
+    [interface]="gui"
+    [message_process]="* Installing Ventoy, a new bootable USB solution "
+    [arch]="paru -S --needed ventoy"
+)
 declare -A install_virt_manager=(
     [interface]="gui"
     [message_process]="* Installing Virtual Machine Manager "
@@ -329,55 +365,56 @@ declare -A install_wakeonlan=(
     [arch]="paru -S --needed wakeonlan"
 )
 #|-< Fonts >------------------------------------------------------------------|#
-declare -A install_inter_font=(
+declare -A install_noto_fonts=(
     [interface]="gui"
-    [message_process]="* Installing Inter font family "
-    [arch]="sudo pacman -S --needed inter-font"
+    [message_process]="* Installing Google Noto TTF fonts "
+    [arch]="sudo pacman -S --needed noto-fonts"
 )
-declare -A install_ibm_plex=(
+declare -A install_noto_fonts_cjk=(
     [interface]="gui"
-    [message_process]="* Installing IBM Plex font family "
-    [arch]="sudo pacman -S --needed ttf-ibm-plex"
+    [message_process]="* Installing Google Noto CJK fonts "
+    [arch]="sudo pacman -S --needed noto-fonts-cjk"
+)
+declare -A install_noto_fonts_emoji=(
+    [interface]="gui"
+    [message_process]="* Installing Google Noto emoji fonts "
+    [arch]="sudo pacman -S --needed noto-fonts-emoji"
+)
+declare -A install_noto_fonts_extra=(
+    [interface]="gui"
+    [message_process]="* Installing additional variants of Google Noto TTF fonts "
+    [arch]="sudo pacman -S --needed noto-fonts-extra"
 )
 declare -A install_chrome_os_fonts=(
     [interface]="gui"
     [message_process]="* Installing Chrome OS core fonts "
     [arch]="sudo pacman -S --needed ttf-croscore"
 )
-declare -A install_twitter_emoji_font=(
+declare -A install_jetbrains_mono=(
     [interface]="gui"
-    [message_process]="* Installing Twitter Emoji font "
-    [arch]="paru -S --needed ttf-twemoji"
+    [message_process]="* Installing JetBrains Mono, a typeface for developers, by JetBrains "
+    [arch]="sudo pacman -S --needed ttf-jetbrains-mono"
 )
 declare -A install_nerd_fonts_jetbrains_mono=(
     [interface]="gui"
-    [message_process]="* Installing Nerd Fonts JetBrains Mono "
-    [dir]="mkdir -p ${HOME}/.local/share/fonts/TTF"
-    [arch]="17"
-    [arch1]="cd ${HOME}/.local/share/fonts/TTF"
-    [arch2]="curl -fLo 'JetBrains Mono Bold Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Bold/complete/JetBrains%20Mono%20Bold%20Nerd%20Font%20Complete.ttf"
-    [arch3]="curl -fLo 'JetBrains Mono Bold Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/BoldItalic/complete/JetBrains%20Mono%20Bold%20Italic%20Nerd%20Font%20Complete.ttf"
-    [arch4]="curl -fLo 'JetBrains Mono ExtraBold Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/ExtraBold/complete/JetBrains%20Mono%20ExtraBold%20Nerd%20Font%20Complete.ttf"
-    [arch5]="curl -fLo 'JetBrains Mono ExtraBold Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/ExtraBoldItalic/complete/JetBrains%20Mono%20ExtraBold%20Italic%20Nerd%20Font%20Complete.ttf"
-    [arch6]="curl -fLo 'JetBrains Mono ExtraLight Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/ExtraLight/complete/JetBrains%20Mono%20ExtraLight%20Nerd%20Font%20Complete.ttf"
-    [arch7]="curl -fLo 'JetBrains Mono ExtraLight Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/ExtraLightItalic/complete/JetBrains%20Mono%20ExtraLight%20Italic%20Nerd%20Font%20Complete.ttf"
-    [arch8]="curl -fLo 'JetBrains Mono Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Italic/complete/JetBrains%20Mono%20Italic%20Nerd%20Font%20Complete.ttf"
-    [arch9]="curl -fLo 'JetBrains Mono Light Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Light/complete/JetBrains%20Mono%20Light%20Nerd%20Font%20Complete.ttf"
-    [arch10]="curl -fLo 'JetBrains Mono Light Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/LightItalic/complete/JetBrains%20Mono%20Light%20Italic%20Nerd%20Font%20Complete.ttf"
-    [arch11]="curl -fLo 'JetBrains Mono Medium Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Medium/complete/JetBrains%20Mono%20Medium%20Nerd%20Font%20Complete.ttf"
-    [arch12]="curl -fLo 'JetBrains Mono Medium Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/MediumItalic/complete/JetBrains%20Mono%20Medium%20Italic%20Nerd%20Font%20Complete.ttf"
-    [arch13]="curl -fLo 'JetBrains Mono Regular Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Regular%20Nerd%20Font%20Complete.ttf"
-    [arch14]="curl -fLo 'JetBrains Mono SemiBold Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/SemiBold/complete/JetBrains%20Mono%20SemiBold%20Nerd%20Font%20Complete.ttf"
-    [arch15]="curl -fLo 'JetBrains Mono SemiBold Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/SemiBoldItalic/complete/JetBrains%20Mono%20SemiBold%20Italic%20Nerd%20Font%20Complete.ttf"
-    [arch16]="curl -fLo 'JetBrains Mono Thin Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Thin/complete/JetBrains%20Mono%20Thin%20Nerd%20Font%20Complete.ttf"
-    [arch17]="curl -fLo 'JetBrains Mono Thin Italic Nerd Font Complete.ttf' https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/ThinItalic/complete/JetBrains%20Mono%20Thin%20Italic%20Nerd%20Font%20Complete.ttf"
-    [post]="cd ${HOME}"
+    [message_process]="* Installing Nerd Fonts JetBrains Mono. Patched font JetBrains Mono from nerd fonts library "
+    [arch]="sudo pacman -S --needed ttf-jetbrains-mono-nerd"
+)
+declare -A install_nerd_fonts_symbols=(
+    [interface]="gui"
+    [message_process]="* Installing Nerd Fonts Symbols. High number of extra glyphs from popular 'iconic fonts' "
+    [arch]="sudo pacman -S --needed ttf-nerd-fonts-symbols"
 )
 #|-< Editing >----------------------------------------------------------------|#
 declare -A install_onlyoffice=(
     [interface]="gui"
     [message_process]="* Installing OnlyOffice. Open-source office suite that combines text, spreadsheet and presentation editors "
     [arch]="paru -S --needed onlyoffice-bin"
+)
+declare -A install_libreoffice=(
+    [interface]="gui"
+    [message_process]="* Installing LibreOffice, a free and open-source office productivity software suite "
+    [arch]="sudo pacman -S --needed libreoffice-fresh"
 )
 declare -A install_blender=(
     [interface]="gui"
@@ -409,6 +446,16 @@ declare -A install_firefox=(
     [interface]="gui"
     [message_process]="* Installing Firefox "
     [arch]="sudo pacman -S --needed firefox"
+)
+declare -A install_firefox_dev=(
+    [interface]="gui"
+    [message_process]="* Installing Firefox developer edition. Developer Edition of the popular Firefox web browser "
+    [arch]="sudo pacman -S --needed firefox-developer-edition"
+)
+declare -A install_chromium=(
+    [interface]="gui"
+    [message_process]="* Installing Chromium. A web browser built for speed, simplicity, and security "
+    [arch]="sudo pacman -S --needed chromium"
 )
 declare -A install_thunderbird=(
     [interface]="gui"
