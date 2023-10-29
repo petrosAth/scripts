@@ -29,7 +29,7 @@ actions_list=(
     "install_fzf"
     "install_tree"
     "install_zsh"
-    "install_exa"
+    "install_eza"
     # "install_kitty"
     "install_wezterm"
     "install_lazygit"
@@ -237,11 +237,11 @@ declare -A install_zsh=(
     [archWSL]="sudo pacman -S --needed zsh"
     [post]="chsh -s /bin/zsh" # Change default shell to zsh
 )
-declare -A install_exa=(
+declare -A install_eza=(
     [interface]="both"
-    [message_process]="* Installing exa, a modern replacement for 'ls' "
-    [arch]="sudo pacman -S --needed exa"
-    [archWSL]="sudo pacman -S --needed exa"
+    [message_process]="* Installing eza, a modern replacement for 'ls' "
+    [arch]="sudo pacman -S --needed eza"
+    [archWSL]="sudo pacman -S --needed eza"
 )
 declare -A install_kitty=(
     [interface]="gui"
@@ -263,13 +263,6 @@ declare -A install_timeshift=(
     [message_process]="* Installing Timeshift. A system restore utility for Linux "
     [arch]="paru -S --needed timeshift timeshift-autosnap"
     [post]="sudo systemctl enable cronie.service"
-)
-declare -A install_grub_btrfs=(
-    [interface]="gui"
-    [message_process]="* Installing grub-btrfs. Include btrfs snapshots in GRUB boot options "
-    [arch]="sudo pacman -S --needed grub-btrfs"
-    [post]="sudo sed -i 's/#GRUB_BTRFS_TITLE_FORMAT=("date" "snapshot" "type" "description")/GRUB_BTRFS_TITLE_FORMAT=("date" "type" "description")/' /etc/default/grub-btrfs/config" # Add color to pacman output
-    [post]="sudo systemctl enable grub-btrfs.path"
 )
 declare -A install_trash_cli=(
     [interface]="both"
