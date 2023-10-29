@@ -114,10 +114,10 @@ install_git_github_cli() {
     [[ $? ]] && _success "OpenSSH, Git and GitHub CLI have been installed"
 
     # Configure github-cli ssh
-    _process "* Configuring GitHub SSH Authentication "
+    _process "* Authenticating with GitHub SSH "
     gh auth login
     ssh -T git@github.com
-    [[ $? ]] && _success "GitHub SSH Authentication have been configured"
+    [[ $? ]] && _success "GitHub SSH Authenticated"
 }
 
 clone_dotfiles() {
