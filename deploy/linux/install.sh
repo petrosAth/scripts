@@ -116,11 +116,6 @@ install_git_github_cli() {
     # Configure github-cli ssh
     _process "* Configuring GitHub SSH Authentication "
     gh auth login
-    ssh-keygen -t ed25519 -C "${GITHUB_EMAIL}"
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/id_ed25519
-    read -p "Name your GitHub public key: " keyTitle
-    gh ssh-key add ~/.ssh/id_ed25519.pub --title "${keyTitle}"
     ssh -T git@github.com
     [[ $? ]] && _success "GitHub SSH Authentication have been configured"
 }
