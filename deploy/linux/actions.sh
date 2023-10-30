@@ -6,6 +6,10 @@ actions_list=(
     "install_base_devel"
     # "install_reflector"
     "install_paru"
+#|-< Desktop environments >---------------------------------------------------|#
+    "install_wayland"
+    "install_pipewire"
+    "install_gnome"
 #|-< Cosmetics >--------------------------------------------------------------|#
     # "install_papirus_icon_theme"
     # "install_conky"
@@ -112,6 +116,25 @@ declare -A install_paru=(
     [archWSL3]="git clone https://aur.archlinux.org/paru.git"
     [archWSL4]="cd paru && makepkg -si"
     [archWSL5]="cd .. && rm -rf paru"
+)
+#|-< Desktop environments >---------------------------------------------------|#
+declare -A install_wayland=(
+    [interface]="gui"
+    [message_process]="* Installing Wayland. A computer display server protocol "
+    [arch]="sudo pacman -S --needed wayland xorg-xwayland xorg-xlsclients glfw-wayland mesa"
+)
+declare -A install_pipewire=(
+    [interface]="gui"
+    [message_process]="* Installing Pipewire. Low-latency audio/video router and processor "
+    [arch]="sudo pacman -S --needed pipewire pipewire-alsa pipewire-pulse jack2"
+)
+declare -A install_gnome=(
+    [interface]="gui"
+    [message_process]="* Installing Gnome desktop environment "
+    [arch]="3"
+    [arch1]="sudo pacman -S --needed gnome gnome-tweaks nautilus-sendto gnome-nettool gnome-usage gnome-firmware gnome-disk-utility dconf-editor"
+    [arch2]="paru -S gnome-shell-extension-blur-my-shell gnome-shell-extension-color-picker gnome-shell-extension-appindicator-git gnome-shell-extension-caffeine gnome-shell-extension-gsconnect"
+    [arch3]="sudo systemctl enable gdm"
 )
 #|-< Cosmetics >--------------------------------------------------------------|#
 declare -A install_papirus_icon_theme=(
