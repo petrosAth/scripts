@@ -22,7 +22,7 @@ actions_list=(
 #|-< Utilities >--------------------------------------------------------------|#
     "install_corectrl"
     "install_python_pynvim" # Neovim dependancy
-    "install_xclip"         # Neovim clipboard sync
+    "install_wlclipboard"   # Neovim clipboard sync
     "install_unzip"         # Neovim LSP Installer dependancy
     "install_fd"            # Neovim plugin telescope dependancy
     "install_ripgrep"       # Neovim plugin telescope dependancy
@@ -195,10 +195,10 @@ declare -A install_python_pynvim=(
     [arch]="sudo pacman -S --needed python-pynvim"
     [archWSL]="sudo pacman -S --needed python-pynvim"
 )
-declare -A install_xclip=(
+declare -A install_wlclipboard=(
     [interface]="gui"
-    [message_process]="* Installing xclip "
-    [arch]="sudo pacman -S --needed xclip"
+    [message_process]="* Installing wl-clipboard. Command-line copy/paste utilities for Wayland "
+    [arch]="sudo pacman -S --needed wl-clipboard"
 )
 declare -A install_unzip=(
     [interface]="both"
