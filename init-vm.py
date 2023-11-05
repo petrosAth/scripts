@@ -24,6 +24,10 @@ def looking_glass(vm):
         time.sleep(2)
         subprocess.run(["looking-glass-client"])
 
+def no_gui(vm, gui):
+    clr_red = "\033[0;31m"
+    clr_white = "\033[1;37m"
+    print(f"{clr_white}{gui} {clr_red}is not configured to be used with {clr_white}{vm}{clr_red} virtual machine!")
 
 def show_vm(vm, gui):
     virt_manager(vm)
@@ -33,5 +37,6 @@ def show_vm(vm, gui):
 def init(vm, gui):
     start_vm(vm)
     show_vm(vm, gui)
+    no_gui(vm, "Remmina")
 
 init(sys.argv[1], sys.argv[2])
