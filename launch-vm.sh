@@ -45,7 +45,7 @@ start_gui() {
 init() {
     vm=$1
     gui=$2
-    is_valid_vm=("arch" "winWS")
+    is_valid_vm=("arch" "pop_os" "testDE-clone" "winWS")
 
     for vm_in_list in ${is_valid_vm[@]}; do
         if [[ ${vm_in_list} = ${vm} ]]; then
