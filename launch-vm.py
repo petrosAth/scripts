@@ -11,7 +11,7 @@ def virt_manager(vm, start):
 
     if vm in has_vmm:
         if start == True:
-            subprocess.run(["virt-manager", "--connect", "qemu:///system", "--show-domain-console", vm])
+            subprocess.run(["sudo", "virt-manager", "--connect", "qemu:///system", "--show-domain-console", vm])
         has_gui = True
 
     return has_gui, "Virtual Machine Manager graphical console"
@@ -69,12 +69,18 @@ def is_running(vm):
     if vm in vm_is_running:
         return True
 
+def demote():
+    def result():
+        os.setgid(1000)
+        os.setuid(1000)
+    return result
 
 def init(vm, gui):
     has_gui, gui_name = show_vm(vm, gui, False)
     if has_gui:
         if not is_running(vm):
             start_vm(vm)
+        demote()
         show_vm(vm, gui, True)
     elif gui_name != "":
         no_gui_error(vm, gui_name)
