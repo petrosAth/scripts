@@ -13,8 +13,12 @@ virt_manager() {
 }
 
 remote_desktop() {
-    sleep 10
-    remmina -c /home/petrosath/.local/share/remmina/group_rdp_winws_192-168-200-121.remmina &
+    vm=$1
+
+    if [[ ${vm} = "winWS" ]]; then
+        sleep 10
+        remmina -c /home/petrosath/.local/share/remmina/group_rdp_winws_192-168-200-121.remmina &
+    fi
 }
 
 looking_glass() {
