@@ -9,6 +9,7 @@ start_vm() {
 virt_manager() {
     vm=$1
 
+    virt-manager --connect qemu:///system --show-domain-console ${vm} &
 }
 
 remote_desktop() {
@@ -51,6 +52,7 @@ init() {
         if [[ ${vm_in_list} = ${vm} ]]; then
             start_vm ${vm}
             start_gui ${vm} ${gui}
+            disown
         fi
     done
 }
