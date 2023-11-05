@@ -22,8 +22,12 @@ remote_desktop() {
 }
 
 looking_glass() {
-    sleep 2
-    looking-glass-client &
+    vm=$1
+
+    if [[ ${vm} = "winWS" ]]; then
+        sleep 2
+        looking-glass-client &
+    fi
 }
 
 init() {
