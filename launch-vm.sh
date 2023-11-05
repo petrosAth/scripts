@@ -9,7 +9,6 @@ start_vm() {
 virt_manager() {
     vm=$1
 
-    virt-manager --connect qemu:///system --show-domain-console ${vm}
 }
 
 remote_desktop() {
@@ -31,19 +30,15 @@ looking_glass() {
 }
 
 start_gui() {
-    gui=$1
-    vm=$2
-
-    if [[ ${gui} = "vmm" ]]; then
-        virt_manager ${vm}
-    fi
+    vm=$1
+    gui=$2
 
     if [[ ${gui} = "rd" ]]; then
         remote_desktop ${vm}
-    fi
-
-    if [[ ${gui} = "lg" ]]; then
+    elif [[ ${gui} = "lg" ]]; then
         looking_glass ${vm}
+    else
+        virt_manager ${vm}
     fi
 }
 
@@ -55,7 +50,7 @@ init() {
     for vm_in_list in ${is_valid_vm[@]}; do
         if [[ ${vm_in_list} = ${vm} ]]; then
             start_vm ${vm}
-            start_gui() ${gui} ${vm}
+            start_gui ${vm} ${gui}
         fi
     done
 }
