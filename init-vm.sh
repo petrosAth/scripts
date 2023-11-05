@@ -1,7 +1,15 @@
 #!/bin/bash
 
 start_vm() {
-    virsh --connect qemu:///system start winWS
+    vm=$1
+
+    virsh --connect qemu:///system start ${vm}
+}
+
+virt_manager() {
+    vm=$1
+
+    virt-manager --connect qemu:///system --show-domain-console ${vm}
 }
 
 remote_desktop() {
@@ -15,15 +23,22 @@ looking_glass() {
 }
 
 init() {
-    start_vm
+    gui=$1
+    vm=$2
 
-    if [[ $1 = "rd" ]]; then
-        remote_desktop
+    start_vm ${vm}
+
+    if [[ ${gui} = "vm" ]]; then
+        virt_manager ${vm}
     fi
 
-    if [[ $1 = "lg" ]]; then
-        looking_glass
+    if [[ ${gui} = "rd" ]]; then
+        remote_desktop ${vm}
+    fi
+
+    if [[ ${gui} = "lg" ]]; then
+        looking_glass ${vm}
     fi
 }
 
-init $1
+init $1 $2
