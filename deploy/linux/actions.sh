@@ -131,10 +131,11 @@ declare -A install_pipewire=(
 declare -A install_gnome=(
     [interface]="gui"
     [message_process]="* Installing Gnome desktop environment "
-    [arch]="3"
+    [arch]="4"
     [arch1]="sudo pacman -S --needed gnome gnome-tweaks nautilus-sendto gnome-nettool gnome-usage gnome-firmware gnome-disk-utility dconf-editor"
-    [arch2]="paru -S gnome-shell-extension-blur-my-shell gnome-shell-extension-color-picker gnome-shell-extension-appindicator-git gnome-shell-extension-caffeine gnome-shell-extension-gsconnect"
-    [arch3]="sudo systemctl enable gdm"
+    [arch2]="paru -S --needed gnome-shell-extension-blur-my-shell gnome-shell-extension-color-picker gnome-shell-extension-appindicator-git gnome-shell-extension-caffeine gnome-shell-extension-gsconnect gnome-shell-extension-lockkeys gnome-shell-extension-vitals gnome-shell-extension-dash-to-dock-git"
+    [arch3]="sudo pacman -S --needed gst-libav gst-plugins-ugly" # tomem codecs
+    [arch4]="sudo systemctl enable gdm"
 )
 #|-< Cosmetics >--------------------------------------------------------------|#
 declare -A install_papirus_icon_theme=(
