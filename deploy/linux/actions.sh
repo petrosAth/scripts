@@ -431,7 +431,7 @@ declare -A install_onlyoffice=(
 declare -A install_libreoffice=(
     [interface]="gui"
     [message_process]="* Installing LibreOffice, a free and open-source office productivity software suite "
-    [arch]="sudo pacman -S --needed libreoffice-fresh"
+    [arch]="sudo pacman -S --needed libreoffice-fresh libreoffice-extension-orthos-greek-dictionary"
 )
 declare -A install_blender=(
     [interface]="gui"
