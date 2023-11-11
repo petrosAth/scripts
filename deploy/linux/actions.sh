@@ -97,7 +97,7 @@ declare -A install_reflector=(
     [message_process]="* Installing Reflector. A Pacman mirror list manager "
     [arch]="4"
     [arch1]="sudo pacman -S --needed reflector"
-    [arch2]="sudo reflector --country Greece,Worldwide --age 6 --sort rate --save /etc/pacman.d/mirrorlist"
+    [arch2]="sudo reflector --country Greece --latest 5 --sort rate --age 6 --save /etc/pacman.d/mirrorlist"
     [arch3]="sudo systemctl enable --now reflector.service"
     [arch4]="sudo systemctl enable --now reflector.timer"
 )
