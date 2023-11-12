@@ -76,7 +76,6 @@ actions_list=(
     "install_audacity"
 #|-< Web & Chat >-------------------------------------------------------------|#
     "install_firefox"
-    "install_firefox_dev"
     "install_chromium"
     "install_thunderbird"
     # "install_jdownloader2"
@@ -470,11 +469,6 @@ declare -A install_firefox=(
     [interface]="gui"
     [message_process]="* Installing Firefox "
     [arch]="sudo pacman -S --needed firefox"
-)
-declare -A install_firefox_dev=(
-    [interface]="gui"
-    [message_process]="* Installing Firefox developer edition. Developer Edition of the popular Firefox web browser "
-    [arch]="sudo pacman -S --needed firefox-developer-edition"
 )
 declare -A install_chromium=(
     [interface]="gui"
