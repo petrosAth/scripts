@@ -14,10 +14,11 @@ actions_list=(
     # "install_papirus_icon_theme"
     # "install_conky"
 #|-< Development >------------------------------------------------------------|#
-    "install_python_pip"
-    "install_jdk_openjdk"
     "install_go"
+    "install_jdk_openjdk"
     "install_nodejs_npm"
+    "install_php"
+    "install_python_pip"
     "install_vscode"
     # "install_mono"
     # "install_dotnet"
@@ -133,7 +134,7 @@ declare -A install_gnome=(
     [message_process]="* Installing Gnome desktop environment "
     [arch]="4"
     [arch1]="sudo pacman -S --needed gnome gnome-tweaks nautilus-sendto gnome-nettool gnome-usage gnome-firmware gnome-disk-utility dconf-editor gnome-themes-extra"
-    [arch2]="paru -S --needed gnome-shell-extension-blur-my-shell gnome-shell-extension-color-picker gnome-shell-extension-appindicator-git gnome-shell-extension-caffeine gnome-shell-extension-gsconnect gnome-shell-extension-lockkeys gnome-shell-extension-vitals gnome-shell-extension-dash-to-dock-git"
+    [arch2]="paru -S --needed gnome-shell-extension-blur-my-shell gnome-shell-extension-color-picker gnome-shell-extension-appindicator-git gnome-shell-extension-caffeine gnome-shell-extension-gsconnect gnome-shell-extension-lockkeys gnome-shell-extension-vitals gnome-shell-extension-dash-to-dock-git gnome-shell-extension-tiling-assistant-git gnome-shell-extension-rounded-window-corners-git"
     [arch3]="sudo pacman -S --needed gst-libav gst-plugins-ugly" # tomem codecs
     [arch4]="sudo systemctl enable gdm"
 )
@@ -152,11 +153,11 @@ declare -A install_conky=(
     [arch]="paru -S --needed conky-lua-archers-git"
 )
 #|-< Development >------------------------------------------------------------|#
-declare -A install_python_pip=(
+declare -A install_go=(
     [interface]="both"
-    [message_process]="* Installing Python and pip package manager "
-    [arch]="sudo pacman -S --needed python python-pip"
-    [archWSL]="sudo pacman -S --needed python python-pip"
+    [message_process]="* Installing GO language "
+    [arch]="sudo pacman -S --needed go"
+    [archWSL]="sudo pacman -S --needed go"
 )
 declare -A install_jdk_openjdk=(
     [interface]="both"
@@ -164,17 +165,23 @@ declare -A install_jdk_openjdk=(
     [arch]="sudo pacman -S --needed jdk-openjdk"
     [archWSL]="sudo pacman -S --needed jdk-openjdk"
 )
-declare -A install_go=(
-    [interface]="both"
-    [message_process]="* Installing GO language "
-    [arch]="sudo pacman -S --needed go"
-    [archWSL]="sudo pacman -S --needed go"
-)
 declare -A install_nodejs_npm=(
     [interface]="both"
     [message_process]="* Installing Node.js and npm package manager "
     [arch]="sudo pacman -S --needed nodejs npm"
     [archWSL]="sudo pacman -S --needed nodejs npm"
+)
+declare -A install_php=(
+    [interface]="both"
+    [message_process]="* Installing php. A general-purpose scripting language that is especially suited to web development "
+    [arch]="sudo pacman -S --needed php composer"
+    [archWSL]="sudo pacman -S --needed php composer"
+)
+declare -A install_python_pip=(
+    [interface]="both"
+    [message_process]="* Installing Python and pip package manager "
+    [arch]="sudo pacman -S --needed python python-pip"
+    [archWSL]="sudo pacman -S --needed python python-pip"
 )
 declare -A install_vscode=(
     [interface]="gui"
