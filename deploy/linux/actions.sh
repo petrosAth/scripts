@@ -185,7 +185,7 @@ declare -A install_python_pip=(
 declare -A install_vscode=(
     [interface]="gui"
     [message_process]="* Installing Visual Studio Code. Editor for building and debugging modern web and cloud applications "
-    [arch]="sudo pacman -S --needed code"
+    [arch]="paru -S --needed visual-studio-code-bin"
 )
 declare -A install_mono=(
     [interface]="both"
