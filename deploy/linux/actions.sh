@@ -6,6 +6,7 @@ actions_list=(
     "install_base_devel"
     # "install_reflector"
     "install_paru"
+    "install_oh_my_posh"
 #|-< Desktop environments >---------------------------------------------------|#
     "install_wayland"
     "install_pipewire"
@@ -116,6 +117,12 @@ declare -A install_paru=(
     [archWSL3]="git clone https://aur.archlinux.org/paru.git"
     [archWSL4]="cd paru && makepkg -si"
     [archWSL5]="cd .. && rm -rf paru"
+)
+declare -A install_oh_my_posh=(
+    [interface]="both"
+    [message_process]="* Installing Oh My Posh. A prompt theme engine for any shell "
+    [arch]="paru -S --needed oh-my-posh"
+    [archWSL]="paru -S --needed oh-my-posh"
 )
 #|-< Desktop environments >---------------------------------------------------|#
 declare -A install_wayland=(
