@@ -7,6 +7,7 @@ actions_list=(
     # "install_reflector"
     "install_paru"
     "install_oh_my_posh"
+    "install_bob"
 #|-< Desktop environments >---------------------------------------------------|#
     "install_wayland"
     "install_pipewire"
@@ -123,6 +124,12 @@ declare -A install_oh_my_posh=(
     [message_process]="* Installing Oh My Posh. A prompt theme engine for any shell "
     [arch]="paru -S --needed oh-my-posh"
     [archWSL]="paru -S --needed oh-my-posh"
+)
+declare -A install_bob=(
+    [interface]="both"
+    [message_process]="* Installing bob.  A version manager for Neovim "
+    [arch]="sudo pacman -S --needed bob"
+    [archWSL]="sudo pacman -S --needed bob"
 )
 #|-< Desktop environments >---------------------------------------------------|#
 declare -A install_wayland=(
