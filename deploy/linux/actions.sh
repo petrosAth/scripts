@@ -27,7 +27,7 @@ actions_list=(
     # "install_powershell_bin"
     # "install_unityhub"
 #|-< Utilities >--------------------------------------------------------------|#
-    "install_corectrl"
+    # "install_corectrl"
     "install_python_pynvim" # Neovim dependancy
     "install_wlclipboard"   # Neovim clipboard sync
     "install_unzip"         # Neovim LSP Installer dependancy
