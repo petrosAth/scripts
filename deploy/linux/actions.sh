@@ -33,6 +33,7 @@ actions_list=(
     "install_unzip"         # Neovim LSP Installer dependancy
     "install_fd"            # Neovim plugin telescope dependancy
     "install_ripgrep"       # Neovim plugin telescope dependancy
+    "install_p7zip"
     "install_fzf"
     "install_tree"
     "install_zsh"
@@ -261,6 +262,12 @@ declare -A install_ripgrep=(
     [message_process]="* Installing ripGREP, a search tool that combines the usability of 'ag' with the raw speed of 'grep' "
     [arch]="sudo pacman -S --needed ripgrep"
     [archWSL]="sudo pacman -S --needed ripgrep"
+)
+declare -A install_p7zip=(
+    [interface]="both"
+    [message_process]="* Installing 7zip, a search tool that combines the usability of 'ag' with the raw speed of 'grep' "
+    [arch]="sudo pacman -S --needed p7zip"
+    [archWSL]="sudo pacman -S --needed p7zip"
 )
 declare -A install_fzf=(
     [interface]="both"
