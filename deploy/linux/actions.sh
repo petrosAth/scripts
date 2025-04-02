@@ -43,9 +43,10 @@ actions_list=(
     "install_lazygit"
     # "install_timeshift"
     "install_trash_cli"
-    # "install_tmux"
+    "install_tmux"
+    "install_tmuxinator"
     "install_xplr"
-    "install_bat"
+    # "install_bat"
     "install_neofetch"
     "install_btop"
     # "install_electrum"
@@ -326,6 +327,12 @@ declare -A install_tmux=(
     [message_process]="* Installing terminal multiplexer tmux "
     [arch]="sudo pacman -S --needed tmux"
     [archWSL]="sudo pacman -S --needed tmux"
+)
+declare -A install_tmuxinator=(
+    [interface]="both"
+    [message_process]="* Installing tmuxinator. Manage complex tmux sessions easily "
+    [arch]="paru -S --needed tmuxinator"
+    [archWSL]="pacman -S --needed tmuxinator"
 )
 declare -A install_xplr=(
     [interface]="both"
