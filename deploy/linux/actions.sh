@@ -56,7 +56,7 @@ actions_list=(
 #|-< Remote and Cloud >-------------------------------------------------------|#
     "install_filezilla"
     # "install_bitwarden"
-    "install_synergy"
+    "install_deskflow"
     "install_nextcloud_client"
     "install_remmina"
     # "install_wakeonlan"          # Used by remmina to wake remote desktops
@@ -387,11 +387,10 @@ declare -A install_bitwarden=(
     [message_process]="* Installing Bitwarden, the most trusted open source password manager for business "
     [arch]="sudo pacman -S --needed bitwarden"
 )
-declare -A install_synergy=(
+declare -A install_deskflow=(
     [interface]="gui"
-    [message_process]="* Installing Synergy "
-    [pre]="cd ${HOME}/.config/Synergy && git checkout linux"
-    [arch]="paru -S --needed synergy"
+    [message_process]="* Installing Deskflow "
+    [arch]="sudo pacman -S --needed deskflow"
 )
 declare -A install_nextcloud_client=(
     [interface]="gui"
