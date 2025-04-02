@@ -38,8 +38,9 @@ actions_list=(
     "install_tree"
     "install_zsh"
     "install_eza"
+    "install_ghostty"
     # "install_kitty"
-    "install_wezterm"
+    # "install_wezterm"
     "install_lazygit"
     # "install_timeshift"
     "install_trash_cli"
@@ -294,6 +295,11 @@ declare -A install_eza=(
     [message_process]="* Installing eza, a modern replacement for 'ls' "
     [arch]="sudo pacman -S --needed eza"
     [archWSL]="sudo pacman -S --needed eza"
+)
+declare -A install_ghostty=(
+    [interface]="gui"
+    [message_process]="* Installing Ghostty, a fast, feature-rich, and cross-platform terminal emulator that uses platform-native UI and GPU acceleration. "
+    [arch]="sudo pacman -S --needed ghostty"
 )
 declare -A install_kitty=(
     [interface]="gui"
