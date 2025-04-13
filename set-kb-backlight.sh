@@ -2,22 +2,22 @@
 
 declare -A themes
 
-themes["dracula"]="ff79c6"           # #ff79c6
-themes["everforest-dark"]="a7c080"   # #a7c080
-themes["everforest-medium"]="a7c080" # #a7c080
-themes["everforest-soft"]="a7c080"   # #a7c080
-themes["gruvbox"]="98971a"           # #98971a
-themes["monokai"]="f92672"           # #f92672
-themes["nord"]="88c0d0"              # #88c0d0
-themes["onedark-cool"]="5ab0f6"      # #5ab0f6
-themes["onedark-dark"]="61afef"      # #61afef
-themes["onedark-darker"]="4fa6ed"    # #4fa6ed
-themes["onedark-deep"]="41a7fc"      # #41a7fc
-themes["onedark-warm"]="68aee8"      # #68aee8
-themes["onedark-warmer"]="57a5e5"    # #57a5e5
-themes["selenized-black"]="777777"   # #777777
-themes["selenized-dark"]="6d858b"    # #6d858b
-themes["solarized-osaka"]="6f8589"   # #6f8589
+themes["dracula"]="86004d"           #86004d
+themes["everforest-dark"]="274000"   #274000
+themes["everforest-medium"]="274000" #274000
+themes["everforest-soft"]="274000"   #274000
+themes["gruvbox"]="7e7d00"           #7e7d00
+themes["monokai"]="d3004c"           #d3004c
+themes["nord"]="003848"              #003848
+themes["onedark-cool"]="00569c"      #00569c
+themes["onedark-dark"]="004e8e"      #004e8e
+themes["onedark-darker"]="005793"    #005793
+themes["onedark-deep"]="0066bb"      #0066bb
+themes["onedark-warm"]="004680"      #004680
+themes["onedark-warmer"]="004e8e"    #004e8e
+themes["selenized-black"]="555555"   #555555
+themes["selenized-dark"]="00313e"    #00313e
+themes["solarized-osaka"]="002f3b"   #002f3b
 
 set-backlight-breathing() {
     color=$1
