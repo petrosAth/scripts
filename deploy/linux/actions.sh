@@ -68,6 +68,7 @@ actions_list=(
     "install_noto_fonts_emoji"
     "install_noto_fonts_extra"
     "install_chrome_os_fonts"
+    "install_gelasio"
     "install_jetbrains_mono"
     "install_nerd_fonts_jetbrains_mono"
     "install_nerd_fonts_symbols"
@@ -445,6 +446,11 @@ declare -A install_chrome_os_fonts=(
     [interface]="gui"
     [message_process]="* Installing Chrome OS core fonts "
     [arch]="sudo pacman -S --needed ttf-croscore"
+)
+declare -A install_gelasio=(
+    [interface]="gui"
+    [message_process]="* Installing Gelasio, the metric-compatible Georgia alternative "
+    [arch]="paru -S --needed ttf-gelasio"
 )
 declare -A install_jetbrains_mono=(
     [interface]="gui"
