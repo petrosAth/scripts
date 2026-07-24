@@ -1,109 +1,38 @@
-# Help
+# Linux deployment (Arch)
 
-## Distribution addition
+Arch package provisioning for the cross-platform deployer. `install.sh` is a thin adapter driven by two plain-text package lists; it is invoked by `../common/deploy.sh`, not run directly for a normal install.
 
-New distributions can be added in two steps. First add the distribution name in the VALID_DISTRO array located at the top of install.sh file. For cosmetic purposes capitalize the first letter only.
+## Files
 
-```
-VALID_DISTRO=("Arch" "Manjaro" "Debian" "Mint")
-```
+| File         | Purpose                                                         |
+| ------------ | --------------------------------------------------------------- |
+| `install.sh` | Adapter: update system, install lists, bootstrap paru, services |
+| `pacman.txt` | Official-repo packages (`pacman -S --needed --noconfirm`)       |
+| `aur.txt`    | AUR packages (`paru -S --needed`)                               |
 
-Finally add the distribution name along with the update command for it in the function <update_system> located in install.sh as well.
+## Editing the package set
 
-```
-update_system() {
-    _process "* Updating system "
-    case ${DISTRO} in
-        arch)
-            sudo pacman -Syu ;;
-        manjaro)
-            sudo pacman -Syu ;;
-        debian)
-            sudo apt-get update && apt-get upgrade ;;
-    esac
+Add or remove a line in `pacman.txt` or `aur.txt`. One package per line; `#` starts a comment (whole-line or trailing) and blank lines are ignored. Keep the section headers — they mirror the categories the deployer is organised around, and fonts in particular are depended on by `fontconfig/AGENTS.md` in the parent repo. Put a package in `aur.txt` only if it is not in the official repositories; `paru` resolves official-repo dependencies itself.
 
-    [[ $? ]] && _success "System updated"
-}
-```
+**Do not add here:** language runtimes (`go`, `java`, `lua`, `python`) — those come from mise (`mise/.config/mise/config.toml`). Nor `oh-my-posh`, which Zinit installs (`zsh/.config/zsh/20-plugins.zsh`). `php`/`composer`, `lazygit`, and `tmuxinator` **are** packages here (official repo), not mise runtimes.
 
-## Action addition
+## What the adapter does
 
-The actions that will be automatically taken by the script are administered here. They must be declared and placed in the action_list using the exact same name.
+1. `pacman -Syu` and enable colored pacman output.
+2. Install every `pacman.txt` entry in one `--needed` transaction (stdin `-`).
+3. Bootstrap `paru` from the AUR in a `mktemp -d` (never `$HOME`) if absent, then install every `aur.txt` entry.
+4. `systemctl enable gdm` and `systemctl enable --now libvirtd`.
 
-```
-action_list=(
-    "install_base_devel"
-)
+Linking is **not** done here — GNU Stow owns it (repo-root `install.sh`), run by `../common/deploy.sh` after packages are in place.
 
-declare -A install_base_devel=(
-    [interface]="both"
-    [arch]="pacman -Syu --needed base_devel"
-)
+## Verification
+
+```sh
+sh -n install.sh
+# Names resolve and there are no duplicates across both lists:
+grep -hv '^#' pacman.txt aur.txt | sed '/^[[:space:]]*$/d' | sort | uniq -d
+# Print the full command sequence without running it:
+DRY_RUN=1 sh install.sh
 ```
 
-## Configuration
-
-- The interface type that the package will be installed is stated using the `[interface]` key and take three values:
-
-```
-[interface]="cli"
-[interface]="gui"
-[interface]="both"
-```
-
-- The distributions that the package will be installed along with the installation commands for those distributions are stated using the `[*distribution*]` key:
-
-```
-[manjaro]="pacman -Syu blender"
-[debian]="apt-get install blender"
-```
-
-- If there are any commands that have to be executed before the installation they can be added using the `[pre]` key:
-
-```
-[pre]="cd ${HOME}"
-```
-
-- If there are any commands that have to be executed after the installation they can be added using the `[post]` key:
-
-```
-[post]="chsh -s /bin/zsh" # Change default shell to zsh
-```
-
-- Directories can be created using the `[dir]` key:
-
-```
-[dir]="mkdir ${HOME}/.config/gh"
-```
-
-- Links can be made using the `[link]` key:
-
-```
-[link]="ln -fs ${DIR}/gh/config.yml ${HOME}/.config/gh/config.yml"
-```
-
-- Pre-installation announcements can be made using the `[message_process]` key:
-
-```
-[message_process]="* Installing Package group base-devel "
-```
-
-- Post-installation announcements can be made using the `[message_success]` key:
-
-```
-[message_success]="Package group base-devel installed "
-```
-
-- In case there are more than one commands that have to be issued for the installation of the package, we can enter them using the following method:
-
-```
-[arch]="6"
-[arch1]="sudo pacman -S --needed git base_devel"
-[arch2]="git clone https://aur.archlinux.org/yay-bin.git"
-[arch3]="cd yay-bin
-[arch4]="makepkg -si"
-[arch5]="cd ..
-[arch6]="rm -rf yay-bin"
-```
-
-> The above method can be applied to any key except: `[interface] [message_process] [message_success]`
+Never execute the real flow as a test — it runs `pacman`, `paru`, `sudo`, and `systemctl`.

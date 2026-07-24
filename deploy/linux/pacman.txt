@@ -1,0 +1,116 @@
+# Official-repo packages installed with: pacman -S --needed --noconfirm
+# One package per line. '#' starts a comment. Sections mirror the old
+# actions_list categories. AUR packages live in aur.txt; language runtimes are
+# provisioned by mise (mise/.config/mise/config.toml); oh-my-posh is installed
+# by Zinit (zsh/.config/zsh/20-plugins.zsh).
+
+#|-< Core >-------------------------------------------------------------------|#
+base-devel
+git
+openssh
+github-cli
+stow
+curl
+wget
+mise
+
+#|-< Desktop environment >----------------------------------------------------|#
+wayland
+xorg-xwayland
+xorg-xlsclients
+glfw-wayland
+mesa
+pipewire
+pipewire-alsa
+pipewire-pulse
+jack2
+gnome
+gnome-tweaks
+nautilus-sendto
+gnome-nettool
+gnome-usage
+gnome-firmware
+gnome-disk-utility
+dconf-editor
+gnome-themes-extra
+gst-libav
+gst-plugins-ugly
+wl-clipboard
+
+#|-< Development >------------------------------------------------------------|#
+php
+composer
+
+#|-< Shell and CLI utilities >------------------------------------------------|#
+zsh
+tmux
+tmuxinator
+lazygit
+fzf
+fd
+ripgrep
+eza
+bat
+btop
+fastfetch
+p7zip
+unzip
+trash-cli
+jq
+
+#|-< System utilities >-------------------------------------------------------|#
+gparted
+qemu-full
+virt-manager
+virt-viewer
+dnsmasq
+vde2
+bridge-utils
+openbsd-netcat
+dmidecode
+edk2-ovmf
+ebtables
+iptables-nft
+nftables
+swtpm
+
+#|-< Terminals >--------------------------------------------------------------|#
+ghostty
+alacritty
+foot
+kitty
+wezterm
+
+#|-< Remote and cloud >-------------------------------------------------------|#
+deskflow
+nextcloud-client
+remmina
+freerdp
+
+#|-< Fonts >------------------------------------------------------------------|#
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
+ttf-croscore
+ttf-jetbrains-mono
+ttf-jetbrains-mono-nerd
+ttf-nerd-fonts-symbols
+
+#|-< Editing and media >------------------------------------------------------|#
+libreoffice-fresh
+hunspell
+hunspell-en_us
+hunspell-el
+inkscape
+handbrake
+avidemux-qt
+audacity
+
+#|-< Web and chat >-----------------------------------------------------------|#
+firefox
+chromium
+thunderbird
+
+#|-< Multimedia >-------------------------------------------------------------|#
+vlc

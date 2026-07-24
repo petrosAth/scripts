@@ -1,0 +1,22 @@
+# AUR packages installed with: paru -S --needed
+# One package per line. '#' starts a comment. paru itself is bootstrapped by
+# install.sh before this list is read.
+
+#|-< Editors and applications >-----------------------------------------------|#
+visual-studio-code-bin
+ventoy
+
+#|-< GNOME shell extensions >-------------------------------------------------|#
+gnome-shell-extension-blur-my-shell
+gnome-shell-extension-color-picker
+gnome-shell-extension-appindicator-git
+gnome-shell-extension-caffeine
+gnome-shell-extension-gsconnect
+gnome-shell-extension-lockkeys
+gnome-shell-extension-vitals
+gnome-shell-extension-dash-to-dock-git
+gnome-shell-extension-tiling-assistant-git
+gnome-shell-extension-rounded-window-corners-git
+
+#|-< Fonts >------------------------------------------------------------------|#
+ttf-gelasio
