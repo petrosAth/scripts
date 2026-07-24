@@ -1,0 +1,69 @@
+# macOS package manifest for `brew bundle`.
+#
+# Formulae mirror the shared CLI set; casks mirror the curated Arch GUI apps.
+# Language runtimes come from mise, and oh-my-posh from Zinit, so those do not
+# appear here. Never run `brew bundle cleanup` from an install path — it
+# uninstalls anything not listed.
+
+# --- Prerequisites -----------------------------------------------------------
+brew "git"
+brew "gh"
+brew "stow"
+brew "curl"
+brew "wget"
+
+# --- Development -------------------------------------------------------------
+brew "php"
+brew "composer"
+
+# --- Shell and CLI utilities -------------------------------------------------
+brew "zsh"
+brew "mise"
+brew "tmux"
+brew "tmuxinator"
+brew "lazygit"
+brew "fzf"
+brew "fd"
+brew "ripgrep"
+brew "eza"
+brew "bat"
+brew "btop"
+brew "fastfetch"
+brew "sevenzip"
+brew "trash"
+brew "jq"
+brew "coreutils" # supplies gdircolors for zsh/.config/zsh/30-appearance.zsh
+brew "gnu-sed"
+
+# --- Fonts -------------------------------------------------------------------
+cask "font-jetbrains-mono"
+cask "font-jetbrains-mono-nerd-font"
+cask "font-symbols-only-nerd-font"
+
+# --- Terminals ---------------------------------------------------------------
+cask "ghostty"
+cask "alacritty"
+cask "kitty"
+cask "wezterm"
+
+# --- Editors and applications ------------------------------------------------
+cask "visual-studio-code"
+cask "libreoffice"
+cask "inkscape"
+cask "handbrake-app"
+cask "audacity"
+cask "joplin"
+cask "nextcloud"
+
+# --- Web and chat ------------------------------------------------------------
+cask "firefox"
+cask "google-chrome"
+cask "chromium"
+cask "thunderbird"
+
+# --- Multimedia --------------------------------------------------------------
+cask "vlc"
+
+# --- Window manager ----------------------------------------------------------
+tap "nikitabobko/tap"
+cask "aerospace"
