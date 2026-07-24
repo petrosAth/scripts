@@ -2,11 +2,18 @@
 
 This is an independent Git repository nested inside the dotfiles `Home` package. It contains standalone utilities and deployment scripts for Linux and Windows; do not treat its history or working tree as part of the parent commit.
 
-## Linux deployment architecture
+## Deployment architecture
 
-`deploy/linux/` is the Arch bootstrap deployer — a Bash engine (`install.sh`) driven by an action registry (`actions.sh`). It is legacy pending a cross-platform replacement, and it carries several verified traps. **Read `deploy/linux/AGENTS.md` before touching it**; that file is authoritative for the action schema, the dispatcher mechanics, and the refactor brief.
+`deploy/` is the cross-platform deployer. It is POSIX `sh`, split by concern:
 
-These scripts run package managers, `sudo`, Git operations, and other machine-changing commands. Do not execute the deployment flow as a test.
+- `deploy/common/` — the shared engine. `bootstrap.sh` is the curl-able entry point (prerequisites → SSH gate → clone → hand off); `deploy.sh` is the on-disk driver (OS packages → mise runtimes → default shell → Stow); `lib.sh` holds the logging, OS-detection, `run`/`DRY_RUN`, `confirm`, and `read_list` helpers.
+- `deploy/linux/` — Arch adapter plus `pacman.txt`/`aur.txt` package lists.
+- `deploy/mac/` — macOS adapter plus a `Brewfile`.
+- `deploy/windows/` — unchanged PowerShell scripts, out of scope here.
+
+The two-stage split is deliberate: **Scripts provisions the machine; the dotfiles repo links itself** (repo-root `install.sh` → GNU Stow). Read the nearest `AGENTS.md` before editing an adapter. Runtimes live in mise and `oh-my-posh` in Zinit — never add them to the package lists.
+
+These scripts run package managers, `sudo`, Git operations, and other machine-changing commands. Do not execute the deployment flow as a test; use `sh -n`, `shellcheck -s sh`, and `DRY_RUN=1`.
 
 ## Editing rules
 
