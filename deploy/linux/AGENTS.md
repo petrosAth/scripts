@@ -24,7 +24,7 @@ Sources `../common/lib.sh` for `_process`/`_success`, `run` (honours `DRY_RUN`),
 
 `actions_list` entry (`pacman.txt:4-90`)-style categories are preserved as section comments — they map cleanly onto the macOS `Brewfile` sections and are depended on by `fontconfig/AGENTS.md` for the font set. One package per line; `#` comments (whole-line and trailing) and blanks are ignored by `read_list`.
 
-**Boundary with mise and Zinit:** language runtimes (`go`, `java`, `lua`, `python`) live in `mise/.config/mise/config.toml`, and `oh-my-posh` is a Zinit `gh-r` command in `zsh/.config/zsh/20-plugins.zsh`. Neither belongs in these lists — adding them would double-install and conflict. `php`/`composer`, `lazygit`, and `tmuxinator`, by contrast, are normal package entries (official repo / Brewfile), not mise runtimes.
+**Boundary with mise and Zinit:** language runtimes (`go`, `java`, `lua`, `python`) live in `mise/.config/mise/config.toml`, and `oh-my-posh` and `zoxide` are Zinit `gh-r` commands in `zsh/.config/zsh/20-plugins.zsh`. None belongs in these lists — adding them would double-install and conflict. `php`/`composer`, `lazygit`, and `tmuxinator`, by contrast, are normal package entries (official repo / Brewfile), not mise runtimes.
 
 ## Verification
 

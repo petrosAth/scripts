@@ -7,7 +7,9 @@
 `Brewfile` carries the shared CLI formulae and the GUI casks that mirror the curated Arch set. Deliberately **not** in the Brewfile:
 
 - **Language runtimes** (`go`, `java`, `lua`, `python`) — provisioned by mise (`mise/.config/mise/config.toml`). `php`/`composer` are Brewfile formulae, not mise runtimes.
-- **oh-my-posh** — installed by Zinit (`zsh/.config/zsh/20-plugins.zsh`).
+- **oh-my-posh** and **zoxide** — installed by Zinit (`zsh/.config/zsh/20-plugins.zsh`).
+
+On macOS the `docker-desktop` cask provides the container engine; the `docker` formula is only the client CLI.
 
 ## Manual installs (no Homebrew cask)
 
