@@ -64,12 +64,15 @@ install_aur_packages() {
     _success "AUR packages installed"
 }
 
-# Enable the display manager and the libvirt daemon. These are the only live
-# services the legacy deployer enabled.
+# Enable the display manager and the daemons the desktop needs, and grant the
+# current user rootless Docker access by adding them to the docker group (takes
+# effect on the next login).
 enable_services() {
     _process "Enabling system services"
     run sudo systemctl enable gdm
     run sudo systemctl enable --now libvirtd
+    run sudo systemctl enable --now docker.socket
+    run sudo usermod -aG docker "$USER"
     _success "System services enabled"
 }
 
