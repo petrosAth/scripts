@@ -15,6 +15,10 @@ brew "wget"
 # --- Development -------------------------------------------------------------
 brew "php"
 brew "composer"
+brew "docker"
+brew "docker-compose"
+brew "pandoc"
+brew "tree-sitter-cli"
 
 # --- Shell and CLI utilities -------------------------------------------------
 brew "zsh"
@@ -36,6 +40,7 @@ brew "coreutils" # supplies gdircolors for zsh/.config/zsh/30-appearance.zsh
 brew "gnu-sed"
 
 # --- Fonts -------------------------------------------------------------------
+brew "fontconfig" # font-matching library (fc-list, fc-match)
 cask "font-jetbrains-mono"
 cask "font-jetbrains-mono-nerd-font"
 cask "font-symbols-only-nerd-font"
@@ -48,12 +53,23 @@ cask "wezterm"
 
 # --- Editors and applications ------------------------------------------------
 cask "visual-studio-code"
+cask "cursor"
+cask "phpstorm"
+cask "tableplus"
+cask "royal-tsx"
 cask "libreoffice"
 cask "inkscape"
 cask "handbrake-app"
 cask "audacity"
 cask "joplin"
 cask "nextcloud"
+
+# --- Dev tools ---------------------------------------------------------------
+cask "claude-code"
+cask "codex"
+cask "docker-desktop"
+cask "postman"
+cask "postman-cli"
 
 # --- Web and chat ------------------------------------------------------------
 cask "firefox"
@@ -63,6 +79,10 @@ cask "thunderbird"
 
 # --- Multimedia --------------------------------------------------------------
 cask "vlc"
+cask "spotify"
+
+# --- Peripherals -------------------------------------------------------------
+cask "logitech-g-hub"
 
 # --- Window manager ----------------------------------------------------------
 tap "nikitabobko/tap"
