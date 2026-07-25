@@ -19,18 +19,28 @@ DOTFILES_DIR="${DOTFILES_DIR:-${HOME}/dotfiles}"
 DOTFILES_BRANCH="${DOTFILES_BRANCH:-master}"
 SSH_KEY="${HOME}/.ssh/id_ed25519"
 
-if [ -t 2 ]; then
-    C_CYAN=$(tput setaf 6 2> /dev/null || printf '')
+# NO_COLOR disables, FORCE_COLOR/CLICOLOR_FORCE force it on, otherwise emit only
+# when stderr is a terminal so logs and pipes stay clean.
+_use_color=0
+if [ -n "${NO_COLOR:-}" ]; then
+    _use_color=0
+elif [ -n "${FORCE_COLOR:-}" ] || [ -n "${CLICOLOR_FORCE:-}" ]; then
+    _use_color=1
+elif [ -t 2 ]; then
+    _use_color=1
+fi
+if [ "$_use_color" -eq 1 ]; then
     C_GREEN=$(tput setaf 2 2> /dev/null || printf '')
     C_RED=$(tput setaf 1 2> /dev/null || printf '')
+    C_DIM=$(tput dim 2> /dev/null || printf '')
     C_RESET=$(tput sgr0 2> /dev/null || printf '')
 else
-    C_CYAN='' C_GREEN='' C_RED='' C_RESET=''
+    C_GREEN='' C_RED='' C_DIM='' C_RESET=''
 fi
-say() { printf '%s* %s%s\n' "$C_CYAN" "$*" "$C_RESET" >&2; }
-ok() { printf '%s\xe2\x9c\x93 %s%s\n' "$C_GREEN" "$*" "$C_RESET" >&2; }
+say() { printf '  %s\xe2\x80\xba  %s%s\n' "$C_DIM" "$*" "$C_RESET" >&2; }
+ok() { printf '  %s\xe2\x9c\x93%s  %s\n' "$C_GREEN" "$C_RESET" "$*" >&2; }
 die() {
-    printf '%s\xe2\x9c\x97 %s%s\n' "$C_RED" "$*" "$C_RESET" >&2
+    printf '  %s\xe2\x9c\x97%s  %s\n' "$C_RED" "$C_RESET" "$*" >&2
     exit 1
 }
 

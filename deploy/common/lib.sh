@@ -6,22 +6,62 @@
 # Honours DRY_RUN=1 to print commands instead of executing them.
 
 # --- Colored status output ---------------------------------------------------
-# Emit SGR sequences only when stderr is a terminal so logs and pipes stay clean.
-if [ -t 2 ]; then
-    _c_cyan=$(tput setaf 6 2> /dev/null || printf '')
+# Decide once whether to colorize: NO_COLOR disables, FORCE_COLOR/CLICOLOR_FORCE
+# force it on even when piped, otherwise emit only when stderr is a terminal so
+# logs and pipes stay clean.
+_use_color=0
+if [ -n "${NO_COLOR:-}" ]; then
+    _use_color=0
+elif [ -n "${FORCE_COLOR:-}" ] || [ -n "${CLICOLOR_FORCE:-}" ]; then
+    _use_color=1
+elif [ -t 2 ]; then
+    _use_color=1
+fi
+if [ "$_use_color" -eq 1 ]; then
     _c_green=$(tput setaf 2 2> /dev/null || printf '')
     _c_yellow=$(tput setaf 3 2> /dev/null || printf '')
     _c_red=$(tput setaf 1 2> /dev/null || printf '')
+    _c_bold=$(tput bold 2> /dev/null || printf '')
+    _c_dim=$(tput dim 2> /dev/null || printf '')
     _c_reset=$(tput sgr0 2> /dev/null || printf '')
 else
-    _c_cyan='' _c_green='' _c_yellow='' _c_red='' _c_reset=''
+    _c_green='' _c_yellow='' _c_red='' _c_bold='' _c_dim='' _c_reset=''
 fi
 
-# Status lines go to stderr; stdout stays reserved for real command output.
-_process() { printf '%s* %s%s\n' "$_c_cyan" "$*" "$_c_reset" >&2; }
-_success() { printf '%s\xe2\x9c\x93 %s%s\n' "$_c_green" "$*" "$_c_reset" >&2; }
-_warn() { printf '%s! %s%s\n' "$_c_yellow" "$*" "$_c_reset" >&2; }
-_error() { printf '%s\xe2\x9c\x97 %s%s\n' "$_c_red" "$*" "$_c_reset" >&2; }
+# Calm, restrained status lines to stderr (stdout stays for real command
+# output): a single accent per state, indented to align with the completion
+# sheet. In-progress lines are dim; state changes carry the color.
+_process() { printf '  %s\xe2\x80\xba  %s%s\n' "$_c_dim" "$*" "$_c_reset" >&2; }
+_success() { printf '  %s\xe2\x9c\x93%s  %s\n' "$_c_green" "$_c_reset" "$*" >&2; }
+_warn() { printf '  %s!%s  %s\n' "$_c_yellow" "$_c_reset" "$*" >&2; }
+_error() { printf '  %s\xe2\x9c\x97%s  %s\n' "$_c_red" "$_c_reset" "$*" >&2; }
+
+# Abbreviate $HOME to ~ for display in messages.
+_tilde() {
+    case "$1" in
+    "$HOME") printf '~\n' ;;
+    "$HOME"/*) printf '~/%s\n' "${1#"$HOME"/}" ;;
+    *) printf '%s\n' "$1" ;;
+    esac
+}
+
+# Render a calm completion sheet to stderr: a green check, a bold headline, and
+# a dim, aligned "Label  Value" list framed by whitespace. Pad the label before
+# coloring so escape codes never skew alignment. Usage:
+#   _complete "Deployment complete" "Platform" "$OS" "Dotfiles" "$dir"
+_complete() {
+    _headline=$1
+    shift
+    printf '\n' >&2
+    printf '  %s%s\xe2\x9c\x93%s  %s%s%s\n' \
+        "$_c_green" "$_c_bold" "$_c_reset" "$_c_bold" "$_headline" "$_c_reset" >&2
+    printf '\n' >&2
+    while [ "$#" -ge 2 ]; do
+        printf '     %s%-11s%s%s\n' "$_c_dim" "$1" "$_c_reset" "$2" >&2
+        shift 2
+    done
+    printf '\n' >&2
+}
 
 # Abort with a message and non-zero status.
 die() {

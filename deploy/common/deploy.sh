@@ -80,7 +80,9 @@ main() {
     install_mise_runtimes
     set_default_shell
     link_dotfiles
-    _success "Deployment complete"
+    _complete "Deployment complete" \
+        "Platform" "$OS" \
+        "Dotfiles" "$(_tilde "$DOTFILES")"
 }
 
 main "$@"
