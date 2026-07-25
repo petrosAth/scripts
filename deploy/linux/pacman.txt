@@ -40,6 +40,10 @@ wl-clipboard
 #|-< Development >------------------------------------------------------------|#
 php
 composer
+docker
+docker-compose
+pandoc-cli
+tree-sitter-cli
 
 #|-< Shell and CLI utilities >------------------------------------------------|#
 zsh
