@@ -4,12 +4,12 @@
 
 ## What Homebrew installs
 
-`Brewfile` carries the shared CLI formulae and the GUI casks that mirror the curated Arch set. Deliberately **not** in the Brewfile:
+`Brewfile` carries the shared CLI formulae and the GUI casks that mirror the curated Arch set. Deliberately **not** in the Brewfile — all provisioned by mise (`mise/.config/mise/config.toml`) instead:
 
-- **Language runtimes** (`go`, `java`, `lua`, `python`) — provisioned by mise (`mise/.config/mise/config.toml`). `php`/`composer` are Brewfile formulae, not mise runtimes.
-- **oh-my-posh** and **zoxide** — installed by Zinit (`zsh/.config/zsh/20-plugins.zsh`).
+- **Language runtimes** — `go`, `java`, `lua`, `node`, `python`, `neovim`. `php`/`composer` are Brewfile formulae, not mise runtimes.
+- **CLI tools** — `tmux`, `zoxide`, `oh-my-posh`, `bat`, `fzf`, `pandoc`, `ripgrep`, `sqlite`, `fastfetch`, `fd`, `eza`, `lazygit`, `claude`, `codex`, `docker-cli`, `docker-compose`, `tree-sitter`, `mkcert`, `jq`.
 
-On macOS the `docker-desktop` cask provides the container engine; the `docker` formula is only the client CLI.
+The AWS CLI is Homebrew-managed (`brew "awscli"`), not a mise tool. The `docker-desktop` cask still provides the container engine; mise's `docker-cli`/`docker-compose` are just the client tools.
 
 ## Manual installs (no Homebrew cask)
 

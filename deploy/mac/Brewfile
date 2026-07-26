@@ -1,9 +1,10 @@
 # macOS package manifest for `brew bundle`.
 #
 # Formulae mirror the shared CLI set; casks mirror the curated Arch GUI apps.
-# Language runtimes come from mise, and oh-my-posh from Zinit, so those do not
-# appear here. Never run `brew bundle cleanup` from an install path — it
-# uninstalls anything not listed.
+# Language runtimes and most CLI tools come from mise
+# (mise/.config/mise/config.toml), so those do not appear here. Never run
+# `brew bundle cleanup` from an install path — it uninstalls anything not
+# listed.
 
 # --- Prerequisites -----------------------------------------------------------
 brew "git"
@@ -15,27 +16,15 @@ brew "wget"
 # --- Development -------------------------------------------------------------
 brew "php"
 brew "composer"
-brew "docker"
-brew "docker-compose"
-brew "pandoc"
-brew "tree-sitter-cli"
 
 # --- Shell and CLI utilities -------------------------------------------------
 brew "zsh"
 brew "mise"
-brew "tmux"
+brew "awscli"
 brew "tmuxinator"
-brew "lazygit"
-brew "fzf"
-brew "fd"
-brew "ripgrep"
-brew "eza"
-brew "bat"
 brew "btop"
-brew "fastfetch"
 brew "sevenzip"
 brew "trash"
-brew "jq"
 brew "coreutils" # supplies gdircolors for zsh/.config/zsh/30-appearance.zsh
 brew "gnu-sed"
 
@@ -65,8 +54,6 @@ cask "joplin"
 cask "nextcloud"
 
 # --- Dev tools ---------------------------------------------------------------
-cask "claude-code"
-cask "codex"
 cask "docker-desktop"
 cask "postman"
 cask "postman-cli"
