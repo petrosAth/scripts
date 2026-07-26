@@ -8,8 +8,6 @@ cursor-bin
 ventoy
 
 #|-< Dev tools >--------------------------------------------------------------|#
-claude-code
-openai-codex-bin
 postman-bin
 postman-cli
 docker-desktop

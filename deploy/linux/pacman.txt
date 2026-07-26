@@ -1,8 +1,8 @@
 # Official-repo packages installed with: pacman -S --needed --noconfirm
 # One package per line. '#' starts a comment. Sections mirror the old
-# actions_list categories. AUR packages live in aur.txt; language runtimes are
-# provisioned by mise (mise/.config/mise/config.toml); oh-my-posh is installed
-# by Zinit (zsh/.config/zsh/20-plugins.zsh).
+# actions_list categories. AUR packages live in aur.txt; language runtimes and
+# most CLI tools are provisioned by mise (mise/.config/mise/config.toml)
+# instead of listed here.
 
 #|-< Core >-------------------------------------------------------------------|#
 base-devel
@@ -40,27 +40,14 @@ wl-clipboard
 #|-< Development >------------------------------------------------------------|#
 php
 composer
-docker
-docker-compose
-pandoc-cli
-tree-sitter-cli
 
 #|-< Shell and CLI utilities >------------------------------------------------|#
 zsh
-tmux
 tmuxinator
-lazygit
-fzf
-fd
-ripgrep
-eza
-bat
 btop
-fastfetch
 p7zip
 unzip
 trash-cli
-jq
 
 #|-< System utilities >-------------------------------------------------------|#
 gparted

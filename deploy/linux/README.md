@@ -14,7 +14,7 @@ Arch package provisioning for the cross-platform deployer. `install.sh` is a thi
 
 Add or remove a line in `pacman.txt` or `aur.txt`. One package per line; `#` starts a comment (whole-line or trailing) and blank lines are ignored. Keep the section headers — they mirror the categories the deployer is organised around, and fonts in particular are depended on by `fontconfig/AGENTS.md` in the parent repo. Put a package in `aur.txt` only if it is not in the official repositories; `paru` resolves official-repo dependencies itself.
 
-**Do not add here:** language runtimes (`go`, `java`, `lua`, `python`) — those come from mise (`mise/.config/mise/config.toml`). Nor `oh-my-posh` or `zoxide`, which Zinit installs (`zsh/.config/zsh/20-plugins.zsh`). `php`/`composer`, `lazygit`, and `tmuxinator` **are** packages here (official repo), not mise runtimes.
+**Do not add here:** anything mise already provisions (`mise/.config/mise/config.toml`) — language runtimes (`go`, `java`, `lua`, `node`, `python`, `neovim`) and CLI tools (`tmux`, `zoxide`, `oh-my-posh`, `bat`, `fzf`, `pandoc`, `ripgrep`, `sqlite`, `fastfetch`, `fd`, `eza`, `lazygit`, `claude`, `codex`, `docker-cli`, `docker-compose`, `tree-sitter`). `php`/`composer` and `tmuxinator` **are** packages here (official repo), not mise tools.
 
 ## What the adapter does
 
