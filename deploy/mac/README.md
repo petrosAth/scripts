@@ -22,7 +22,7 @@ These Linux packages have no maintained macOS cask. Install them by hand if you 
 
 ## Not applicable on macOS
 
-GNOME, Wayland, PipeWire, `gdm`, GParted, Ventoy, virt-manager, CoreCtrl, Conky, foot, fontconfig, and `wl-clipboard` are Linux-only. `pbcopy` is built in, and `zsh/.config/zsh/60-commands.zsh:ywd` already branches to it. Noto CJK and emoji ship with macOS, so the Linux nine-font set reduces to the three Nerd Font casks.
+GNOME, Wayland, PipeWire, `gdm`, GParted, Ventoy, virt-manager, Conky, foot, fontconfig, and `wl-clipboard` are Linux-only. `pbcopy` is built in, and `zsh/.config/zsh/60-commands.zsh:ywd` already branches to it. Noto CJK and emoji ship with macOS, so the Linux nine-font set reduces to the three Nerd Font casks.
 
 ## Verification
 
