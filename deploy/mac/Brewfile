@@ -14,6 +14,8 @@ brew "curl"
 brew "wget"
 
 # --- Development -------------------------------------------------------------
+brew "python"
+brew "mkcert"
 brew "php"
 brew "composer"
 
@@ -23,6 +25,9 @@ brew "mise"
 brew "awscli"
 brew "tmuxinator"
 brew "btop"
+brew "ripgrep"
+brew "fd"
+brew "jq"
 brew "sevenzip"
 brew "trash"
 brew "coreutils" # supplies gdircolors for zsh/.config/zsh/30-appearance.zsh

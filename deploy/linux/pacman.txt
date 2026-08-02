@@ -38,6 +38,8 @@ gst-plugins-ugly
 wl-clipboard
 
 #|-< Development >------------------------------------------------------------|#
+python
+mkcert
 php
 composer
 
@@ -45,6 +47,9 @@ composer
 zsh
 tmuxinator
 btop
+ripgrep
+fd
+jq
 p7zip
 unzip
 trash-cli
