@@ -11,7 +11,7 @@ This is an independent Git repository nested inside the dotfiles `Home` package.
 - `deploy/mac/` — macOS adapter plus a `Brewfile`.
 - `deploy/windows/` — unchanged PowerShell scripts, out of scope here.
 
-The two-stage split is deliberate: **Scripts provisions the machine; the dotfiles repo links itself** (repo-root `install.sh` → GNU Stow). Read the nearest `AGENTS.md` before editing an adapter. Runtimes and most CLI tools live in mise (`mise/.config/mise/config.toml`) — never add a package to the OS package lists if mise already provides it. The AWS CLI is an intentional exception managed by Homebrew.
+The two-stage split is deliberate: **Scripts provisions the machine; the dotfiles repo links itself** (repo-root `install.sh` → GNU Stow). Read the nearest `AGENTS.md` before editing an adapter. Runtimes and most CLI tools live in mise (`mise/.config/mise/config.toml`) — never add a package to the OS package lists if mise already provides it, except for the intentional system-Python fallback used by boot and non-interactive scripts. `ripgrep`, `fd`, `mkcert`, and `jq` are OS-managed on both platforms. The AWS CLI is an intentional Homebrew-only package.
 
 These scripts run package managers, `sudo`, Git operations, and other machine-changing commands. Do not execute the deployment flow as a test; use `sh -n`, `shellcheck -s sh`, and `DRY_RUN=1`.
 

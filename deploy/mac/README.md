@@ -6,8 +6,8 @@
 
 `Brewfile` carries the shared CLI formulae and the GUI casks that mirror the curated Arch set. Deliberately **not** in the Brewfile — all provisioned by mise (`mise/.config/mise/config.toml`) instead:
 
-- **Language runtimes** — `go`, `java`, `lua`, `node`, `python`, `neovim`. `php`/`composer` are Brewfile formulae, not mise runtimes.
-- **CLI tools** — `tmux`, `zoxide`, `oh-my-posh`, `bat`, `fzf`, `pandoc`, `ripgrep`, `sqlite`, `fastfetch`, `fd`, `eza`, `lazygit`, `claude`, `codex`, `docker-cli`, `docker-compose`, `tree-sitter`, `mkcert`, `jq`.
+- **Language runtimes** — `go`, `java`, `lua`, `node`, `python`, `neovim`. Python is intentionally also a Brewfile formula so boot and non-interactive scripts have a system `python3`; `php`/`composer` are Brewfile formulae, not mise runtimes.
+- **CLI tools** — `tmux`, `zoxide`, `oh-my-posh`, `bat`, `fzf`, `pandoc`, `sqlite`, `fastfetch`, `eza`, `lazygit`, `claude`, `codex`, `docker-cli`, `docker-compose`, `tree-sitter`, `gh`. `ripgrep`, `fd`, `mkcert`, and `jq` are Brewfile formulae instead.
 
 The AWS CLI is Homebrew-managed (`brew "awscli"`), not a mise tool. The `docker-desktop` cask still provides the container engine; mise's `docker-cli`/`docker-compose` are just the client tools.
 
