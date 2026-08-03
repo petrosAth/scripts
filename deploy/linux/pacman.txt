@@ -53,6 +53,8 @@ jq
 p7zip
 unzip
 trash-cli
+docker
+docker-compose
 
 #|-< System utilities >-------------------------------------------------------|#
 gparted
