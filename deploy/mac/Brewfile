@@ -16,8 +16,6 @@ brew "wget"
 # --- Development -------------------------------------------------------------
 brew "python"
 brew "mkcert"
-brew "php"
-brew "composer"
 
 # --- Shell and CLI utilities -------------------------------------------------
 brew "zsh"

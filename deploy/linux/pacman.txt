@@ -40,8 +40,6 @@ wl-clipboard
 #|-< Development >------------------------------------------------------------|#
 python
 mkcert
-php
-composer
 
 #|-< Shell and CLI utilities >------------------------------------------------|#
 zsh
