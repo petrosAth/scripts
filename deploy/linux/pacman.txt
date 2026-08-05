@@ -43,7 +43,6 @@ mkcert
 
 #|-< Shell and CLI utilities >------------------------------------------------|#
 zsh
-tmuxinator
 btop
 ripgrep
 fd
