@@ -11,6 +11,8 @@
 
 The AWS CLI, Docker CLI, and Docker Compose are Homebrew-managed (`brew "awscli"`, `brew "docker"`, `brew "docker-compose"`), not mise tools. The `docker-desktop` cask still provides the container engine and GUI; the Homebrew formulae are the day-to-day client and compose binaries.
 
+The Stats menu-bar system monitor is an intentional Homebrew-only GUI application (`cask "stats"`); it has no entry in the Arch package lists.
+
 ## Manual installs (no Homebrew cask)
 
 These Linux packages have no maintained macOS cask. Install them by hand if you need them on macOS:
