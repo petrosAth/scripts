@@ -13,6 +13,16 @@ The AWS CLI, Docker CLI, and Docker Compose are Homebrew-managed (`brew "awscli"
 
 The Stats menu-bar system monitor is an intentional Homebrew-only GUI application (`cask "stats"`); it has no entry in the Arch package lists.
 
+## Routine updates
+
+On an existing macOS installation, run Homebrew as the account that owns its prefix, never with `sudo brew`:
+
+```sh
+brew update && brew upgrade && brew cleanup
+```
+
+`brew cleanup` removes outdated downloads and package versions. It is distinct from `brew bundle cleanup`, which uninstalls formulae and casks that are not declared in the Brewfile and must not be added to the install path.
+
 ## Manual installs (no Homebrew cask)
 
 These Linux packages have no maintained macOS cask. Install them by hand if you need them on macOS:
