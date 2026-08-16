@@ -47,7 +47,11 @@ btop
 ripgrep
 fd
 jq
-p7zip
+ffmpeg
+7zip
+poppler
+resvg
+imagemagick
 unzip
 trash-cli
 docker

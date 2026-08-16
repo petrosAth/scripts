@@ -27,7 +27,11 @@ brew "btop"
 brew "ripgrep"
 brew "fd"
 brew "jq"
+brew "ffmpeg-full", link: :overwrite
 brew "sevenzip"
+brew "poppler"
+brew "resvg"
+brew "imagemagick-full", link: :overwrite
 brew "trash"
 brew "coreutils" # supplies gdircolors for zsh/.config/zsh/30-appearance.zsh
 brew "gnu-sed"
