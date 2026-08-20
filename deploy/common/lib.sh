@@ -32,9 +32,9 @@ fi
 # output): a single accent per state, indented to align with the completion
 # sheet. In-progress lines are dim; state changes carry the color.
 _process() { printf '  %s\xe2\x80\xba  %s%s\n' "$_c_dim" "$*" "$_c_reset" >&2; }
-_success() { printf '  %s\xe2\x9c\x93%s  %s\n' "$_c_green" "$_c_reset" "$*" >&2; }
-_warn() { printf '  %s!%s  %s\n' "$_c_yellow" "$_c_reset" "$*" >&2; }
-_error() { printf '  %s\xe2\x9c\x97%s  %s\n' "$_c_red" "$_c_reset" "$*" >&2; }
+_success() { printf '  %s%s\xe2\x9c\x93%s  %s\n' "$_c_green" "$_c_bold" "$_c_reset" "$*" >&2; }
+_warn() { printf '  %s%s!%s  %s\n' "$_c_yellow" "$_c_bold" "$_c_reset" "$*" >&2; }
+_error() { printf '  %s%s\xe2\x9c\x97%s  %s\n' "$_c_red" "$_c_bold" "$_c_reset" "$*" >&2; }
 
 # Abbreviate $HOME to ~ for display in messages.
 _tilde() {
