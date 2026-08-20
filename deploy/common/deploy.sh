@@ -80,9 +80,16 @@ main() {
     install_mise_runtimes
     set_default_shell
     link_dotfiles
-    _complete "Deployment complete" \
-        "Platform" "$OS" \
-        "Dotfiles" "$(_tilde "$DOTFILES")"
+    if [ "${DRY_RUN:-0}" = "1" ]; then
+        _complete "Deployment simulated" \
+            "Platform" "$OS" \
+            "Dotfiles" "$(_tilde "$DOTFILES")" \
+            "Changes" "None"
+    else
+        _complete "Deployment complete" \
+            "Platform" "$OS" \
+            "Dotfiles" "$(_tilde "$DOTFILES")"
+    fi
 }
 
 main "$@"
