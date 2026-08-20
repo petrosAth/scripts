@@ -42,8 +42,10 @@ ensure_homebrew() {
         return 0
     fi
     _process "Installing Homebrew"
+    # Keep the download inside the command passed to run so simulation cannot
+    # expand curl before run has a chance to suppress the command.
     run /bin/bash -c \
-        "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        '/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
     for prefix in /opt/homebrew /usr/local; do
         if [ -x "${prefix}/bin/brew" ]; then
             eval "$("${prefix}/bin/brew" shellenv)"
