@@ -72,7 +72,8 @@ install_prerequisites() {
         if ! xcode-select -p > /dev/null 2>&1; then
             say "Installing Xcode Command Line Tools"
             xcode-select --install || true
-            printf 'Finish the Command Line Tools installer, then press Enter... ' >&2
+            warn "Finish the Command Line Tools installer."
+            printf 'Press Enter to continue... ' >&2
             read -r _
         fi
         if ! command -v brew > /dev/null 2>&1; then
