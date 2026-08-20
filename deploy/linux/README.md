@@ -32,7 +32,7 @@ sh -n install.sh
 # Names resolve and there are no duplicates across both lists:
 grep -hv '^#' pacman.txt aur.txt | sed '/^[[:space:]]*$/d' | sort | uniq -d
 # Print the full command sequence without running it:
-DRY_RUN=1 sh install.sh
+sh install.sh --simulate
 ```
 
 Never execute the real flow as a test — it runs `pacman`, `paru`, `sudo`, and `systemctl`.

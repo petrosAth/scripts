@@ -3,7 +3,8 @@
 #
 #   . "$(dirname "$0")/../common/lib.sh"
 #
-# Honours DRY_RUN=1 to print commands instead of executing them.
+# Call parse_args before using these helpers. With -n/--simulate, run prints
+# commands instead of executing them.
 
 # --- Colored status output ---------------------------------------------------
 # Decide once whether to colorize: NO_COLOR disables, FORCE_COLOR/CLICOLOR_FORCE
@@ -89,15 +90,51 @@ detect_os() {
     esac
 }
 
-# --- Command execution -------------------------------------------------------
-# Run a command, or just print it when DRY_RUN=1. Every state-changing call in
-# the deployer goes through here so a dry run prints the full sequence.
-run() {
+# Convert an internal platform token into a user-facing name.
+platform_name() {
+    case "$1" in
+    arch) printf 'Arch Linux\n' ;;
+    macos) printf 'macOS\n' ;;
+    *) die "Unsupported platform token: $1" ;;
+    esac
+}
+
+# --- Arguments ---------------------------------------------------------------
+# Parse the simulation flag shared by the on-disk driver and platform adapters.
+# Reject the removed environment interface so an old simulation command can never
+# turn into a real deployment silently.
+parse_args() {
+    SIMULATE=0
     if [ "${DRY_RUN:-0}" = "1" ]; then
-        printf 'DRY_RUN: %s\n' "$*" >&2
+        die "DRY_RUN=1 is no longer supported; use --simulate."
+    fi
+    for arg in "$@"; do
+        case "$arg" in
+        -n | --simulate) SIMULATE=1 ;;
+        *) die "Unknown argument: $arg" ;;
+        esac
+    done
+}
+
+# --- Command execution -------------------------------------------------------
+# Run a command, or just print it in simulation mode. Every state-changing call in
+# the deployer goes through here so simulation prints the full sequence.
+run() {
+    if [ "$SIMULATE" -eq 1 ]; then
+        printf 'SIMULATE: %s\n' "$*" >&2
         return 0
     fi
     "$@"
+}
+
+# Nested installers own their simulation behavior and messages. Execute them
+# with --simulate instead of suppressing the entire child process.
+run_installer() {
+    if [ "$SIMULATE" -eq 1 ]; then
+        "$@" --simulate
+    else
+        run "$@"
+    fi
 }
 
 # --- Interactive prompts -----------------------------------------------------

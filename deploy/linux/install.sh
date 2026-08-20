@@ -15,6 +15,8 @@ SCRIPT_DIR=$(
 # shellcheck source=/dev/null
 . "${SCRIPT_DIR}/../common/lib.sh"
 
+parse_args "$@"
+
 PACMAN_LIST="${SCRIPT_DIR}/pacman.txt"
 AUR_LIST="${SCRIPT_DIR}/aur.txt"
 
@@ -41,9 +43,9 @@ bootstrap_paru() {
         return 0
     fi
     _process "Bootstrapping paru (AUR helper)"
-    if [ "${DRY_RUN:-0}" = "1" ]; then
-        printf 'DRY_RUN: git clone https://aur.archlinux.org/paru.git <tmp>/paru\n' >&2
-        printf 'DRY_RUN: (cd <tmp>/paru && makepkg -si --noconfirm)\n' >&2
+    if [ "$SIMULATE" -eq 1 ]; then
+        printf 'SIMULATE: git clone https://aur.archlinux.org/paru.git <tmp>/paru\n' >&2
+        printf 'SIMULATE: (cd <tmp>/paru && makepkg -si --noconfirm)\n' >&2
         _success "paru installed"
         return 0
     fi

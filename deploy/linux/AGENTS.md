@@ -2,7 +2,7 @@
 
 Arch package provisioning for the cross-platform deployer. See `Home/Scripts/AGENTS.md` for repository-wide rules and `deploy/common/` for the shared engine this plugs into.
 
-> **Never run the real flow as a test.** `install.sh` runs `pacman`, `paru`, `makepkg`, `sudo`, and `systemctl`. Verify with `sh -n`, `shellcheck -s sh`, and `DRY_RUN=1 sh install.sh`, which prints every command instead of running it. This is POSIX `sh`, not Bash — probe with `sh`, not `bash`.
+> **Never run the real flow as a test.** `install.sh` runs `pacman`, `paru`, `makepkg`, `sudo`, and `systemctl`. Verify with `sh -n`, `shellcheck -s sh`, and `sh install.sh --simulate`, which prints every command instead of running it. This is POSIX `sh`, not Bash — probe with `sh`, not `bash`.
 
 ## Design
 
@@ -16,7 +16,7 @@ A thin **adapter over data**. `install.sh` holds the mechanics; `pacman.txt` and
 
 ## The adapter (`install.sh`)
 
-Sources `../common/lib.sh` for `_process`/`_success`, `run` (honours `DRY_RUN`), and `read_list` (strips comments and blanks from a list file). Four stages, in order: `update_system` → `install_pacman_packages` → `install_aur_packages` (which bootstraps paru first) → `enable_services` (`gdm`, `libvirtd`).
+Sources `../common/lib.sh` for argument parsing, `_process`/`_success`, `run`, and `read_list` (strips comments and blanks from a list file). Four stages, in order: `update_system` → `install_pacman_packages` → `install_aur_packages` (which bootstraps paru first) → `enable_services` (`gdm`, `libvirtd`).
 
 `install_pacman_packages` feeds the list to `pacman -S --needed --noconfirm -` on stdin; `install_aur_packages` expands the list into `paru` arguments. Both use `--needed` so re-runs are cheap and idempotent.
 
@@ -32,7 +32,7 @@ Sources `../common/lib.sh` for `_process`/`_success`, `run` (honours `DRY_RUN`),
 sh -n install.sh
 shellcheck -s sh install.sh          # if installed
 grep -hv '^#' pacman.txt aur.txt | sed '/^[[:space:]]*$/d' | sort | uniq -d
-DRY_RUN=1 sh install.sh
+sh install.sh --simulate
 ```
 
 Inspect this submodule's status separately from the parent dotfiles repo.

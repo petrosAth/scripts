@@ -15,6 +15,8 @@ SCRIPT_DIR=$(
 # shellcheck source=/dev/null
 . "${SCRIPT_DIR}/../common/lib.sh"
 
+parse_args "$@"
+
 BREWFILE="${SCRIPT_DIR}/Brewfile"
 
 # The Command Line Tools provide git and the compilers Homebrew needs. The GUI
@@ -25,6 +27,10 @@ ensure_clt() {
     fi
     _process "Installing Xcode Command Line Tools"
     run xcode-select --install
+    if [ "$SIMULATE" -eq 1 ]; then
+        _warn "Would wait for the Command Line Tools installer."
+        return 0
+    fi
     _warn "Finish the Command Line Tools installer, then continue."
     confirm "Command Line Tools installed?" || die "Command Line Tools are required."
 }

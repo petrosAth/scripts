@@ -60,6 +60,16 @@ detect_os() {
     esac
 }
 
+# Convert an internal platform token into a user-facing name. This is duplicated
+# intentionally because bootstrap runs before the repository and lib.sh exist.
+platform_name() {
+    case "$1" in
+    arch) printf 'Arch Linux\n' ;;
+    macos) printf 'macOS\n' ;;
+    *) die "Unsupported platform token: $1" ;;
+    esac
+}
+
 # Install just enough to clone over SSH: toolchain, git, ssh, gh, stow, curl.
 install_prerequisites() {
     case "$OS" in
@@ -142,11 +152,24 @@ clone_dotfiles() {
     ok "Dotfiles ready at ${DOTFILES_DIR}"
 }
 
+if [ "${DRY_RUN:-0}" = "1" ]; then
+    die "DRY_RUN=1 is no longer supported; use the on-disk deployer with --simulate."
+fi
+for arg in "$@"; do
+    case "$arg" in
+    -n | --simulate)
+        die "Bootstrap cannot simulate before cloning; run deploy/common/deploy.sh --simulate from an existing checkout."
+        ;;
+    *) die "Unknown argument: $arg" ;;
+    esac
+done
+
 OS=$(detect_os)
-say "Bootstrapping dotfiles for ${OS}"
+PLATFORM=$(platform_name "$OS")
+say "Bootstrapping dotfiles for ${PLATFORM}"
 install_prerequisites
 ensure_github_ssh
 clone_dotfiles
 
 # Hand off to the on-disk driver, which sources lib.sh and finishes the install.
-exec sh "${DOTFILES_DIR}/Home/Scripts/deploy/common/deploy.sh" "$@"
+exec sh "${DOTFILES_DIR}/Home/Scripts/deploy/common/deploy.sh"

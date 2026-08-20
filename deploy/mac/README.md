@@ -42,6 +42,7 @@ GNOME, Wayland, PipeWire, `gdm`, GParted, Ventoy, virt-manager, Conky, foot, fon
 
 ```sh
 sh -n install.sh
+sh install.sh --simulate
 brew bundle check --file=Brewfile
 ```
 

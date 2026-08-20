@@ -6,7 +6,7 @@ set -eu
 #
 #   OS packages -> mise runtimes -> default shell -> stow
 #
-# Set DRY_RUN=1 to print every state-changing command without running it.
+# Pass --simulate (or -n) to exercise every stage without applying changes.
 
 SCRIPT_DIR=$(
     unset CDPATH
@@ -14,6 +14,8 @@ SCRIPT_DIR=$(
 )
 # shellcheck source=/dev/null
 . "${SCRIPT_DIR}/lib.sh"
+
+parse_args "$@"
 
 DEPLOY_DIR=$(
     unset CDPATH
@@ -26,12 +28,13 @@ DOTFILES=$(
 )
 
 OS=$(detect_os)
+PLATFORM=$(platform_name "$OS")
 
 # Provision OS-level packages through the per-platform adapter.
 install_packages() {
     case "$OS" in
-    arch) run sh "${DEPLOY_DIR}/linux/install.sh" ;;
-    macos) run sh "${DEPLOY_DIR}/mac/install.sh" ;;
+    arch) run_installer sh "${DEPLOY_DIR}/linux/install.sh" ;;
+    macos) run_installer sh "${DEPLOY_DIR}/mac/install.sh" ;;
     esac
 }
 
@@ -70,24 +73,28 @@ set_default_shell() {
 # Link the dotfiles into $HOME. The root installer owns the Stow package lists.
 link_dotfiles() {
     _process "Linking dotfiles with Stow"
-    run sh "${DOTFILES}/install.sh"
-    _success "Dotfiles linked"
+    run_installer sh "${DOTFILES}/install.sh"
+    if [ "$SIMULATE" -eq 1 ]; then
+        _success "Dotfiles simulation complete"
+    else
+        _success "Dotfiles linked"
+    fi
 }
 
 main() {
-    _process "Deploying dotfiles for ${OS}"
+    _process "Deploying dotfiles for ${PLATFORM}"
     install_packages
     install_mise_runtimes
     set_default_shell
     link_dotfiles
-    if [ "${DRY_RUN:-0}" = "1" ]; then
+    if [ "$SIMULATE" -eq 1 ]; then
         _complete "Deployment simulated" \
-            "Platform" "$OS" \
+            "Platform" "${_c_bold}${PLATFORM}${_c_reset}" \
             "Dotfiles" "$(_tilde "$DOTFILES")" \
             "Changes" "None"
     else
         _complete "Deployment complete" \
-            "Platform" "$OS" \
+            "Platform" "${_c_bold}${PLATFORM}${_c_reset}" \
             "Dotfiles" "$(_tilde "$DOTFILES")"
     fi
 }
