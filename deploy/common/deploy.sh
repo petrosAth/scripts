@@ -38,15 +38,16 @@ install_packages() {
     esac
 }
 
-# Install the runtimes pinned in mise/.config/mise/config.toml. mise reads the
-# config through the stowed symlink, but the repo copy works before linking too.
+# Install the runtimes pinned in mise/.config/mise/config.toml. Point mise at
+# the repo copy explicitly because the global config has not been stowed yet.
 install_mise_runtimes() {
     if ! command -v mise > /dev/null 2>&1; then
         _warn "mise not found on PATH; skipping runtime install."
         return 0
     fi
     _process "Installing mise-managed runtimes"
-    run mise install --yes
+    run env MISE_GLOBAL_CONFIG_FILE="${DOTFILES}/mise/.config/mise/config.toml" \
+        mise install --yes
     _success "mise runtimes installed"
 }
 
