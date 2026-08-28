@@ -60,6 +60,7 @@ cask "handbrake-app"
 cask "audacity"
 cask "joplin"
 cask "nextcloud"
+cask "raycast"
 cask "stats"
 
 # --- Dev tools ---------------------------------------------------------------
