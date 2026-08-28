@@ -26,6 +26,22 @@ Sources `../common/lib.sh` for argument parsing, `_process`/`_success`, `run`, a
 
 **Boundary with mise:** mise (`mise/.config/mise/config.toml`) owns language runtimes (`go`, `java`, `lua`, `node`, `python`, `ruby`, `rust`, `neovim`) and most CLI tools (`tmux`, `zoxide`, `oh-my-posh`, `bat`, `fzf`, `pandoc`, `sqlite`, `fastfetch`, `eza`, `lazygit`, `delta` — Git's pager, `claude`, `codex`, `tree-sitter`, `gh`, `tmuxinator` — a `gem:` backend entry on mise's `ruby`, `git-surgeon` — a `cargo:` backend entry on mise's `rust`, `yazi`). Python is intentionally also installed here so boot and non-interactive scripts have `/usr/bin/python3`; mise remains the interactive development runtime. `ripgrep`, `fd`, `mkcert`, `jq`, `7zip`, `ffmpeg`, `poppler`, `resvg`, `imagemagick`, `docker`, and `docker-compose` are OS-managed. No other mise tool belongs in these lists. `php`/`composer` remain normal package entries (official repo / Brewfile).
 
+## Routine updates
+
+For a normal full system update, run:
+
+```sh
+paru -Syu
+```
+
+Use this occasional forced database refresh only when needed; it re-downloads all repository databases and is unnecessary for normal updates:
+
+```sh
+paru -Syyu
+```
+
+Never perform a database-only refresh before upgrading: that partial-update pattern can leave Arch inconsistent. Review [Arch News](https://archlinux.org/news/) for manual intervention before the upgrade and check `.pacnew` notices afterwards.
+
 ## Verification
 
 ```sh

@@ -16,6 +16,22 @@ Add or remove a line in `pacman.txt` or `aur.txt`. One package per line; `#` sta
 
 **Do not add here:** anything mise already provisions (`mise/.config/mise/config.toml`) — language runtimes (`go`, `java`, `lua`, `node`, `ruby`, `rust`, `neovim`) and CLI tools (`tmux`, `zoxide`, `oh-my-posh`, `bat`, `fzf`, `pandoc`, `sqlite`, `fastfetch`, `eza`, `lazygit`, `delta`, `claude`, `codex`, `tree-sitter`, `gh`, `tmuxinator`, `git-surgeon`, `yazi`). Python is intentionally installed by both pacman and mise: `/usr/bin/python3` is for boot and non-interactive scripts, while mise supplies the interactive development runtime. `ripgrep`, `fd`, `mkcert`, `jq`, `7zip`, `ffmpeg`, `poppler`, `resvg`, `imagemagick`, `docker`, `docker-compose`, and `php`/`composer` are normal official-repository packages rather than mise tools. The media and archive tools provide Yazi previews and extraction; `wl-clipboard` and the existing Nerd Fonts satisfy its Linux clipboard and icon integrations.
 
+## Routine updates
+
+Use `paru -Syu` for a normal, full Arch system update:
+
+```sh
+paru -Syu
+```
+
+Use `paru -Syyu` only when a forced repository-database refresh is needed. It re-downloads all repository databases and is unnecessary for normal updates:
+
+```sh
+paru -Syyu
+```
+
+Do not refresh package databases separately from a full upgrade: database-only partial updates can leave the system in an inconsistent state. Before upgrading, review [Arch News](https://archlinux.org/news/) for manual intervention, and after it completes, review any `.pacnew` notices.
+
 ## What the adapter does
 
 1. `pacman -Syu` and enable colored pacman output.
