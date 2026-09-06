@@ -59,6 +59,8 @@ docker-compose
 
 #|-< System utilities >-------------------------------------------------------|#
 gparted
+solaar
+libappindicator # Solaar tray icon
 qemu-full
 virt-manager
 virt-viewer
