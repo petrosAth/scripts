@@ -1,54 +1,51 @@
 # Linux deployment (Arch)
 
-Arch package provisioning for the cross-platform deployer. `install.sh` is a thin adapter driven by two plain-text package lists; it is invoked by `../common/deploy.sh`, not run directly for a normal install.
+Arch package provisioning for the cross-platform deployer. `install.sh` is a thin adapter driven by two plain-text package lists; it is invoked by `../common/deploy.sh`, not run directly for a normal install. Design rationale and invariants live in `AGENTS.md`.
 
 ## Files
 
-| File         | Purpose                                                         |
-| ------------ | --------------------------------------------------------------- |
-| `install.sh` | Adapter: update system, install lists, bootstrap paru, services |
-| `pacman.txt` | Official-repo packages (`pacman -S --needed --noconfirm`)       |
-| `aur.txt`    | AUR packages (`paru -S --needed`)                               |
+| cd File      | Purpose                                                        |
+| ------------ | -------------------------------------------------------------- |
+| `install.sh` | Adapter: pacman color, official packages, services, paru + AUR |
+| `pacman.txt` | Official-repo packages (`pacman -S --needed --noconfirm`)      |
+| `cdaur.txt`  | AUR packages (`paru -S --needed`)                              |
 
 ## Editing the package set
 
-Add or remove a line in `pacman.txt` or `aur.txt`. One package per line; `#` starts a comment (whole-line or trailing) and blank lines are ignored. Keep the section headers — they mirror the categories the deployer is organised around, and fonts in particular are depended on by `fontconfig/AGENTS.md` in the parent repo. Put a package in `aur.txt` only if it is not in the official repositories; `paru` resolves official-repo dependencies itself.
+Add or remove a line in `pacman.txt` or `aur.txt`. One package per line; `#` starts a comment and blank lines are ignored. Keep the section headers (`fontconfig/AGENTS.md` in the parent repo depends on the fonts section). Put a package in `aur.txt` only if it is not in the official repositories.
 
-**Do not add here:** anything mise already provisions (`mise/.config/mise/config.toml`) — language runtimes (`go`, `java`, `lua`, `node`, `ruby`, `rust`, `neovim`) and CLI tools (`tmux`, `zoxide`, `oh-my-posh`, `bat`, `fzf`, `pandoc`, `sqlite`, `fastfetch`, `eza`, `lazygit`, `delta`, `claude`, `codex`, `tree-sitter`, `gh`, `tmuxinator`, `git-surgeon`, `yazi`). Python is intentionally installed by both pacman and mise: `/usr/bin/python3` is for boot and non-interactive scripts, while mise supplies the interactive development runtime. `ripgrep`, `fd`, `mkcert`, `jq`, `7zip`, `ffmpeg`, `poppler`, `resvg`, `imagemagick`, `docker`, `docker-compose`, and `php`/`composer` are normal official-repository packages rather than mise tools. The media and archive tools provide Yazi previews and extraction; `wl-clipboard` and the existing Nerd Fonts satisfy its Linux clipboard and icon integrations.
+Do not add anything mise already provisions (`mise/.config/mise/config.toml`), and do not add packages that are already pulled in transitively (for example `plasma-meta` pulls `plasma-login-manager`, `base` pulls `curl` through `pacman`, and `breeze-plymouth` pulls `plymouth`). Docker Compose and Buildx come from the official `docker-compose` and `docker-buildx` packages.
+
+`kde-applications-meta` is the **full** KDE application set (roughly 194 packages, several GB), not just Dolphin, Konsole and Kate.
+
+## What the adapter does
+
+1. Refuse to run as root, then enable colored pacman output (`bootstrap.sh` has already run `pacman -Syu`).
+2. Install every `pacman.txt` entry in one `--needed` transaction.
+3. Enable `plasmalogin.service`, `bluetooth.service`, `libvirtd.socket` and `docker.socket`, add you to the `docker` and `libvirt` groups (effective at next login), and autostart libvirt's default NAT network.
+4. Bootstrap `paru` if absent and install every `aur.txt` entry with interactive PKGBUILD review (`paru -S --needed`). An ordinary build/install failure here only warns, so mise and Stow still run; rerun `sh ~/dotfiles/Home/Scripts/deploy/common/deploy.sh` to retry. Everything is `--needed`, so a rerun is safe.
+
+The first AUR run uses Paru's defaults because Stow links its configuration later; deployment is interactive. Paru's own `makepkg` bootstrap has no automatic review step. Ctrl-C or TERM stops the installer rather than continuing to mise and Stow.
+
+Linking is **not** done here; GNU Stow (repo-root `install.sh`) does it, run by `../common/deploy.sh` afterwards.
 
 ## Routine updates
-
-Use `paru -Syu` for a normal, full Arch system update:
 
 ```sh
 paru -Syu
 ```
 
-Use `paru -Syyu` only when a forced repository-database refresh is needed. It re-downloads all repository databases and is unnecessary for normal updates:
-
-```sh
-paru -Syyu
-```
-
-Do not refresh package databases separately from a full upgrade: database-only partial updates can leave the system in an inconsistent state. Before upgrading, review [Arch News](https://archlinux.org/news/) for manual intervention, and after it completes, review any `.pacnew` notices.
-
-## What the adapter does
-
-1. `pacman -Syu` and enable colored pacman output.
-2. Install every `pacman.txt` entry in one `--needed` transaction (stdin `-`).
-3. Bootstrap `paru` from the AUR in a `mktemp -d` (never `$HOME`) if absent, then install every `aur.txt` entry.
-4. `systemctl enable gdm` and `systemctl enable --now libvirtd`.
-
-Linking is **not** done here — GNU Stow owns it (repo-root `install.sh`), run by `../common/deploy.sh` after packages are in place.
+Use `paru -Syyu` only when a forced database refresh is needed. Never refresh the databases without upgrading (partial upgrades break Arch). Check [Arch News](https://archlinux.org/news/) before upgrading and `.pacnew` notices afterwards.
 
 ## Verification
 
 ```sh
 sh -n install.sh
-# Names resolve and there are no duplicates across both lists:
-grep -hv '^#' pacman.txt aur.txt | sed '/^[[:space:]]*$/d' | sort | uniq -d
+shellcheck -s sh install.sh          # if installed
+# No duplicates across both lists:
+grep -hv '^#' pacman.txt aur.txt | sed -e 's/#.*//' -e '/^[[:space:]]*$/d' | sort | uniq -d
 # Print the full command sequence without running it:
 sh install.sh --simulate
 ```
 
-Never execute the real flow as a test — it runs `pacman`, `paru`, `sudo`, and `systemctl`.
+Never execute the real flow as a test: it runs `pacman`, `paru`, `sudo`, and `systemctl`.

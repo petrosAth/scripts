@@ -29,14 +29,13 @@ brew update && brew upgrade && brew cleanup
 
 These Linux packages have no maintained macOS cask. Install them by hand if you need them on macOS:
 
-- **FileZilla** — download from filezilla-project.org (or use `brew install --cask filezillapro` if licensed).
 - **Deskflow** — download from deskflow.org.
 - **Avidemux** — download from avidemux.sourceforge.net.
 - **Remmina** — no macOS build; use Microsoft's Remote Desktop (`windows-app` cask) or another RDP client. Verify the cask name before adding it to the Brewfile.
 
 ## Not applicable on macOS
 
-GNOME, Wayland, PipeWire, `gdm`, GParted, Ventoy, virt-manager, Conky, foot, fontconfig, and `wl-clipboard` are Linux-only. `pbcopy` is built in, and `zsh/.config/zsh/60-commands.zsh:ywd` already branches to it. Noto CJK and emoji ship with macOS, so the Linux nine-font set reduces to the three Nerd Font casks.
+KDE Plasma, Wayland, PipeWire, Plasma Login Manager, virt-manager, fontconfig, and `wl-clipboard` are Linux-only. `pbcopy` is built in, and `zsh/.config/zsh/60-commands.zsh:ywd` already branches to it. Noto CJK and emoji ship with macOS, so the Linux nine-font set reduces to the three Nerd Font casks.
 
 ## Verification
 

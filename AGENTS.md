@@ -11,7 +11,7 @@ This is an independent Git repository nested inside the dotfiles `Home` package.
 - `deploy/mac/` — macOS adapter plus a `Brewfile`.
 - `deploy/windows/` — unchanged PowerShell scripts, out of scope here.
 
-The two-stage split is deliberate: **Scripts provisions the machine; the dotfiles repo links itself** (repo-root `install.sh` → GNU Stow). Read the nearest `AGENTS.md` before editing an adapter. Runtimes and most CLI tools, including Yazi, live in mise (`mise/.config/mise/config.toml`) — never add a package to the OS package lists if mise already provides it, except for the intentional system-Python fallback used by boot and non-interactive scripts. `ripgrep`, `fd`, `mkcert`, `jq`, 7-Zip, FFmpeg, Poppler, resvg, ImageMagick, `docker`, and `docker-compose` are OS-managed on both platforms. macOS uses the keg-only `ffmpeg-full` and `imagemagick-full` formulae with Brewfile overwrite-link options so their commands are on `PATH`. The AWS CLI is an intentional Homebrew-only formula, and the Stats menu-bar system monitor is an intentional Homebrew-only cask.
+The two-stage split is deliberate: **Scripts provisions the machine; the dotfiles repo links itself** (repo-root `install.sh` → GNU Stow). Read the nearest `AGENTS.md` before editing an adapter. Runtimes and most CLI tools, including Yazi, live in mise (`mise/.config/mise/config.toml`) — never add a package to the OS package lists if mise already provides it, except for the intentional system-Python fallback used by boot and non-interactive scripts. `ripgrep`, `fd`, `mkcert`, `jq`, 7-Zip, FFmpeg, Poppler, resvg, ImageMagick, `docker`, and Docker Compose are OS-managed on both platforms. On Arch, Compose and Buildx are the official `docker-compose` and `docker-buildx` packages (no Docker Desktop); macOS keeps its Homebrew Compose formula. macOS uses the keg-only `ffmpeg-full` and `imagemagick-full` formulae with Brewfile overwrite-link options so their commands are on `PATH`. The AWS CLI is an intentional Homebrew-only formula, and the Stats menu-bar system monitor is an intentional Homebrew-only cask.
 
 These scripts run package managers, `sudo`, Git operations, and other machine-changing commands. Do not execute the deployment flow as a test; use `sh -n`, `shellcheck -s sh`, and `sh deploy/common/deploy.sh --simulate`.
 
@@ -24,7 +24,9 @@ These scripts run package managers, `sudo`, Git operations, and other machine-ch
 ## Verification
 
 ```sh
-bash -n deploy/linux/install.sh deploy/linux/actions.sh
+sh -n deploy/common/bootstrap.sh deploy/common/deploy.sh deploy/common/lib.sh \
+     deploy/linux/install.sh deploy/mac/install.sh
+sh deploy/common/deploy.sh --simulate
 ```
 
-Run `shellcheck` as an additional check when it is installed. Inspect this repository's status separately from the parent dotfiles repository.
+These are POSIX `sh`, so probe them with `sh -n`, not `bash -n`. (`deploy/linux/actions.sh` no longer exists — the `eval`-driven action registry was replaced by the `pacman.txt`/`aur.txt` lists.) Run `shellcheck -s sh` as an additional check when it is installed. Inspect this repository's status separately from the parent dotfiles repository.
