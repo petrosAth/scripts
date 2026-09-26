@@ -8,9 +8,7 @@
 base-devel
 git
 openssh
-github-cli
 stow
-curl
 wget
 mise
 
@@ -18,21 +16,21 @@ mise
 wayland
 xorg-xwayland
 xorg-xlsclients
-glfw-wayland
+glfw
 mesa
+vulkan-radeon
 pipewire
 pipewire-alsa
 pipewire-pulse
-jack2
-gnome
-gnome-tweaks
-nautilus-sendto
-gnome-nettool
-gnome-usage
-gnome-firmware
-gnome-disk-utility
-dconf-editor
-gnome-themes-extra
+pipewire-jack
+wireplumber
+plasma-meta # also pulls plasma-login-manager, plasma-nm, kwallet-pam, xdg-desktop-portal-kde
+breeze-plymouth # pulls plymouth itself; needs the mkinitcpio hook + 'splash'
+kgamma
+plymouth-kcm
+union
+wacomtablet
+kde-applications-meta # the FULL KDE app set (~194 pkgs via 12 sub-metas), not just Dolphin/Konsole/Kate
 gst-libav
 gst-plugins-ugly
 wl-clipboard
@@ -40,6 +38,23 @@ wl-clipboard
 #|-< Development >------------------------------------------------------------|#
 python
 mkcert
+
+#|-< mise source-build dependencies >-----------------------------------------|#
+# System libraries mise needs to compile php (verzly/mise-php default build, per
+# its bin/install-dependencies.sh) and ruby. These are not mise tools, so they
+# belong here. Anything base/base-devel already guarantees is left out.
+re2c # php (mise): lexer generator for the build
+oniguruma # php (mise): mbstring
+libxcrypt # php (mise): crypt()
+libsodium # php (mise): sodium
+libzip # php (mise): zip
+postgresql-libs # php (mise): pgsql / pdo_pgsql
+gd # php (mise): gd
+libpng # php (mise): gd PNG
+libjpeg-turbo # php (mise): gd JPEG
+freetype2 # php (mise): gd fonts
+libwebp # php (mise): gd WebP
+libyaml # ruby (mise): psych, without which gem installs fail
 
 #|-< Shell and CLI utilities >------------------------------------------------|#
 zsh
@@ -56,51 +71,42 @@ unzip
 trash-cli
 docker
 docker-compose
+docker-buildx
 
 #|-< System utilities >-------------------------------------------------------|#
-gparted
 solaar
 libappindicator # Solaar tray icon
+usbutils
+bluez-utils
 qemu-full
 virt-manager
 virt-viewer
-dnsmasq
-vde2
-bridge-utils
+dnsmasq # libvirt's default NAT network
 openbsd-netcat
-dmidecode
-edk2-ovmf
-ebtables
-iptables-nft
-nftables
+iptables # provides/replaces iptables-nft; nftables arrives via docker
 swtpm
 
 #|-< Terminals >--------------------------------------------------------------|#
 ghostty
-alacritty
-foot
-kitty
-wezterm
 
 #|-< Remote and cloud >-------------------------------------------------------|#
 deskflow
 nextcloud-client
 remmina
 freerdp
+sshfs
 
 #|-< Fonts >------------------------------------------------------------------|#
-noto-fonts
 noto-fonts-cjk
 noto-fonts-emoji
 noto-fonts-extra
-ttf-croscore
+texlive-fontsextra
 ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
 ttf-nerd-fonts-symbols
 
 #|-< Editing and media >------------------------------------------------------|#
 libreoffice-fresh
-hunspell
 hunspell-en_us
 hunspell-el
 inkscape
@@ -115,3 +121,7 @@ thunderbird
 
 #|-< Multimedia >-------------------------------------------------------------|#
 vlc
+vlc-plugin-ass
+vlc-plugin-freetype
+vlc-plugin-srt
+transmission-qt
