@@ -40,15 +40,20 @@ install_packages() {
 
 # Install the runtimes pinned in mise/.config/mise/config.toml. Point mise at
 # the repo copy explicitly because the global config has not been stowed yet.
+# A failed tool (usually a source build missing a system library) warns rather
+# than aborts, so it can never block the Stow step that follows.
 install_mise_runtimes() {
     if ! command -v mise > /dev/null 2>&1; then
         _warn "mise not found on PATH; skipping runtime install."
         return 0
     fi
     _process "Installing mise-managed runtimes"
-    run env MISE_GLOBAL_CONFIG_FILE="${DOTFILES}/mise/.config/mise/config.toml" \
-        mise install --yes
-    _success "mise runtimes installed"
+    if run env MISE_GLOBAL_CONFIG_FILE="${DOTFILES}/mise/.config/mise/config.toml" \
+        mise install --yes; then
+        _success "mise runtimes installed"
+    else
+        _warn "Some mise tools failed to install; rerun 'mise install' after deployment."
+    fi
 }
 
 # Make zsh the login shell. On macOS the Homebrew zsh must be listed in

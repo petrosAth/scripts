@@ -101,13 +101,8 @@ platform_name() {
 
 # --- Arguments ---------------------------------------------------------------
 # Parse the simulation flag shared by the on-disk driver and platform adapters.
-# Reject the removed environment interface so an old simulation command can never
-# turn into a real deployment silently.
 parse_args() {
     SIMULATE=0
-    if [ "${DRY_RUN:-0}" = "1" ]; then
-        die "DRY_RUN=1 is no longer supported; use --simulate."
-    fi
     for arg in "$@"; do
         case "$arg" in
         -n | --simulate) SIMULATE=1 ;;
@@ -163,9 +158,12 @@ confirm() {
 
 # --- Package-list files ------------------------------------------------------
 # Print the installable entries of a list file: strip '#' comments (whole-line
-# and trailing) and blank lines. One package per output line.
+# and trailing) and blank lines. One package per output line. A list that is
+# empty (or entirely comments/blanks) after filtering is a valid result, not a
+# failure. Require a readable regular file, then use one filter so an open/read
+# error propagates to callers capturing the output under `set -e`.
 read_list() {
     list=$1
-    [ -r "$list" ] || die "Package list not found: $list"
-    sed -e 's/#.*$//' -e 's/[[:space:]]*$//' "$list" | grep -v '^[[:space:]]*$'
+    [ -f "$list" ] && [ -r "$list" ] || die "Package list must be a readable regular file: $list"
+    sed -e 's/#.*$//' -e 's/[[:space:]]*$//' -e '/^[[:space:]]*$/d' "$list"
 }

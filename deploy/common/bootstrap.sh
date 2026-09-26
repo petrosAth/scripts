@@ -17,7 +17,6 @@ GITHUB_USER="petrosAth"
 DOTFILES_REPO="dotfiles"
 DOTFILES_DIR="${DOTFILES_DIR:-${HOME}/dotfiles}"
 DOTFILES_BRANCH="${DOTFILES_BRANCH:-master}"
-SSH_KEY="${HOME}/.ssh/id_ed25519"
 
 # NO_COLOR disables, FORCE_COLOR/CLICOLOR_FORCE force it on, otherwise emit only
 # when stderr is a terminal so logs and pipes stay clean.
@@ -75,8 +74,7 @@ install_prerequisites() {
     case "$OS" in
     arch)
         say "Updating system and installing prerequisites"
-        sudo pacman -Syu --noconfirm
-        sudo pacman -S --needed --noconfirm base-devel git openssh github-cli stow curl
+        sudo pacman -Syu --needed --noconfirm base-devel git openssh github-cli stow
         ;;
     macos)
         if ! xcode-select -p > /dev/null 2>&1; then
@@ -109,27 +107,33 @@ github_ssh_ok() {
 }
 
 # Ensure SSH access to GitHub before any clone, since every submodule uses an
-# SSH URL. Authenticate gh, create and register a key, then re-probe.
+# SSH URL. With the SSH protocol, `gh auth login` offers to generate a key (with
+# an optional passphrase) or pick an existing one, and uploads it; the
+# admin:public_key scope is requested up front so that upload cannot fail. It
+# runs even when gh is already logged in, because that login may lack an SSH key.
 ensure_github_ssh() {
     if github_ssh_ok; then
         ok "GitHub SSH already authenticated"
         return 0
     fi
-    say "Authenticating to GitHub"
+    say "Authenticating to GitHub and registering an SSH key"
     command -v gh > /dev/null 2>&1 || die "gh is required but was not installed."
-    gh auth status > /dev/null 2>&1 || gh auth login
+    gh auth login -h github.com -p ssh -s admin:public_key
 
-    if [ ! -f "$SSH_KEY" ]; then
-        say "Generating an SSH key"
-        ssh-keygen -t ed25519 -C "${GITHUB_USER}@github" -f "$SSH_KEY" -N ''
-    fi
-    eval "$(ssh-agent -s)"
-    ssh-add "$SSH_KEY"
-    say "Registering the SSH key with GitHub"
-    gh ssh-key add "${SSH_KEY}.pub" --title "$(hostname)-$(date +%Y%m%d)" || true
-
-    github_ssh_ok || die "GitHub SSH authentication still failing; aborting before clone."
+    github_ssh_ok || die "GitHub SSH authentication still failing; aborting before clone. Check 'gh ssh-key list' and ~/.ssh, then rerun."
     ok "GitHub SSH authenticated"
+}
+
+# `gh auth login` writes a regular ~/.config/gh/config.yml, which collides with
+# the Stow-managed one and would abort the final linking step. Remove only that
+# generated regular file; an existing symlink is the repository's own config,
+# and hosts.yml (the credentials) is never touched.
+remove_generated_gh_config() {
+    gh_config="${HOME}/.config/gh/config.yml"
+    if [ -f "$gh_config" ] && [ ! -L "$gh_config" ]; then
+        say "Removing gh's generated config.yml so Stow can link the repository copy"
+        rm -f -- "$gh_config"
+    fi
 }
 
 # Clone the dotfiles with submodules, or update an existing checkout in place.
@@ -152,23 +156,12 @@ clone_dotfiles() {
     ok "Dotfiles ready at ${DOTFILES_DIR}"
 }
 
-if [ "${DRY_RUN:-0}" = "1" ]; then
-    die "DRY_RUN=1 is no longer supported; use the on-disk deployer with --simulate."
-fi
-for arg in "$@"; do
-    case "$arg" in
-    -n | --simulate)
-        die "Bootstrap cannot simulate before cloning; run deploy/common/deploy.sh --simulate from an existing checkout."
-        ;;
-    *) die "Unknown argument: $arg" ;;
-    esac
-done
-
 OS=$(detect_os)
 PLATFORM=$(platform_name "$OS")
 say "Bootstrapping dotfiles for ${PLATFORM}"
 install_prerequisites
 ensure_github_ssh
+remove_generated_gh_config
 clone_dotfiles
 
 # Hand off to the on-disk driver, which sources lib.sh and finishes the install.
