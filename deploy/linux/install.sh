@@ -118,8 +118,9 @@ enable_services() {
     run sudo usermod -aG docker "$(id -un)"
     run sudo usermod -aG libvirt "$(id -un)"
     # The default NAT network is what dnsmasq and iptables are installed for.
-    # libvirtd defines it on first start, so a fresh machine can race this;
-    # warn rather than abort, since everything else is already in place.
+    # libvirt ships its default.xml but no autostart link, so this is needed.
+    # virsh socket-activates libvirtd; warn rather than abort if the daemon
+    # does not come up in time, since everything else is already in place.
     run sudo virsh net-autostart default \
         || _warn "Could not autostart libvirt's default network; run 'sudo virsh net-autostart default' once libvirtd has started."
     _success "System services enabled"

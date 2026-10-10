@@ -4,11 +4,11 @@ Arch package provisioning for the cross-platform deployer. `install.sh` is a thi
 
 ## Files
 
-| cd File      | Purpose                                                        |
+| File         | Purpose                                                        |
 | ------------ | -------------------------------------------------------------- |
 | `install.sh` | Adapter: pacman color, official packages, services, paru + AUR |
 | `pacman.txt` | Official-repo packages (`pacman -S --needed --noconfirm`)      |
-| `cdaur.txt`  | AUR packages (`paru -S --needed`)                              |
+| `aur.txt`    | AUR packages (`paru -S --needed`)                              |
 
 ## Editing the package set
 
